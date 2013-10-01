@@ -47,14 +47,16 @@ public class MainMenuScreen implements Screen {
 		stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 		Gdx.input.setInputProcessor(stage);
 
+		//Buttons erzeugen
 		final TextButton button = new TextButton("  PotentialFieldTest  ", game.skin);
 		button.setPosition(Gdx.graphics.getWidth()/2, (Gdx.graphics.getHeight()/10*9)-Gdx.graphics.getWidth()/5/2);
 		button.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
 		
 		final TextButton button2 = new TextButton("  Nix  ", game.skin);
-		button.setPosition(Gdx.graphics.getWidth()/2, (Gdx.graphics.getHeight()/10*7)-Gdx.graphics.getWidth()/5/2);
-		button.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
+		button2.setPosition(Gdx.graphics.getWidth()/2, (Gdx.graphics.getHeight()/10*7)-Gdx.graphics.getWidth()/5/2);
+		button2.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
 		
+		//Buttons der Stage hinzufügen damit sie gerendert werden.
 		stage.addActor(button);
 		stage.addActor(button2);
 		

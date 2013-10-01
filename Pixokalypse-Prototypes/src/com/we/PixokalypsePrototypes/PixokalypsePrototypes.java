@@ -26,7 +26,7 @@ public class PixokalypsePrototypes extends Game {
     	
         public void create() {
 
-        	//Font
+        	//Font generieren
         	FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/Minecraftia.ttf"));
         	font12 = generator.generateFont(12); // font size 12 pixels
         	font24 = generator.generateFont(24); // font size 25 pixels
@@ -37,11 +37,11 @@ public class PixokalypsePrototypes extends Game {
     		font12.setColor(0.0f, 0.0f, 0.0f, 1.0f);
     		font24.setColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-        	//Skin
+        //Ab hier wird ein standard Skin erzeugt für Buttons und Text.
     		// A skin can be loaded via JSON or defined programmatically, either is fine. Using a skin is optional but strongly
     		// recommended solely for the convenience of getting a texture, region, etc as a drawable, tinted drawable, etc.
     		skin = new Skin();
-
+    		
     		// Generate a 1x1 white texture and store it in the skin named "white".
     		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
     		pixmap.setColor(Color.WHITE);
@@ -65,10 +65,15 @@ public class PixokalypsePrototypes extends Game {
     		labelStyle.font = font12;
     		skin.add("defaultLabel", labelStyle);
     		skin.add("default", textButtonStyle);
+    	//ende Skinerzeugung
     		
+    	//Renderer erzeugen
      		shapeRenderer = new ShapeRenderer();
     		batch = new SpriteBatch();
-
+    		
+    		
+    		//Sprung zum Mainscreen und übergabe des gameobjekts um in jeder sceen die public variablen
+    		//und somit die renderer, Schriftarten nutzen zu können.
             this.setScreen(new MainMenuScreen(this));
         }
 
@@ -81,14 +86,6 @@ public class PixokalypsePrototypes extends Game {
                 font12.dispose();
                 shapeRenderer.dispose();
         		skin.dispose();
-        }
-        
-        public int getNextPowOf2(int value){
-        	int result = 2;
-        	while(value > result){
-        		result *=2;
-        	}
-        	return result;
         }
 
 }
