@@ -1,8 +1,4 @@
 package com.we.PixokalypsePrototypes.test;
-
-	enum FieldType {
-	    EMPTY, STREET, BUILDING
-	}
 	
 public class Field {
 	public int xAxis;

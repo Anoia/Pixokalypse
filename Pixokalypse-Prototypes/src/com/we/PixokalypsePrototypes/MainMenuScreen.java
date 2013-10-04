@@ -52,7 +52,7 @@ public class MainMenuScreen implements Screen {
 		button.setPosition(Gdx.graphics.getWidth()/2, (Gdx.graphics.getHeight()/10*9)-Gdx.graphics.getWidth()/5/2);
 		button.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
 		
-		final TextButton button2 = new TextButton("  Nix  ", game.skin);
+		final TextButton button2 = new TextButton("  MapTest  ", game.skin);
 		button2.setPosition(Gdx.graphics.getWidth()/2, (Gdx.graphics.getHeight()/10*7)-Gdx.graphics.getWidth()/5/2);
 		button2.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
 		
@@ -73,6 +73,8 @@ public class MainMenuScreen implements Screen {
 		
 		button2.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
+				game.setScreen(new CreateMapTestScreen(game));
+				dispose();
 			}
 		});
 	}

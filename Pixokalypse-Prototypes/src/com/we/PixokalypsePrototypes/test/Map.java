@@ -2,22 +2,20 @@ package com.we.PixokalypsePrototypes.test;
 
 import java.util.HashSet;
 
-import com.sun.xml.internal.ws.message.EmptyMessageImpl;
-
 enum Direction{
 	UP, RIGHT, DOWN, LEFT
 }
 
 public class Map {
 	
-	private int mapSize; //anzahl der Felder 
+	public int mapSize; //anzahl der Felder 
 	private int minFieldsPerBlock;
 	private int randomFieldsPerBlock; //optionale Gebäude
-	private Field[][] map;
+	public Field[][] map;
 	private int mapBorder; //rand der map, wenn der erreicht ist wird nicht mehr generiert
 	
 	public Map(){
-		this(40, 7, 3, 7);
+		this(40, 7, 3, 6);
 	}
 	
 	public Map(int mapSize, int minFieldsPerBlock, int randomFieldsPerBlock, int mapBorder){
