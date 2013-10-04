@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.we.PixokalypsePrototypes.test.SpriteContainer;
 
 public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
@@ -50,6 +51,17 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 		game.batch.begin();
 		//Sprites Rendern anfang
 		
+		Sprite sprite = spriteContainer.getSprite("hC2");
+		float laufI = 40;
+		float laufJ = 41;
+
+		for (int i = 0;i < laufI;i++){
+			for (int j = 1;j  < laufJ;j++){		
+			sprite.setPosition(Gdx.graphics.getWidth()/laufI*i,Gdx.graphics.getHeight()/laufJ*j);
+			sprite.draw(game.batch);
+			}
+		}
+		
 		//Sprites Rendern ende
 		game.batch.end();
 
@@ -62,7 +74,8 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 		game.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		//font.setColor(1.0f, 0.0f, 0.0f, 1.0f);
 		game.batch.begin();
-		game.font12.draw(game.batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 20, 20);
+		game.font12.draw(game.batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 20, 13);
+		game.font12.draw(game.batch, "Anz gerenderte Tiles pro Frame: " + (int)(laufI * (laufJ-1)), Gdx.graphics.getWidth()/2, 13);
 		game.batch.end();
 	}
 	

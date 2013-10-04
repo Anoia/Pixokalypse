@@ -2,6 +2,7 @@ package com.we.PixokalypsePrototypes.test;
 
 import java.util.HashMap;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -15,7 +16,7 @@ public class SpriteContainer {
 		
 	public SpriteContainer(){
 		
-		spriteSheet = new TextureAtlas("assets/data/spritesheet.txt");
+		spriteSheet = new TextureAtlas(Gdx.files.internal("data/textures/pack.atlas"));
 		spriteHashmap = new HashMap<String,Sprite>();
 		
 		//Für alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
@@ -25,5 +26,9 @@ public class SpriteContainer {
 			//spriteHashmap.get(name).setSize(width, height);
 		}
 		System.out.println("anzahl Sprites: " + spriteHashmap.size());
+	}
+	
+	public Sprite getSprite(String spriteName){
+		return spriteHashmap.get(spriteName);
 	}
 }
