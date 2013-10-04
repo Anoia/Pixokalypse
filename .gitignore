@@ -36,6 +36,7 @@ libgdx-*.zip
 
 *.iml
 /.idea/
+.metadata
 
 #core & extension libs/ folders that have no 3rd party dependencies in them
 /gdx/libs
