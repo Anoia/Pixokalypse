@@ -21,7 +21,7 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 	private int height;
 	private boolean addNewActors = true;
 
-	private int countdownTillStop = 300;
+	private int countdownTillStop = 120;
 	public ParseTextureAtlasTestScreen(final PixokalypsePrototypes gam) {
 		this.game = gam;
 		spriteContainer = new SpriteContainer();
@@ -56,7 +56,7 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 			for (int i = 0; i < 10;i++){
 				actorList.add(new TestActor(width, height, spriteContainer.getRandomSpriteName()));
 			}
-			if(Gdx.graphics.getFramesPerSecond() < 45 && Gdx.graphics.getFramesPerSecond() > 15) countdownTillStop --;
+			if(Gdx.graphics.getFramesPerSecond() < 45 && Gdx.graphics.getFramesPerSecond() > 10) countdownTillStop --;
 			if(countdownTillStop < 1)addNewActors = false;
 		}
 		
@@ -103,7 +103,7 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 		game.batch.begin();
 		if(!addNewActors)game.font24.draw(game.batch, "Anz gerenderte Tiles pro Frame: " + actorList.size(), 20, Gdx.graphics.getHeight()/2);
 		game.font24.draw(game.batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 30, 30);
-		game.font12.draw(game.batch, "Anz gerenderte Tiles pro Frame: " + actorList.size(), Gdx.graphics.getWidth()/2, 13);
+		game.font12.draw(game.batch, "("+countdownTillStop+")Anz gerenderte Tiles pro Frame: " + actorList.size(), Gdx.graphics.getWidth()/2, 13);
 		game.batch.end();
 	}
 	

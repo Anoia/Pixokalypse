@@ -17,7 +17,6 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 	public CreateMapTestScreen(final PixokalypsePrototypes gam) {
 		this.game = gam;
 		mainMap = new Map();
-		mainMap.printASCII();
 	}
 	
 	@Override
@@ -67,7 +66,6 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 						break;
 					case BUILDING:
 						float color = 1-((1.f/255.f)*((4.f*mainMap.map[i][j].blockID+1.f))%255);
-						System.out.println(color);
 						game.shapeRenderer.setColor(new Color(color, 0, 0, 1));
 						break;
 					case STREET:

@@ -25,7 +25,6 @@ public class PixokalypsePrototypes extends Game {
     	}
     	
         public void create() {
-
         	//Font generieren
         	FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/Minecraftia.ttf"));
         	font12 = generator.generateFont(12); // font size 12 pixels
@@ -85,7 +84,7 @@ public class PixokalypsePrototypes extends Game {
                 batch.dispose();
                 font12.dispose();
                 shapeRenderer.dispose();
-        		skin.dispose();
+        		//skin.dispose();
         }
 
 }
