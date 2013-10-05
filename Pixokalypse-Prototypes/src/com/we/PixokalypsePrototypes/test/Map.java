@@ -26,10 +26,12 @@ public class Map {
 		map = new Field[mapSize][mapSize];
 		this.initEmptyMap();
 		this.generateMap();
+		this.fixStreets();
 		
 		//Print Map
 	}
 	
+
 	private void initEmptyMap() {
 		for(int x = 0; x < mapSize; x++){
 			for(int y = 0; y < mapSize; y++){
@@ -91,6 +93,7 @@ public class Map {
 			if(field.fieldType == FieldType.EMPTY){
 				createBlock(field, currentBlockId);
 				currentBlockId++;
+				System.out.println(currentBlockId);
 			}
 			
 			keepGenerating = !(currentFieldX==mapBorder || currentFieldY == mapBorder);
@@ -185,6 +188,56 @@ public class Map {
 					System.out.print("+");
 					break;
 				}
+			}
+		}
+		
+	}
+	
+	private void fixStreets() {
+		
+		for(int y = 1; y < mapSize-1; y++){
+			for(int x = 1; x < mapSize-1; x++){
+				if(map[x][y].fieldType == FieldType.STREET &&  //1
+						map[x+1][y].fieldType == FieldType.STREET && //2
+ 						map[x+1][y+1].fieldType == FieldType.STREET && //3
+						map[x][y+1].fieldType == FieldType.STREET){   //4
+					
+					//4er gefunden
+					if(!(map[x-1][y].fieldType == FieldType.STREET) && 
+							!(map[x][y-1].fieldType == FieldType.STREET)){
+						//links oben kann weg
+						Field f = map[x][y];
+						f.fieldType = FieldType.BUILDING;
+						f.blockID = map[x-1][y].blockID;
+						
+					}else if(!(map[x+1][y-1].fieldType == FieldType.STREET) && 
+							!(map[x+2][y].fieldType == FieldType.STREET)){
+						//rechts oben kann weg
+						Field f = map[x+1][y];
+						f.fieldType = FieldType.BUILDING;
+						f.blockID = map[x+1][y-1].blockID;
+						
+					}else if(!(map[x-1][y+1].fieldType == FieldType.STREET) && 
+							!(map[x][y+2].fieldType == FieldType.STREET)){
+						//links unten kann weg
+						Field f = map[x][y+1];
+						f.fieldType = FieldType.BUILDING;
+						f.blockID = map[x-1][y+1].blockID;
+						
+					}else if(!(map[x+2][y+1].fieldType == FieldType.STREET) && 
+							!(map[x+1][y+2].fieldType == FieldType.STREET)){
+						//rechts unten kann weg
+						Field f = map[x+1][y+1];
+						f.fieldType = FieldType.BUILDING;
+						f.blockID = map[x+2][y+1].blockID;
+						
+					}else{
+						//6er!
+						
+					}
+					
+				}
+				
 			}
 		}
 		

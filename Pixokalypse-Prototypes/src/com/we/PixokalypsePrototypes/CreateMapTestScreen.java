@@ -63,10 +63,13 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 				for(int j = 0; j < mainMap.mapSize; j++){
 					switch(mainMap.map[i][j].fieldType){
 					case EMPTY:
-						game.shapeRenderer.setColor(Color.GREEN);
+						game.shapeRenderer.setColor(new Color(0, .5f, 0, 1));
 						break;
 					case BUILDING:
-						game.shapeRenderer.setColor(Color.RED);break;
+						float color = 1-((1.f/255.f)*((4.f*mainMap.map[i][j].blockID+1.f))%255);
+						System.out.println(color);
+						game.shapeRenderer.setColor(new Color(color, 0, 0, 1));
+						break;
 					case STREET:
 						game.shapeRenderer.setColor(Color.DARK_GRAY);
 						break;
