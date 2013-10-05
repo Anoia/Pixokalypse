@@ -1,21 +1,33 @@
 package com.we.PixokalypsePrototypes;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.we.PixokalypsePrototypes.test.SpriteContainer;
+import com.we.PixokalypsePrototypes.test.TestActor;
 
 public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
- final PixokalypsePrototypes game;
+	final PixokalypsePrototypes game;
 	
- private OrthographicCamera camera;
+ 	private OrthographicCamera camera;
 	private SpriteContainer spriteContainer;
-	
+	private ArrayList<TestActor> actorList;
+	private int width;
+	private int height;
+	private boolean addNewActors = true;
+
+	private int countdownTillStop = 300;
 	public ParseTextureAtlasTestScreen(final PixokalypsePrototypes gam) {
 		this.game = gam;
 		spriteContainer = new SpriteContainer();
+		actorList = new ArrayList<TestActor>();
+		width = Gdx.graphics.getWidth();
+		height = Gdx.graphics.getHeight();
 	}
 	
 	@Override
@@ -38,11 +50,26 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 
 	@Override
 	public void render(float delta) {
+		
+		if(addNewActors){
+			//Generierte Actors pro Frame
+			for (int i = 0; i < 10;i++){
+				actorList.add(new TestActor(width, height, spriteContainer.getRandomSpriteName()));
+			}
+			if(Gdx.graphics.getFramesPerSecond() < 45 && Gdx.graphics.getFramesPerSecond() > 15) countdownTillStop --;
+			if(countdownTillStop < 1)addNewActors = false;
+		}
+		
+		Iterator itr = actorList.iterator();
+	      while(itr.hasNext()) {
+	    	 TestActor testActor = (TestActor) itr.next();
+	         if(testActor.isOutOfWindow()) testActor.resertActor();
+	         else testActor.updatePosition(delta);
+	      }
+	      
 		Gdx.gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
-		
-		
+				
 //		angeblich für transparenz notwendig
 		Gdx.gl.glEnable(GL10.GL_BLEND);
 		Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
@@ -51,18 +78,18 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 		game.batch.begin();
 		//Sprites Rendern anfang
 		
-		Sprite sprite = spriteContainer.getSprite("hC2");
-		float laufI = 40;
-		float laufJ = 41;
-
-		for (int i = 0;i < laufI;i++){
-			for (int j = 1;j  < laufJ;j++){		
-			sprite.setPosition(Gdx.graphics.getWidth()/laufI*i,Gdx.graphics.getHeight()/laufJ*j);
+		Sprite sprite;
+		TestActor testActor;
+        
+		itr = actorList.iterator();
+	    while(itr.hasNext()) {
+	    	testActor = (TestActor) itr.next();
+	    	sprite = spriteContainer.getSprite(testActor.spriteName);
+			sprite.setPosition(testActor.x,testActor.y);
 			sprite.draw(game.batch);
-			}
 		}
 		
-		//Sprites Rendern ende
+	    //Sprites Rendern ende
 		game.batch.end();
 
 		
@@ -74,8 +101,9 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 		game.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		//font.setColor(1.0f, 0.0f, 0.0f, 1.0f);
 		game.batch.begin();
-		game.font12.draw(game.batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 20, 13);
-		game.font12.draw(game.batch, "Anz gerenderte Tiles pro Frame: " + (int)(laufI * (laufJ-1)), Gdx.graphics.getWidth()/2, 13);
+		if(!addNewActors)game.font24.draw(game.batch, "Anz gerenderte Tiles pro Frame: " + actorList.size(), 20, Gdx.graphics.getHeight()/2);
+		game.font24.draw(game.batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 30, 30);
+		game.font12.draw(game.batch, "Anz gerenderte Tiles pro Frame: " + actorList.size(), Gdx.graphics.getWidth()/2, 13);
 		game.batch.end();
 	}
 	

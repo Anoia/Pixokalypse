@@ -31,4 +31,8 @@ public class SpriteContainer {
 	public Sprite getSprite(String spriteName){
 		return spriteHashmap.get(spriteName);
 	}
+	
+	public String getRandomSpriteName(){
+		return (String) spriteHashmap.keySet().toArray()[(int) (Math.random()*spriteHashmap.size())];
+	}
 }
