@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.we.PixocalypsePrototypes.PotentialField.PotentialField;
 import com.we.PixocalypsePrototypes.PotentialField.PotentialFieldManager;
 import com.we.PixocalypsePrototypes.PotentialField.StaticPotentialField;
 
@@ -18,15 +17,26 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 	private PotentialFieldManager manager;
 	private PlayerCharacter player;
 	private PlayerCharacter player2;
+	private PlayerCharacter player3;
+	private PlayerCharacter player4;
+	private PlayerCharacter player5;
+	
 	
 
 	public PotentialFieldTestScreen(final PixokalypsePrototypes gam) {
 		this.game = gam;
 		manager = new PotentialFieldManager(new StaticPotentialField(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+		Gdx.input.setInputProcessor(new PotentialFieldInputProcessor(manager));
 		player = new PlayerCharacter(100, 100);
 		manager.addPlayerCharacter(player);
 		player2 = new PlayerCharacter(150, 100);
 		manager.addPlayerCharacter(player2);
+		player3 = new PlayerCharacter(180, 100);
+		manager.addPlayerCharacter(player3);
+		player4 = new PlayerCharacter(150, 130);
+		manager.addPlayerCharacter(player4);
+		player5 = new PlayerCharacter(150, 80);
+		manager.addPlayerCharacter(player5);
 		
 	}
 	
@@ -37,7 +47,7 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 	@Override
 	public void resize(int width, int height) {
 		camera = new OrthographicCamera(width, height);
-		camera.setToOrtho(false, width, height);
+		camera.setToOrtho(true, width, height);
 	}
 
 	@Override
@@ -71,9 +81,16 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 		game.shapeRenderer.setProjectionMatrix(camera.combined);
 		game.shapeRenderer.begin(ShapeType.Filled);
 		game.shapeRenderer.setColor(Color.RED);
-		game.shapeRenderer.rect(player.x-5, player.y-5, 11, 11);
+		game.shapeRenderer.rect(player.x-3, player.y-3, 7, 7);
 		game.shapeRenderer.setColor(Color.GREEN);
-		game.shapeRenderer.rect(player2.x-5, player2.y-5, 11, 11);
+		game.shapeRenderer.rect(player2.x-3, player2.y-3, 7, 7);
+		game.shapeRenderer.setColor(Color.BLUE);
+		game.shapeRenderer.rect(player3.x-3, player3.y-3, 7, 7);
+		game.shapeRenderer.setColor(Color.ORANGE);
+		game.shapeRenderer.rect(player4.x-3, player4.y-3, 7, 7);
+		game.shapeRenderer.setColor(Color.DARK_GRAY);
+		game.shapeRenderer.rect(player5.x-3, player5.y-3, 7, 7);
+
 		game.shapeRenderer.end();
 		
 		
