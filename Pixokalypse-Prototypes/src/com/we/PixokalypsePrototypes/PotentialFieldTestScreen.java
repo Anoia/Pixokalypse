@@ -72,9 +72,9 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 		game.shapeRenderer.setProjectionMatrix(camera.combined);
 		game.shapeRenderer.begin(ShapeType.Filled);
 		game.shapeRenderer.setColor(Color.RED);
-		game.shapeRenderer.rect(player.x-5, player.y-5, 11, 11);
+		game.shapeRenderer.rect(player.x-3, player.y-3, 7, 7);
 		game.shapeRenderer.setColor(Color.GREEN);
-		game.shapeRenderer.rect(player2.x-5, player2.y-5, 11, 11);
+		game.shapeRenderer.rect(player2.x-3, player2.y-3, 7, 7);
 
 		game.shapeRenderer.end();
 		

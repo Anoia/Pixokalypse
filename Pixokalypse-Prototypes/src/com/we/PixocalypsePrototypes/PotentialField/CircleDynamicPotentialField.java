@@ -48,23 +48,23 @@ public class CircleDynamicPotentialField extends DynamicPotentialField{
 		}
 	}
 	
-	/*
-	private HashSet<GridPoint2> getEmptyNeighbours(HashSet<GridPoint2> points){
-		HashSet<GridPoint2> neighbours = new HashSet<GridPoint2>();
-		for(GridPoint2 point: points){
-			for(int i = point.x-1; i <= point.x+1; i++){
-				for(int j = point.y-1; j <= point.y+1; j++){
-					if(potentialFieldMap[i][j] == -1){
-						neighbours.add(new GridPoint2(i, j));
-					}
-				}
-			}
-		}
-		
-		
-		return neighbours;		
-	}
-	*/
+	
+//	private HashSet<GridPoint2> getEmptyNeighbours(HashSet<GridPoint2> points){
+//		HashSet<GridPoint2> neighbours = new HashSet<GridPoint2>();
+//		for(GridPoint2 point: points){
+//			for(int i = point.x-1; i <= point.x+1; i++){
+//				for(int j = point.y-1; j <= point.y+1; j++){
+//					if(potentialFieldMap[i][j] == -1){
+//						neighbours.add(new GridPoint2(i, j));
+//					}
+//				}
+//			}
+//		}
+//		
+//		
+//		return neighbours;		
+//	}
+	
 	
 	private HashSet<GridPoint2> getEmptyNeighbours(HashSet<GridPoint2> points){
 		HashSet<GridPoint2> neighbours = new HashSet<GridPoint2>();

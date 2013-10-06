@@ -20,7 +20,7 @@ public class PotentialFieldManager {
 		
 		this.environmentMap = environmentMap;
 		this.playerCharacters = new ArrayList<PlayerCharacter>();
-		pushingPlayerCharacterPotentialFieldMap = new CircleDynamicPotentialField(10, true);
+		pushingPlayerCharacterPotentialFieldMap = new CircleDynamicPotentialField(15, true);
 		this.setPlayerCharacterTarget(200, 200);	
 	}
 	
@@ -32,7 +32,9 @@ public class PotentialFieldManager {
 		
 		CombinedMap map = new CombinedMap(environmentMap);
 		map.add(playerCharacterTarget);		
-		
+		for(PlayerCharacter pc: playerCharacters){
+			map.add(pushingPlayerCharacterPotentialFieldMap, pc);
+		}
 		
 		//+ all players
 		
@@ -42,10 +44,13 @@ public class PotentialFieldManager {
 		//--current player
 		//movePlayer
 		for(PlayerCharacter pc: playerCharacters){
+			map.remove(pushingPlayerCharacterPotentialFieldMap, pc);
 			GridPoint2 destination = getDestination(pc, map);
+			System.out.println("dest: " + destination.x + " "+destination.y);
 			int xDirection = destination.x - (int)pc.x;
 			int yDirection = destination.y - (int)pc.y;
 			pc.makeStep(delta, xDirection, yDirection);
+			map.add(pushingPlayerCharacterPotentialFieldMap, pc);
 		}
 		//get new Pos
 		//++current player
@@ -74,6 +79,7 @@ public class PotentialFieldManager {
 	}
 	
 	public void setPlayerCharacterTarget(int x, int y){
+		System.out.println("new target");
 		int radius = 300;
 		playerCharacterTarget = new Target(new CircleDynamicPotentialField(radius, false), x-radius, y-radius);
 	}
