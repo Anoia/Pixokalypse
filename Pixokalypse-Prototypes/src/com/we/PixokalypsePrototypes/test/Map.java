@@ -258,7 +258,7 @@ public class Map {
 							//vertikaler 6er
 							if(map[x-1][y+1].fieldCategory != FieldCategory.STREET){
 								//12 ist keine Straﬂe, 4 kann weg
-								makeBuilding(x+1, y, map[x-1][y+1].blockID);
+								makeBuilding(x, y+1, map[x-1][y+1].blockID);
 								
 							}else if(map[x+2][y+1].fieldCategory != FieldCategory.STREET){
 								//9 ist keine Straﬂe, 3 kann weg
