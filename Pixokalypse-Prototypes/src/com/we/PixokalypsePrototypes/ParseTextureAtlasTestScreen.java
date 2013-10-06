@@ -8,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
 import com.we.PixokalypsePrototypes.test.SpriteContainer;
 import com.we.PixokalypsePrototypes.test.TestActor;
 
@@ -15,7 +16,8 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 	final PixokalypsePrototypes game;
 	
  	private OrthographicCamera camera;
-	private SpriteContainer spriteContainer;
+ 	private SpriteContainer spriteContainer;
+ 	private SpriteCollisionMapContainer spriteCollisionmapContainer;
 	private ArrayList<TestActor> actorList;
 	private int width;
 	private int height;
@@ -25,6 +27,7 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 	public ParseTextureAtlasTestScreen(final PixokalypsePrototypes gam) {
 		this.game = gam;
 		spriteContainer = new SpriteContainer();
+		spriteCollisionmapContainer = new SpriteCollisionMapContainer();
 		actorList = new ArrayList<TestActor>();
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();

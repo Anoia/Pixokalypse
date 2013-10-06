@@ -1,249 +1,229 @@
-heightmap.png
+
+collisionpack.png
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
-str_rul_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-g3_
-  rotate: false
-  xy: 2, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-s1_
-  rotate: false
-  xy: 44, 2
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-str_rl_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-empty_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 2
-str_ul_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-h3_
-  rotate: false
-  xy: 2, 86
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 2
-str
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: -1
-str_or_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-p1_
-  rotate: false
-  xy: 86, 2
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 4
-str_oul_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-str_oru_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-str_ou_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-str_ol_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-empty_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 3
-user1_
-  rotate: false
-  xy: 2, 2
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 3
-h1_
-  rotate: false
-  xy: 44, 128
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-empty
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: -1
-str_orl_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-h3_
-  rotate: false
-  xy: 86, 44
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 3
-p1_
-  rotate: false
-  xy: 44, 44
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-str_orul_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-str_ru_
-  rotate: false
-  xy: 86, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-g1_
-  rotate: false
-  xy: 44, 170
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-user0_
-  rotate: false
-  xy: 2, 2
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-h1_
-  rotate: false
-  xy: 2, 128
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 2
-user1_
-  rotate: false
-  xy: 2, 2
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 2
-h2_
-  rotate: false
-  xy: 86, 86
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-p1_
-  rotate: false
-  xy: 2, 44
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 2
-g2_
+empty1
   rotate: false
   xy: 2, 212
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
-  index: 1
-g
+  index: -1
+empty2
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+strOL1
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+strRL1
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+empty3
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+pA3
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+strORUL1
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+strUL1
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+strOR1
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+strRU1
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+strOU1
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+strOUL1
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+strRUL1
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+strORU1
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+strORL1
+  rotate: false
+  xy: 2, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+gA1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+gB1
+  rotate: false
+  xy: 44, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+gC1
+  rotate: false
+  xy: 86, 212
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+hA1
+  rotate: false
+  xy: 2, 128
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+hA2
+  rotate: false
+  xy: 44, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+hB1
+  rotate: false
+  xy: 86, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+hC1
+  rotate: false
+  xy: 2, 86
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+hC2
+  rotate: false
+  xy: 44, 128
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+hC3
   rotate: false
   xy: 86, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
-  index: 3
-empty_
+  index: -1
+pA1
   rotate: false
-  xy: 86, 170
+  xy: 2, 44
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
-  index: 1
-user1_
-  rotate: false
-  xy: 2, 2
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: 1
-h3_
+  index: -1
+pA2
   rotate: false
   xy: 44, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
-  index: 1
-p1_
+  index: -1
+pA4
   rotate: false
-  xy: 86, 170
+  xy: 86, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
-  index: 3
+  index: -1
+sA1
+  rotate: false
+  xy: 2, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+userA1
+  rotate: false
+  xy: 44, 44
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+userB2
+  rotate: false
+  xy: 44, 44
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+userB1
+  rotate: false
+  xy: 44, 44
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+userB3
+  rotate: false
+  xy: 44, 44
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
