@@ -17,6 +17,7 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 	private OrthographicCamera camera;
 	private PotentialFieldManager manager;
 	private PlayerCharacter player;
+	private PlayerCharacter player2;
 	
 
 	public PotentialFieldTestScreen(final PixokalypsePrototypes gam) {
@@ -24,6 +25,8 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 		manager = new PotentialFieldManager(new StaticPotentialField(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 		player = new PlayerCharacter(100, 100);
 		manager.addPlayerCharacter(player);
+		player2 = new PlayerCharacter(150, 100);
+		manager.addPlayerCharacter(player2);
 		
 	}
 	
@@ -69,6 +72,8 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 		game.shapeRenderer.begin(ShapeType.Filled);
 		game.shapeRenderer.setColor(Color.RED);
 		game.shapeRenderer.rect(player.x-5, player.y-5, 11, 11);
+		game.shapeRenderer.setColor(Color.GREEN);
+		game.shapeRenderer.rect(player2.x-5, player2.y-5, 11, 11);
 		game.shapeRenderer.end();
 		
 		
