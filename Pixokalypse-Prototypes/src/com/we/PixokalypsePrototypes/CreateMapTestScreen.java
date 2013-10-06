@@ -61,7 +61,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 			int tileSize = 20;
 			for(int i = 0; i < mainMap.mapSize; i ++){
 				for(int j = 0; j < mainMap.mapSize; j++){
-					switch(mainMap.map[i][j].fieldType){
+					switch(mainMap.map[i][j].fieldCategory){
 					case EMPTY:
 						game.shapeRenderer.setColor(new Color(0, .5f, 0, 1));
 						break;

@@ -4,17 +4,18 @@ public class Field {
 	public int xAxis;
 	public int yAxis;
 	public int blockID;
+	public FieldCategory fieldCategory;
 	public FieldType fieldType;
 	
 	public Field(int xAxis, int yAxis){
-		this(xAxis, yAxis, -1, FieldType.EMPTY);
+		this(xAxis, yAxis, -1, FieldCategory.EMPTY);
 	}
 	
-	public Field(int xAxis, int yAxis, int blockID, FieldType fieldType){
+	public Field(int xAxis, int yAxis, int blockID, FieldCategory fieldType){
 		this.xAxis = xAxis;
 		this.yAxis = yAxis;
 		this.blockID = blockID;
-		this.fieldType = fieldType;
+		this.fieldCategory = fieldType;
 	}
 	
 	@Override   

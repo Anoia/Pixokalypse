@@ -1,5 +1,5 @@
 package com.we.PixokalypsePrototypes.test;
 
 public enum FieldType {
-	 EMPTY, STREET, BUILDING
+	STORE, FLAT, PARK, L_STREET, DEADEND, FOUR_WAY_INTERSECTION, T_INTERSECTION 
 }
