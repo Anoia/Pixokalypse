@@ -1,16 +1,30 @@
 package com.we.PixokalypsePrototypes;
 
+import Agents.PlayerCharacter;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.we.PixocalypsePrototypes.PotentialField.PotentialField;
+import com.we.PixocalypsePrototypes.PotentialField.PotentialFieldManager;
+import com.we.PixocalypsePrototypes.PotentialField.StaticPotentialField;
 
 public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
- final PixokalypsePrototypes game;
+	final PixokalypsePrototypes game;
 	private OrthographicCamera camera;
+	private PotentialFieldManager manager;
+	private PlayerCharacter player;
+	
 
 	public PotentialFieldTestScreen(final PixokalypsePrototypes gam) {
 		this.game = gam;
+		manager = new PotentialFieldManager(new StaticPotentialField(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+		player = new PlayerCharacter(100, 100);
+		manager.addPlayerCharacter(player);
+		
 	}
 	
 	@Override
@@ -33,6 +47,7 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 
 	@Override
 	public void render(float delta) {
+		manager.step(delta);
 		Gdx.gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
@@ -48,6 +63,14 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 		
 		//Sprites Rendern ende
 		game.batch.end();
+		
+		//Shape rendern
+		game.shapeRenderer.setProjectionMatrix(camera.combined);
+		game.shapeRenderer.begin(ShapeType.Filled);
+		game.shapeRenderer.setColor(Color.RED);
+		game.shapeRenderer.rect(player.x-5, player.y-5, 11, 11);
+		game.shapeRenderer.end();
+		
 		
 //      angeblich für transparenz notwendig ende
 		Gdx.gl.glDisable(GL10.GL_BLEND);
