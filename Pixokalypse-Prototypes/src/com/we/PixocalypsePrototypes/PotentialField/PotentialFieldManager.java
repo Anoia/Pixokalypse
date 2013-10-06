@@ -21,7 +21,7 @@ public class PotentialFieldManager {
 		this.environmentMap = environmentMap;
 		this.playerCharacters = new ArrayList<PlayerCharacter>();
 		pushingPlayerCharacterPotentialFieldMap = new CircleDynamicPotentialField(15, true);
-		this.setPlayerCharacterTarget(200, 200);	
+		this.setPlayerCharacterTarget(1000, 1000);	
 	}
 	
 	public void step(float delta){
@@ -44,7 +44,6 @@ public class PotentialFieldManager {
 		for(PlayerCharacter pc: playerCharacters){
 			map.remove(pushingPlayerCharacterPotentialFieldMap, pc);
 			GridPoint2 destination = getDestination(pc, map);
-			System.out.println("dest: " + destination.x + " "+destination.y);
 			int xDirection = destination.x - (int)pc.x;
 			int yDirection = destination.y - (int)pc.y;
 			pc.makeStep(delta, xDirection, yDirection);
