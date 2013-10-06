@@ -36,13 +36,11 @@ public class PotentialFieldManager {
 			map.add(pushingPlayerCharacterPotentialFieldMap, pc);
 		}
 		
-		//+ all players
+
 		
 		
 		
-		//schleife
-		//--current player
-		//movePlayer
+
 		for(PlayerCharacter pc: playerCharacters){
 			map.remove(pushingPlayerCharacterPotentialFieldMap, pc);
 			GridPoint2 destination = getDestination(pc, map);
@@ -52,9 +50,7 @@ public class PotentialFieldManager {
 			pc.makeStep(delta, xDirection, yDirection);
 			map.add(pushingPlayerCharacterPotentialFieldMap, pc);
 		}
-		//get new Pos
-		//++current player
-		//repeat
+
 	}
 	
 	private GridPoint2 getDestination(Agent pc, CombinedMap map) {

@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.we.PixocalypsePrototypes.PotentialField.PotentialField;
 import com.we.PixocalypsePrototypes.PotentialField.PotentialFieldManager;
 import com.we.PixocalypsePrototypes.PotentialField.StaticPotentialField;
 
@@ -18,6 +17,10 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 	private PotentialFieldManager manager;
 	private PlayerCharacter player;
 	private PlayerCharacter player2;
+	private PlayerCharacter player3;
+	private PlayerCharacter player4;
+	private PlayerCharacter player5;
+	
 	
 
 	public PotentialFieldTestScreen(final PixokalypsePrototypes gam) {
@@ -28,6 +31,12 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 		manager.addPlayerCharacter(player);
 		player2 = new PlayerCharacter(150, 100);
 		manager.addPlayerCharacter(player2);
+		player3 = new PlayerCharacter(180, 100);
+		manager.addPlayerCharacter(player3);
+		player4 = new PlayerCharacter(150, 130);
+		manager.addPlayerCharacter(player4);
+		player5 = new PlayerCharacter(150, 80);
+		manager.addPlayerCharacter(player5);
 		
 	}
 	
@@ -75,6 +84,12 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 		game.shapeRenderer.rect(player.x-3, player.y-3, 7, 7);
 		game.shapeRenderer.setColor(Color.GREEN);
 		game.shapeRenderer.rect(player2.x-3, player2.y-3, 7, 7);
+		game.shapeRenderer.setColor(Color.BLUE);
+		game.shapeRenderer.rect(player3.x-3, player3.y-3, 7, 7);
+		game.shapeRenderer.setColor(Color.ORANGE);
+		game.shapeRenderer.rect(player4.x-3, player4.y-3, 7, 7);
+		game.shapeRenderer.setColor(Color.DARK_GRAY);
+		game.shapeRenderer.rect(player5.x-3, player5.y-3, 7, 7);
 
 		game.shapeRenderer.end();
 		
