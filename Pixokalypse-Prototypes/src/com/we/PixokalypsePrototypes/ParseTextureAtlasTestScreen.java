@@ -30,7 +30,7 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 		spriteCollisionmapContainer = new SpriteCollisionMapContainer();
 		actorList = new ArrayList<TestActor>();
 		width = Gdx.graphics.getWidth();
-		height = Gdx.graphics.getHeight();
+		height = Gdx.graphics.getHeight();		
 	}
 	
 	@Override
@@ -43,7 +43,6 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 		camera.setToOrtho(false, width, height);
 	}
 
-	@Override
 	public void pause() {
 	}
 

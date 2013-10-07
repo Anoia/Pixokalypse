@@ -1,15 +1,17 @@
 package com.we.PixokalypsePrototypes.test;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
 public class SpriteCollisionMapContainer {
@@ -21,29 +23,35 @@ public class SpriteCollisionMapContainer {
 		spriteCollisionmapHashmap = new HashMap<String, byte[][]>();
 				
 		//Für alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
+		Texture fullexture = new Texture(Gdx.files.internal("data/heightmap/collisionpack.png"));
+		
+		TextureData textureData = fullexture.getTextureData();
+		textureData.prepare();
+		Pixmap pixMap = new Pixmap(fullexture.getWidth(),fullexture.getHeight(),textureData.getFormat());
+		pixMap = textureData.consumePixmap();
+		
+		
 		for(AtlasRegion item:spriteSheet.getRegions()){
 			String name = item.name;
-			System.out.println(item.name);
-			spriteCollisionmapHashmap.put(name, spriteToCollisionmapArray(spriteSheet.createSprite(name)));
+			TextureRegion tr = spriteSheet.findRegion(name);
+			Color color;
+			
+			byte[][] collisionMap = new byte[tr.getRegionWidth()][tr.getRegionHeight()];	
+			for(int x = tr.getRegionX(); x < tr.getRegionWidth()+tr.getRegionX();x++){
+				for(int y = tr.getRegionY(); y < tr.getRegionHeight()+tr.getRegionY();y++){
+					color = new Color(pixMap.getPixel(x, y));
+					String blub = color.toString();
+
+					if(0 == blub.compareToIgnoreCase("ffffff00"))System.out.print("Darf nicht würd ich sagen");
+					else if(0 == blub.compareToIgnoreCase("000000ff"))collisionMap[y-tr.getRegionY()][x-tr.getRegionX()] = 1;
+					else if(0 == blub.compareToIgnoreCase("ffffffff"))collisionMap[y-tr.getRegionY()][x-tr.getRegionX()] = 0;
+				}
+			}
+			spriteCollisionmapHashmap.put(name, collisionMap);
 		}
+		pixMap.dispose();
 	}
 	
-	private byte[][] spriteToCollisionmapArray(Sprite createSprite) {
-		byte[][] collisionMap = new byte[createSprite.getRegionWidth()][createSprite.getRegionHeight()];
-		Pixmap pm = new Pixmap(createSprite.getRegionWidth(), createSprite.getRegionHeight(), createSprite.getTexture().getTextureData().getFormat());
-		TextureData td = createSprite.getTexture().getTextureData();
-		td.prepare();
-		pm = td.consumePixmap();
-		for(int x = 0; x < createSprite.getRegionWidth();x++){
-			for(int y = 0; y < createSprite.getRegionHeight();y++){
-				Color color = new Color(pm.getPixel(x, y));
-				if(color.r == 1 && color.b==1 && color.g == 1)collisionMap[x][y] = 0;
-				if(color.r == 0 && color.b==0 && color.g == 0)collisionMap[x][y] = 1;
-			}		
-		}
-		return collisionMap;
-	}
-
 	public byte[][] getSpriteCollisionmap(String spriteName){
 		return spriteCollisionmapHashmap.get(spriteName);
 	}
