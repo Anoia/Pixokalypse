@@ -5,10 +5,8 @@ import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -24,7 +22,7 @@ public class SpriteCollisionMapContainer {
 				
 		//Für alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
 		Texture fullexture = new Texture(Gdx.files.internal("data/heightmap/collisionpack.png"));
-		
+		fullexture.dispose();
 		TextureData textureData = fullexture.getTextureData();
 		textureData.prepare();
 		Pixmap pixMap = new Pixmap(fullexture.getWidth(),fullexture.getHeight(),textureData.getFormat());
@@ -49,6 +47,8 @@ public class SpriteCollisionMapContainer {
 			}
 			spriteCollisionmapHashmap.put(name, collisionMap);
 		}
+		textureData.disposePixmap();//weiß nicht ob das muss :D
+		fullexture.dispose();
 		pixMap.dispose();
 	}
 	
