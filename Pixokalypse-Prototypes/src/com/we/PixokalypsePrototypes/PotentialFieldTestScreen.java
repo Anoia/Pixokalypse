@@ -40,7 +40,7 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 		manager.addPlayerCharacter(player);
 		player2 = new PlayerCharacter(150, 100);
 		manager.addPlayerCharacter(player2);
-		player3 = new PlayerCharacter(180, 100);
+		player3 = new PlayerCharacter((int)Gdx.graphics.getWidth()/2,(int)Gdx.graphics.getHeight()/2);
 		manager.addPlayerCharacter(player3);
 		player4 = new PlayerCharacter(150, 130);
 		manager.addPlayerCharacter(player4);

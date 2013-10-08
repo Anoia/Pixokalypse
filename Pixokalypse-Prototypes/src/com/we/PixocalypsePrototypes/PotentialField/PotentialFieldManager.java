@@ -2,6 +2,8 @@ package com.we.PixocalypsePrototypes.PotentialField;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+
 import Agents.Agent;
 import Agents.PlayerCharacter;
 
@@ -23,7 +25,7 @@ public class PotentialFieldManager {
 		this.environmentMap = environmentMap;
 		this.playerCharacters = new ArrayList<PlayerCharacter>();
 		pushingPlayerCharacterPotentialFieldMap = new CircleDynamicPotentialField(15, true);
-		this.setPlayerCharacterTarget(1000, 1000);	
+		this.setPlayerCharacterTarget((int)Gdx.graphics.getWidth()/2, (int)Gdx.graphics.getHeight());	
 	}
 	
 	public void step(float delta){
@@ -73,15 +75,17 @@ public class PotentialFieldManager {
 	
 	public void setPlayerCharacterTarget(int x, int y){
 		System.out.println("new target");
-		int radius = 300;
-		playerCharacterTarget = new Target(new CircleDynamicPotentialField(radius, false), x-radius, y-radius);
+		int radius = 200;
+		//playerCharacterTarget = new Target(new CircleDynamicPotentialField(radius, false), x-radius, y-radius);
+		playerCharacterTarget = new Target(new SuperIntelligentDynamicPotentialField(environmentMap, radius, false,x-radius, y-radius), x-radius, y-radius);
+		
 		neuRendernA = true;
 	}
 
 	//Hilfsfunktion zum Debugen
 	//Setzt ein "Gebäude" in die environmentMap
 	public void drawOnEnvironmentMap(int screenX, int screenY) {
-		int diameter = 20;
+		int diameter = 10;
 		for(int x = screenX-diameter; x < screenX+diameter;x++){
 			for(int y = screenY-diameter; y < screenY+diameter;y++){
 				environmentMap.potentialFieldMap[x][y] = 10000;
