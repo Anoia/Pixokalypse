@@ -33,11 +33,15 @@ public class CombinedMap extends PotentialField {
 		int y = (mapToAddYPos < 0)? 0 : mapToAddYPos; 
 		
 		
-		int maxI = (x + mapToAdd.length)%potentialFieldMap.length;
+		int maxI = (x + mapToAdd.length);
+		maxI = (maxI > potentialFieldMap.length)?potentialFieldMap.length-1:maxI;
 		maxI = (mapToAddXPos < 0)? maxI+mapToAddXPos : maxI;
-		int maxJ = (y + mapToAdd[0].length)%potentialFieldMap[0].length;
-		maxJ = (mapToAddYPos < 0)? maxJ + mapToAddYPos : maxJ;
 		
+		int maxJ = (y + mapToAdd[0].length);
+		maxJ = (maxJ > potentialFieldMap[0].length)?potentialFieldMap[0].length-1:maxJ;
+		maxJ = (mapToAddYPos < 0)? maxJ + mapToAddYPos : maxJ;
+
+
 		for(int i = x; i < maxI; i++){
 			for(int j = y; j < maxJ; j++){
 				int add = mapToAdd[i-mapToAddXPos][j-mapToAddYPos];
