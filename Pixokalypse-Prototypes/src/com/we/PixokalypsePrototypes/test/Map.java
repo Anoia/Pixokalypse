@@ -8,14 +8,14 @@ enum Direction{
 
 public class Map {
 	
-	public int mapSize; //anzahl der Felder 
+	public int mapSize; //anzahl der Felder
 	private int minFieldsPerBlock;
 	private int randomFieldsPerBlock; //optionale Gebäude
 	public Field[][] map;
 	private int mapBorder; //rand der map, wenn der erreicht ist wird nicht mehr generiert
 	
 	public Map(){
-		this(40, 7, 3, 6);
+		this(15, 2, 2, 3);
 	}
 	
 	public Map(int mapSize, int minFieldsPerBlock, int randomFieldsPerBlock, int mapBorder){
@@ -26,12 +26,29 @@ public class Map {
 		map = new Field[mapSize][mapSize];
 		this.initEmptyMap();
 		this.generateMap();
-		printASCII();
 		this.fixStreets();
-		
+		this.setTileSprites();
+		printASCII();
 		//Print Map
 	}
 	
+
+	private void setTileSprites() {
+		for(int x = 1; x < mapSize-1; x++){
+			for(int y = 1; y < mapSize-1; y++){
+				Field field = map[x][y];
+				if(field.fieldCategory == FieldCategory.STREET)setStreetTile(x, y);
+			}
+		}
+		
+		for(int x = 0; x < mapSize; x++){
+			for(int y = 0; y < mapSize; y++){
+				Field field = map[x][y];
+				if(field.fieldCategory == FieldCategory.EMPTY)setRandomeEmptyField(x, y);
+				else if(field.fieldCategory == FieldCategory.BUILDING)setRandomNonStreetTile(x, y);
+			}
+		}
+	}
 
 	private void initEmptyMap() {
 		for(int x = 0; x < mapSize; x++){
@@ -103,7 +120,6 @@ public class Map {
 			keepGenerating = !(currentFieldX==mapBorder || currentFieldY == mapBorder);
 			
 		}	
-		
 	}
 
 	/**
@@ -202,15 +218,15 @@ public class Map {
 		for(int i = 0; i < mapSize; i ++){
 			System.out.print("\n");
 			for(int j = 0; j < mapSize; j++){
-				switch(map[i][j].fieldCategory){
+				switch(map[j][i].fieldCategory){
 				case EMPTY:
-					System.out.print(" ");
+					System.out.print("   ");
 					break;
 				case BUILDING:
-					System.out.print(" ");
+					System.out.print(" B ");
 					break;
 				case STREET:
-					System.out.print("+");
+					System.out.print(" + ");
 					break;
 				}
 			}
@@ -289,6 +305,90 @@ public class Map {
 		
 	}
 	
+	private void setRandomeEmptyField(int x,int y){
+		String[] emptyFieldSpriteNames ={"empty1", "empty2", "empty3"};
+		Field field = map[x][y];
+		field.spriteName = emptyFieldSpriteNames[(int)(Math.random() * emptyFieldSpriteNames.length)];
+	}
+	private void setRandomNonStreetTile(int x, int y){
+		String[] fieldSpriteNames ={"gA1", "gB1", "gC1", "hA1", "hA2", "hB1", "hC1", "hC2", "hC3", "pA1", "pA2", "pA3", "pA4", "sA1", "userA1", "userB1", 
+				"userB2", "userB3"};
+		Field field = map[x][y];
+		field.spriteName = fieldSpriteNames[(int)(Math.random() * fieldSpriteNames.length)];
+		
+	}
+	private void setStreetTile(int x, int y){
+		//Strassentexturen setzen
+		boolean strO = true;
+		boolean strR = true;
+		boolean strU = true;
+		boolean strL = true;
+		int neigbouhrstreetsCount = 0;
+		Field field;
+		field = map[x][y];
+
+			//vier felder anschauen
+			//oben
+
+			if(map[x][y-1].fieldCategory == FieldCategory.STREET){
+				strO = true;
+				neigbouhrstreetsCount++;
+			}else{
+				strO = false;
+			}
+
+			//unten
+			if(map[x][y+1].fieldCategory == FieldCategory.STREET){
+				strU = true;
+				neigbouhrstreetsCount++;
+			}else{
+				strU = false;
+			}
+
+			//rechts
+			if(map[x+1][y].fieldCategory == FieldCategory.STREET){
+				strR = true;
+				neigbouhrstreetsCount++;
+			}else{
+				strR = false;
+			}
+
+			//links
+
+			if(map[x-1][y].fieldCategory == FieldCategory.STREET){
+				strL = true;
+				neigbouhrstreetsCount++;
+			}else{
+				strL = false;
+			}
+
+
+			//Anliegende Strassen erkannt! nun Schritt gehen
+			//println strCount
+			switch (neigbouhrstreetsCount){
+			case 1: field.spriteName = "strORUL1";
+				break;
+			case 2:
+					if(strO && strL) field.spriteName = "strOL1";
+					else if(strO && strR) field.spriteName = "strOR1";
+					else if(strO && strU) field.spriteName = "strOU1";
+					else if(strR && strL) field.spriteName = "strRL1";
+					else if(strR && strU) field.spriteName = "strRU1";
+					else if(strU && strL) field.spriteName = "strUL1";
+					else System.out.println("street 2neighbours fail");
+					break;
+				case 3:
+					if(strO && strR && strL) field.spriteName = "strORL1";
+					else if(strO && strR && strU) field.spriteName = "strORU1";
+					else if(strO && strU && strL) field.spriteName = "strOUL1";
+					else if(strR && strU && strL) field.spriteName = "strRUL1";
+					else System.out.println("street 3neighbours fail");
+					break;
+				case 4:
+					 field.spriteName = "strORUL1";
+					break;
+			}
+		}
 	/**
 	 * changes the Type of a Field to BUILDING, assignes blockID
 	 * @param x x-position of the field on the map

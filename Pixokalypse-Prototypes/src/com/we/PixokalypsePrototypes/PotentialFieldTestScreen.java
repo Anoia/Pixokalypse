@@ -7,6 +7,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.we.PixocalypsePrototypes.PotentialField.PotentialFieldManager;
 import com.we.PixocalypsePrototypes.PotentialField.StaticPotentialField;
@@ -21,6 +27,9 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 	private PlayerCharacter player4;
 	private PlayerCharacter player5;
 	
+	//DebugVariablen zum Zeichen der PotentialFelder
+	private Texture debugTexture;
+	private Sprite debugSprite;
 	
 
 	public PotentialFieldTestScreen(final PixokalypsePrototypes gam) {
@@ -57,10 +66,47 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 	@Override
 	public void resume() {
 	}
-
+	
+	//Zeichnet die combinedMap des PotentialFieldManagers in einen Sprite
+	public void reDrawDebugMap(){
+		System.out.println("rebuild debugmap");
+		if(manager.combinedMap != null){
+			Pixmap pm = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Format.RGBA4444);
+			//PixMap pixMap = new PixMap();
+			float farbzahl = 1.f/255;
+			for(int x = 0; x < manager.combinedMap.width;x++){
+				for(int y = 0; y < manager.combinedMap.height;y++){
+					float zahl = farbzahl*manager.combinedMap.potentialFieldMap[x][y];
+					Color color = new Color(1-zahl,1,1,1);
+					if(manager.combinedMap.potentialFieldMap[x][y] >= 10000) color = Color.BLACK;
+					//if(manager.combinedMap.potentialFieldMap[x][y] != 0)System.out.println(zahl);
+					//System.out.println(Integer.toHexString(color.toIntBits()));
+					pm.setColor(color);
+					//pm.setColor(Color.BLACK);
+					pm.fillRectangle(x, y, 1, 1);
+				}	
+			}
+			
+			debugTexture = new Texture(game.getNextPowOf2(Gdx.graphics.getWidth()), game.getNextPowOf2(Gdx.graphics.getHeight()), Format.RGBA4444);
+			debugTexture.draw(pm, 0, 0);
+			pm.dispose();
+			
+			//texture = new Texture(Gdx.files.internal("data/libgdx.png"));
+			debugTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+			TextureRegion region = new TextureRegion(debugTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+			debugSprite = new Sprite(region);
+			debugSprite.setPosition(0, 0);
+			debugSprite.flip(false, true);
+			manager.neuRendernA = false;
+			manager.neuRendernB = false;
+		}
+		
+	}
+	
 	@Override
 	public void render(float delta) {
 		manager.step(delta);
+		if(manager.neuRendernA && manager.neuRendernB)reDrawDebugMap();
 		Gdx.gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
@@ -73,6 +119,11 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 		//Sprites Rendern anfang
+		
+		//combinedMapField Rendern für Debugzwecke
+		if(debugSprite != null){
+			debugSprite.draw(game.batch);
+		}
 		
 		//Sprites Rendern ende
 		game.batch.end();

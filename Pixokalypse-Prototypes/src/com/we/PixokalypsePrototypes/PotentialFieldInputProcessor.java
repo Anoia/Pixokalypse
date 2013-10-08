@@ -32,7 +32,8 @@ public class PotentialFieldInputProcessor implements InputProcessor {
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		System.out.println(screenX +" "+ screenY);
 		//UNPROJECT for real world coords
-		manager.setPlayerCharacterTarget(screenX, screenY);
+		if(button == 0)manager.setPlayerCharacterTarget(screenX, screenY);
+		if(button == 1)manager.drawOnEnvironmentMap(screenX,screenY);
 		return false;
 	}
 
@@ -44,7 +45,6 @@ public class PotentialFieldInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

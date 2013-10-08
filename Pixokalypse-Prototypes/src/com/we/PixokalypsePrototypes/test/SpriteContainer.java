@@ -22,7 +22,9 @@ public class SpriteContainer {
 		//Für alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
 		for(AtlasRegion item:spriteSheet.getRegions()){
 			String name = item.name;
-			spriteHashmap.put(name, spriteSheet.createSprite(name));
+			Sprite sprite = spriteSheet.createSprite(name);
+			sprite.flip(false, true);
+			spriteHashmap.put(name, sprite);
 			//spriteHashmap.get(name).setSize(width, height);
 		}
 		System.out.println("anzahl Sprites: " + spriteHashmap.size());

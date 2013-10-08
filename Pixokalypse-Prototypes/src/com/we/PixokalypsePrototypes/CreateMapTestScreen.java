@@ -2,21 +2,25 @@ package com.we.PixokalypsePrototypes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.we.PixokalypsePrototypes.test.Map;
+import com.we.PixokalypsePrototypes.test.SpriteContainer;
 
 public class CreateMapTestScreen implements Screen{ //,InputProcessor {
  final PixokalypsePrototypes game;
 	
  private OrthographicCamera camera;
 	private Map mainMap;
+
+	private SpriteContainer spriteContainer;
 	
 	public CreateMapTestScreen(final PixokalypsePrototypes gam) {
 		this.game = gam;
 		mainMap = new Map();
+		spriteContainer = new SpriteContainer();
+		System.out.println("alles fertig");
 	}
 	
 	@Override
@@ -26,7 +30,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 	@Override
 	public void resize(int width, int height) {
 		camera = new OrthographicCamera(width, height);
-		camera.setToOrtho(false, width, height);
+		camera.setToOrtho(true, width, height);
 	}
 
 	@Override
@@ -51,13 +55,25 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 		//Sprites Rendern anfang
-		
+		int tileSize = 40;
+		Sprite sprite;
+		for(int x = 0; x < mainMap.mapSize; x ++){
+			for(int y = 0; y < mainMap.mapSize; y++){
+				String spriteName = mainMap.map[x][y].spriteName;
+				sprite = spriteContainer.getSprite(spriteName);
+				sprite.setPosition(x*tileSize,y*tileSize);
+				sprite.draw(game.batch);	
+			}
+		}
+			
 		//Sprites Rendern ende
 		game.batch.end();
 		
+		
+		/*	
 		game.shapeRenderer.setProjectionMatrix(camera.combined);
 		game.shapeRenderer.begin(ShapeType.Filled);
-			int tileSize = 20;
+			int tileSize = 40;
 			for(int i = 0; i < mainMap.mapSize; i ++){
 				for(int j = 0; j < mainMap.mapSize; j++){
 					switch(mainMap.map[i][j].fieldCategory){
@@ -77,7 +93,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 			}
 			
 		game.shapeRenderer.end();
-		
+		*/
 //      angeblich für transparenz notwendig ende
 		Gdx.gl.glDisable(GL10.GL_BLEND);
 		

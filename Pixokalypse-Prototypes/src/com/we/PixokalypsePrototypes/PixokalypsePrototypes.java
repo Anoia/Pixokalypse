@@ -86,5 +86,13 @@ public class PixokalypsePrototypes extends Game {
                 shapeRenderer.dispose();
         		//skin.dispose();
         }
+        
+        public int getNextPowOf2(int value){
+        	int result = 2;
+        	while(value > result){
+        		result *=2;
+        	}
+        	return result;
+        }
 
 }

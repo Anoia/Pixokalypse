@@ -8,7 +8,9 @@ import Agents.PlayerCharacter;
 public class PotentialFieldManager {
 	
 	private StaticPotentialField  environmentMap;
-	
+	public CombinedMap combinedMap;
+	public boolean neuRendernA = false;
+	public boolean neuRendernB = false;
 	
 	
 	private ArrayList<PlayerCharacter> playerCharacters;
@@ -26,28 +28,24 @@ public class PotentialFieldManager {
 	
 	public void step(float delta){
 		stepPlayerCharacters(delta);
+		if(neuRendernA)neuRendernB = true;
 	}
 	
 	public void stepPlayerCharacters(float delta){
 		
-		CombinedMap map = new CombinedMap(environmentMap);
-		map.add(playerCharacterTarget);		
+		combinedMap = new CombinedMap(environmentMap);
+		combinedMap.add(playerCharacterTarget);		
 		for(PlayerCharacter pc: playerCharacters){
-			map.add(pushingPlayerCharacterPotentialFieldMap, pc);
+			combinedMap.add(pushingPlayerCharacterPotentialFieldMap, pc);
 		}
 		
-
-		
-		
-		
-
 		for(PlayerCharacter pc: playerCharacters){
-			map.remove(pushingPlayerCharacterPotentialFieldMap, pc);
-			GridPoint2 destination = getDestination(pc, map);
+			combinedMap.remove(pushingPlayerCharacterPotentialFieldMap, pc);
+			GridPoint2 destination = getDestination(pc, combinedMap);
 			int xDirection = destination.x - (int)pc.x;
 			int yDirection = destination.y - (int)pc.y;
 			pc.makeStep(delta, xDirection, yDirection);
-			map.add(pushingPlayerCharacterPotentialFieldMap, pc);
+			combinedMap.add(pushingPlayerCharacterPotentialFieldMap, pc);
 		}
 
 	}
@@ -77,6 +75,19 @@ public class PotentialFieldManager {
 		System.out.println("new target");
 		int radius = 300;
 		playerCharacterTarget = new Target(new CircleDynamicPotentialField(radius, false), x-radius, y-radius);
+		neuRendernA = true;
+	}
+
+	//Hilfsfunktion zum Debugen
+	//Setzt ein "Gebäude" in die environmentMap
+	public void drawOnEnvironmentMap(int screenX, int screenY) {
+		int diameter = 20;
+		for(int x = screenX-diameter; x < screenX+diameter;x++){
+			for(int y = screenY-diameter; y < screenY+diameter;y++){
+				environmentMap.potentialFieldMap[x][y] = 10000;
+			}	
+		}
+		neuRendernA = true;
 	}
 
 }

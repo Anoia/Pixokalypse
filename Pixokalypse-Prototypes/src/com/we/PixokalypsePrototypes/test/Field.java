@@ -4,6 +4,7 @@ public class Field {
 	public int xAxis;
 	public int yAxis;
 	public int blockID;
+	public String spriteName;
 	public FieldCategory fieldCategory;
 	public FieldType fieldType;
 	
