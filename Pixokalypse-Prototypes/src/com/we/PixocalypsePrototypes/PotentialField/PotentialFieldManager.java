@@ -2,10 +2,12 @@ package com.we.PixocalypsePrototypes.PotentialField;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Gdx;
-
 import Agents.Agent;
 import Agents.PlayerCharacter;
+
+import com.badlogic.gdx.Gdx;
+import com.we.PixokalypsePrototypes.test.Map;
+import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
 
 public class PotentialFieldManager {
 	
@@ -34,7 +36,6 @@ public class PotentialFieldManager {
 	}
 	
 	public void stepPlayerCharacters(float delta){
-		
 		combinedMap = new CombinedMap(environmentMap);
 		combinedMap.add(playerCharacterTarget);		
 		for(PlayerCharacter pc: playerCharacters){
@@ -69,6 +70,20 @@ public class PotentialFieldManager {
 		return pos;
 	}
 
+	public void addCollisionMapToEnvironment(Map map, SpriteCollisionMapContainer spriteCollisionMapContainer){
+		//Für jeden MapTile
+		int tileSize = 40;// müssen wir in der Map Speichern :D
+		for(int i = 0; i < map.mapSize;i++){
+			for(int j = 0; j < map.mapSize;j++){
+				//Collisionmap in Environmentmap kopieren
+				int[][] collisionmap = spriteCollisionMapContainer.getSpriteCollisionmap(map.map[j][i].spriteName);
+				for(int row = 0; row < tileSize;row++){
+					System.arraycopy( collisionmap[39-row], 0, environmentMap.potentialFieldMap[row+j*tileSize], i*tileSize, tileSize);
+				}
+			}	
+		}
+	}
+		
 	public void addPlayerCharacter(PlayerCharacter pc){
 		playerCharacters.add(pc);
 	}

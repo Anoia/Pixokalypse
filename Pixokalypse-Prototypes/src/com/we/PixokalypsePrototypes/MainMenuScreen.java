@@ -60,10 +60,16 @@ public class MainMenuScreen implements Screen {
 		button3.setPosition(Gdx.graphics.getWidth()/2, (Gdx.graphics.getHeight()/10*5)-Gdx.graphics.getWidth()/5/2);
 		button3.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
 		
+		final TextButton button4 = new TextButton("  collisionMap+PotentialFields  ", game.skin);
+		button4.setPosition(Gdx.graphics.getWidth()/2, (Gdx.graphics.getHeight()/10*3)-Gdx.graphics.getWidth()/5/2);
+		button4.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
+		
 		//Buttons der Stage hinzufügen damit sie gerendert werden.
 		stage.addActor(button);
 		stage.addActor(button2);
 		stage.addActor(button3);
+		stage.addActor(button4);
+		
 		
 		// Add a listener to the button. ChangeListener is fired when the button's checked state changes, eg when clicked,
 		// Button#setChecked() is called, via a key press, etc. If the event.cancel() is called, the checked state will be reverted.
@@ -86,6 +92,12 @@ public class MainMenuScreen implements Screen {
 		button3.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 				game.setScreen(new ParseTextureAtlasTestScreen(game));
+				dispose();
+			}
+		});
+		button4.addListener(new ChangeListener() {
+			public void changed (ChangeEvent event, Actor actor) {
+				game.setScreen(new PotentialFieldMapTestScreen(game));
 				dispose();
 			}
 		});

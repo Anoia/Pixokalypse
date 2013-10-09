@@ -9,12 +9,21 @@ public class CombinedMap extends PotentialField {
 		this.width = environment.width;
 		this.height = environment.height;
 		this.potentialFieldMap = new int[width][height];
+		
+		//2-3 millisekunden
 		for(int i = 0; i < width; i++){
 			for(int j=0; j < height; j++){
 				this.potentialFieldMap[i][j] = environment.potentialFieldMap[i][j];
 				
 			}
-		}				
+		}
+		
+		//auch 2-4 millisekunden :D soll bei großen Arrays Performanter sein :D
+		/*
+		for(int i = 0; i < environment.potentialFieldMap.length;i++){
+		System.arraycopy(environment.potentialFieldMap[i], 0, this.potentialFieldMap[i], 0, environment.potentialFieldMap[0].length);
+		}
+		*/
 	}
 	
 	public void add(Target target){

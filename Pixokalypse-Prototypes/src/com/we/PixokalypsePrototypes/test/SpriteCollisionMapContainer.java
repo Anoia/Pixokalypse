@@ -14,11 +14,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class SpriteCollisionMapContainer {
 		TextureAtlas spriteSheet;
-		HashMap<String,byte[][]> spriteCollisionmapHashmap;
+		HashMap<String,int[][]> spriteCollisionmapHashmap;
 	public SpriteCollisionMapContainer(){
 		
 		spriteSheet = new TextureAtlas(Gdx.files.internal("data/heightmap/collisionpack.atlas"));
-		spriteCollisionmapHashmap = new HashMap<String, byte[][]>();
+		spriteCollisionmapHashmap = new HashMap<String, int[][]>();
 				
 		//Für alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
 		Texture fullexture = new Texture(Gdx.files.internal("data/heightmap/collisionpack.png"));
@@ -34,25 +34,32 @@ public class SpriteCollisionMapContainer {
 			TextureRegion tr = spriteSheet.findRegion(name);
 			Color color;
 			
-			byte[][] collisionMap = new byte[tr.getRegionWidth()][tr.getRegionHeight()];	
+			int[][] collisionMap = new int[tr.getRegionWidth()][tr.getRegionHeight()];	
 			for(int x = tr.getRegionX(); x < tr.getRegionWidth()+tr.getRegionX();x++){
 				for(int y = tr.getRegionY(); y < tr.getRegionHeight()+tr.getRegionY();y++){
 					color = new Color(pixMap.getPixel(x, y));
 					String blub = color.toString();
 
 					if(0 == blub.compareToIgnoreCase("ffffff00"))System.out.print("Darf nicht würd ich sagen");
-					else if(0 == blub.compareToIgnoreCase("000000ff"))collisionMap[y-tr.getRegionY()][x-tr.getRegionX()] = 1;
-					else if(0 == blub.compareToIgnoreCase("ffffffff"))collisionMap[y-tr.getRegionY()][x-tr.getRegionX()] = 0;
+					else if(0 == blub.compareToIgnoreCase("000000ff"))collisionMap[x-tr.getRegionX()][y-tr.getRegionY()] = 10000;
+					else if(0 == blub.compareToIgnoreCase("ffffffff"))collisionMap[x-tr.getRegionX()][y-tr.getRegionY()] = 0;
 				}
 			}
-			spriteCollisionmapHashmap.put(name, collisionMap);
+			//Vertikal Spiegeln vorher!
+			int[][] collisionMapGespiegelt = new int[tr.getRegionWidth()][tr.getRegionHeight()];
+			for(int x = 0; x<collisionMap.length;x++){
+				for(int y = 0; y<collisionMap.length;y++){
+					collisionMapGespiegelt[collisionMap.length-1-x][y] = collisionMap[x][y];
+				}
+			}
+			spriteCollisionmapHashmap.put(name, collisionMapGespiegelt);
 		}
 		textureData.disposePixmap();//weiß nicht ob das muss :D
 		fullexture.dispose();
 		pixMap.dispose();
 	}
 	
-	public byte[][] getSpriteCollisionmap(String spriteName){
+	public int[][] getSpriteCollisionmap(String spriteName){
 		return spriteCollisionmapHashmap.get(spriteName);
 	}
 }
