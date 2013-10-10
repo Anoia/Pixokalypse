@@ -34,7 +34,7 @@ public class SuperIntelligentDynamicPotentialField extends DynamicPotentialField
 		while(!done.isEmpty()){
 			todo = getEmptyNeighbours(done);
 			setAllPoints(todo, laufVar);
-			laufVar++;
+			laufVar+=1;
 			done = todo;
 		}
 		System.out.println("zonenen von 0 bis "+laufVar);

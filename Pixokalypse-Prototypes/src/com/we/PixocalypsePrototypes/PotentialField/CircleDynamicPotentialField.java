@@ -98,10 +98,10 @@ public class CircleDynamicPotentialField extends DynamicPotentialField{
 		}
 	}
 	
-	/*
+	
 	public static void main(String[] arg){
-		CircleDynamicPotentialField c  = new CircleDynamicPotentialField(9, false);
+		CircleDynamicPotentialField c  = new CircleDynamicPotentialField(9, true);
 		c.printASCII();
-	}*/
+	}
 
 }

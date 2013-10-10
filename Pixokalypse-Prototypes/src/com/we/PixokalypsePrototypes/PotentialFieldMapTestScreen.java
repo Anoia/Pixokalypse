@@ -25,6 +25,10 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 	private OrthographicCamera camera;
 	private PotentialFieldManager manager;
 	private PlayerCharacter player;
+	private PlayerCharacter player2;
+	private PlayerCharacter player3;
+	private PlayerCharacter player4;
+	private PlayerCharacter player5;
 	
 	private SpriteContainer spriteContainer;
 	private SpriteCollisionMapContainer spriteCollisionMapConainer;
@@ -40,6 +44,14 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 		Gdx.input.setInputProcessor(new PotentialFieldInputProcessor(manager));
 		player = new PlayerCharacter(100, 100);
 		manager.addPlayerCharacter(player);
+		player2 = new PlayerCharacter(150, 100);
+		manager.addPlayerCharacter(player2);
+		player3 = new PlayerCharacter((int)Gdx.graphics.getWidth()/2,(int)Gdx.graphics.getHeight()/2);
+		manager.addPlayerCharacter(player3);
+		player4 = new PlayerCharacter(150, 130);
+		manager.addPlayerCharacter(player4);
+		player5 = new PlayerCharacter(150, 80);
+		manager.addPlayerCharacter(player5);
 		spriteContainer = new SpriteContainer();	
 		spriteCollisionMapConainer = new SpriteCollisionMapContainer();
 		mainMap = new Map();
@@ -140,7 +152,15 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 		game.shapeRenderer.setProjectionMatrix(camera.combined);
 		game.shapeRenderer.begin(ShapeType.Filled);
 		game.shapeRenderer.setColor(Color.RED);
-		game.shapeRenderer.rect(player.x-1, player.y-1, 3, 3);
+		game.shapeRenderer.rect(player.x-3, player.y-3, 7, 7);
+		game.shapeRenderer.setColor(Color.GREEN);
+		game.shapeRenderer.rect(player2.x-3, player2.y-3, 7, 7);
+		game.shapeRenderer.setColor(Color.BLUE);
+		game.shapeRenderer.rect(player3.x-3, player3.y-3, 7, 7);
+		game.shapeRenderer.setColor(Color.ORANGE);
+		game.shapeRenderer.rect(player4.x-3, player4.y-3, 7, 7);
+		game.shapeRenderer.setColor(Color.DARK_GRAY);
+		game.shapeRenderer.rect(player5.x-3, player5.y-3, 7, 7);
 		game.shapeRenderer.end();
 		
 		

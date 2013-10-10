@@ -100,13 +100,52 @@ public class PotentialFieldManager {
 	//Hilfsfunktion zum Debugen
 	//Setzt ein "Gebäude" in die environmentMap
 	public void drawOnEnvironmentMap(int screenX, int screenY) {
-		int diameter = 10;
-		for(int x = screenX-diameter; x < screenX+diameter;x++){
-			for(int y = screenY-diameter; y < screenY+diameter;y++){
+		int radius = 10;
+		
+		CircleDynamicPotentialField cDPF = new CircleDynamicPotentialField(radius*2, true);
+		System.out.println(cDPF.potentialFieldMap.length);
+		System.out.println((screenX-radius-10)+","+(screenX+radius+9));
+		
+		for(int x = screenX-radius-10; x < screenX+radius+9;x++){
+			for(int y = screenY-radius-10; y < screenY+radius+9;y++){
+				System.out.println((x-(screenX-radius-10))+","+(y-(screenY-radius-10)));
+				System.out.println();
+				int bla = cDPF.potentialFieldMap[x-(screenX-radius-10)][y-(screenY-radius-10)];
+				environmentMap.potentialFieldMap[x][y] = bla;
+			}	
+		}
+		
+		for(int x = screenX-radius; x < screenX+radius;x++){
+			for(int y = screenY-radius; y < screenY+radius;y++){
 				environmentMap.potentialFieldMap[x][y] = 10000;
 			}	
 		}
 		neuRendernA = true;
+	}
+
+	public void printZoneACII(int screenX, int screenY) {
+		int radius = 20;
+		System.out.println("\n\n");
+			for(PlayerCharacter player: playerCharacters){
+					System.out.println(player.x+","+player.y);
+				}
+		for(int y = screenY-radius; y < screenY+radius;y++){
+			System.out.println();			
+			for(int x = screenX-radius; x < screenX+radius;x++){
+				int value = combinedMap.potentialFieldMap[x][y];
+				String stringValue = ""+value;
+				while (stringValue.length()<5)stringValue = " "+stringValue;
+				boolean playerposition = false;
+				for(PlayerCharacter player: playerCharacters){
+					if((int)player.x == x && (int)player.y == y)playerposition = true;
+				}
+				if(playerposition){
+					stringValue = stringValue.substring(1, 5);
+					stringValue = "X"+stringValue;
+				}
+				System.out.print("["+stringValue+"]");
+			}	
+		}
 	}
 
 }

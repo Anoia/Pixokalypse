@@ -35,7 +35,7 @@ public class PotentialFieldInputProcessor implements InputProcessor {
 		//UNPROJECT for real world coords
 		if(button == 0)manager.setPlayerCharacterTarget(screenX, screenY);
 		if(button == 1){
-			manager.drawOnEnvironmentMap(screenX,screenY);
+			manager.printZoneACII(screenX,screenY);
 			zeichnen = true;
 		}
 		return false;
