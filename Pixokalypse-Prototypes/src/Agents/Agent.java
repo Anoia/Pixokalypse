@@ -1,6 +1,6 @@
-package Agents;
+package agents;
 
-import com.we.PixocalypsePrototypes.PotentialField.Target;
+import potentialField.Target;
 
 public abstract class Agent {
 	public float x;
