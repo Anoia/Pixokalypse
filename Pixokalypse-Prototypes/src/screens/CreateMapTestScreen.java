@@ -1,10 +1,11 @@
-package com.we.PixokalypsePrototypes;
+package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 import com.we.PixokalypsePrototypes.test.Map;
 import com.we.PixokalypsePrototypes.test.SpriteContainer;
 

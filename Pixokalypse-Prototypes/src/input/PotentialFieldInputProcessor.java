@@ -1,7 +1,8 @@
-package com.we.PixokalypsePrototypes;
+package input;
+
+import potentialField.PotentialFieldManager;
 
 import com.badlogic.gdx.InputProcessor;
-import com.we.PixocalypsePrototypes.PotentialField.PotentialFieldManager;
 
 public class PotentialFieldInputProcessor implements InputProcessor {
 	private PotentialFieldManager manager;

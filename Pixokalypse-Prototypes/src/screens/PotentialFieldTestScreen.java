@@ -1,6 +1,10 @@
-package com.we.PixokalypsePrototypes;
+package screens;
 
-import Agents.PlayerCharacter;
+
+import input.PotentialFieldInputProcessor;
+import potentialField.PotentialFieldManager;
+import potentialField.StaticPotentialField;
+import agents.PlayerCharacter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,19 +12,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.we.PixocalypsePrototypes.PotentialField.PotentialFieldManager;
-import com.we.PixocalypsePrototypes.PotentialField.StaticPotentialField;
-import com.we.PixokalypsePrototypes.test.Map;
-import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
-import com.we.PixokalypsePrototypes.test.SpriteContainer;
+import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 
-public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
+public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 	final PixokalypsePrototypes game;
 	private OrthographicCamera camera;
 	private PotentialFieldManager manager;
@@ -30,15 +30,12 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 	private PlayerCharacter player4;
 	private PlayerCharacter player5;
 	
-	private SpriteContainer spriteContainer;
-	private SpriteCollisionMapContainer spriteCollisionMapConainer;
-	private Map mainMap;
-
 	//DebugVariablen zum Zeichen der PotentialFelder
 	private Texture debugTexture;
 	private Sprite debugSprite;
 	
-	public PotentialFieldMapTestScreen(final PixokalypsePrototypes gam) {
+
+	public PotentialFieldTestScreen(final PixokalypsePrototypes gam) {
 		this.game = gam;
 		manager = new PotentialFieldManager(new StaticPotentialField(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 		Gdx.input.setInputProcessor(new PotentialFieldInputProcessor(manager));
@@ -52,10 +49,7 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 		manager.addPlayerCharacter(player4);
 		player5 = new PlayerCharacter(150, 80);
 		manager.addPlayerCharacter(player5);
-		spriteContainer = new SpriteContainer();	
-		spriteCollisionMapConainer = new SpriteCollisionMapContainer();
-		mainMap = new Map();
-		manager.addCollisionMapToEnvironment(mainMap, spriteCollisionMapConainer);
+		
 	}
 	
 	@Override
@@ -85,10 +79,9 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 			float farbzahl = 1.f/255;
 			for(int x = 0; x < manager.combinedMap.width;x++){
 				for(int y = 0; y < manager.combinedMap.height;y++){
-					float zahl = farbzahl*manager.combinedMap.potentialFieldMap[x][y];
+					float zahl = farbzahl*manager.combinedMap.fieldArray[x][y];
 					Color color = new Color(1-zahl,1,1,1);
-					if(manager.combinedMap.potentialFieldMap[x][y] >= 10000) color = Color.BLACK;
-					if(manager.combinedMap.potentialFieldMap[x][y] == 0) color = new Color(0,0,0,0);
+					if(manager.combinedMap.fieldArray[x][y] >= 10000) color = Color.BLACK;
 					//if(manager.combinedMap.potentialFieldMap[x][y] != 0)System.out.println(zahl);
 					//System.out.println(Integer.toHexString(color.toIntBits()));
 					pm.setColor(color);
@@ -129,17 +122,7 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 		//Sprites Rendern anfang
-		int tileSize = 40;
-		Sprite sprite;
-		for(int x = 0; x < mainMap.mapSize; x ++){
-			for(int y = 0; y < mainMap.mapSize; y++){
-				String spriteName = mainMap.map[x][y].spriteName;
-				sprite = spriteContainer.getSprite(spriteName);
-				sprite.setPosition(x*tileSize,y*tileSize);
-				sprite.draw(game.batch);	
-			}
-		}
-
+		
 		//combinedMapField Rendern für Debugzwecke
 		if(debugSprite != null){
 			debugSprite.draw(game.batch);
@@ -161,6 +144,7 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 		game.shapeRenderer.rect(player4.x-3, player4.y-3, 7, 7);
 		game.shapeRenderer.setColor(Color.DARK_GRAY);
 		game.shapeRenderer.rect(player5.x-3, player5.y-3, 7, 7);
+
 		game.shapeRenderer.end();
 		
 		

@@ -1,4 +1,4 @@
-package com.we.PixokalypsePrototypes;
+package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 
 public class MainMenuScreen implements Screen {
 	

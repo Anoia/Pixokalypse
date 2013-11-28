@@ -1,4 +1,4 @@
-package com.we.PixokalypsePrototypes;
+package screens;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
 import com.we.PixokalypsePrototypes.test.SpriteContainer;
 import com.we.PixokalypsePrototypes.test.TestActor;
