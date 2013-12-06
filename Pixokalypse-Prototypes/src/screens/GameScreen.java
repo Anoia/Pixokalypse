@@ -14,6 +14,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
@@ -33,7 +34,7 @@ public class GameScreen implements Screen {
 	int tileSize = 40; //one tile = one field on map
 	
 	private Player player;
-	private ArrayList<Follower> follower;
+	private ArrayList<Follower> followers = new ArrayList<Follower>();
 	
 	
 	public GameScreen(PixokalypsePrototypes game){
@@ -52,8 +53,14 @@ public class GameScreen implements Screen {
 		System.out.println("GAME SCREEN");
 		
 		//The Player, only one!
-		player = new Player(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+		player = new Player(200, 200);
 		manager.addPlayerCharacter(player);
+		
+		for(int i = 0; i < 3; i++){
+			Follower f = new Follower(200+3*i, 200+3*i);
+			followers.add(f);
+			manager.addPlayerCharacter(f);
+		}
 		
 		
 	}
@@ -89,19 +96,27 @@ public class GameScreen implements Screen {
 			
 		}
 		
+		//Render Player
+		Texture playerTexture = new Texture(Gdx.files.internal("data/characters/char_1.png"));	
+		sprite = new Sprite(playerTexture, 0, 0, 6, 8);
+		sprite.setPosition(player.x-sprite.getWidth()/2, player.y-sprite.getHeight());
+		sprite.flip(false, true);
+		sprite.draw(game.batch);
 		
+		//render followers
+		Texture followerTexture = new Texture(Gdx.files.internal("data/characters/char_2.png"));	
+		sprite = new Sprite(followerTexture, 0, 0, 6, 8);
+		sprite.flip(false, true);
+		if(!followers.isEmpty()){
+			for(Follower f: followers){
+				sprite.setPosition(f.x-sprite.getWidth()/2, f.y-sprite.getHeight());
+				sprite.draw(game.batch);
+			}
+		}
 		
 		
 		//Sprites Rendern ende
 		game.batch.end();
-		
-		//Render Player + Followers
-		game.shapeRenderer.setProjectionMatrix(camera.combined);
-		game.shapeRenderer.begin(ShapeType.Filled);
-		game.shapeRenderer.setColor(Color.RED);
-		game.shapeRenderer.rect(player.x, player.y, 1, 1);
-		game.shapeRenderer.end();
-		
 		
 
 		
