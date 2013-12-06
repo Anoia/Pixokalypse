@@ -10,15 +10,15 @@ import com.we.PixokalypsePrototypes.test.Map;
 import com.we.PixokalypsePrototypes.test.SpriteContainer;
 
 public class CreateMapTestScreen implements Screen{ //,InputProcessor {
- final PixokalypsePrototypes game;
+	PixokalypsePrototypes game;
 	
- private OrthographicCamera camera;
+ 	private OrthographicCamera camera;
 	private Map mainMap;
 
 	private SpriteContainer spriteContainer;
 	
-	public CreateMapTestScreen(final PixokalypsePrototypes gam) {
-		this.game = gam;
+	public CreateMapTestScreen(PixokalypsePrototypes game) {
+		this.game = game;
 		mainMap = new Map();
 		spriteContainer = new SpriteContainer();
 		System.out.println("alles fertig");
@@ -32,6 +32,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 	public void resize(int width, int height) {
 		camera = new OrthographicCamera(width, height);
 		camera.setToOrtho(true, width, height);
+		
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 		Sprite sprite;
 		for(int x = 0; x < mainMap.mapSize; x ++){
 			for(int y = 0; y < mainMap.mapSize; y++){
-				String spriteName = mainMap.map[x][y].spriteName;
+				String spriteName = mainMap.data[x][y].spriteName;
 				sprite = spriteContainer.getSprite(spriteName);
 				sprite.setPosition(x*tileSize,y*tileSize);
 				sprite.draw(game.batch);	

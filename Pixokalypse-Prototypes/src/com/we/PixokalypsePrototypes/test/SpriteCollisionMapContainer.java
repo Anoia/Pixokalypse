@@ -59,7 +59,7 @@ public class SpriteCollisionMapContainer {
 			}
 			
 			makeBuildingsPushFromCenter(collisionMapGespiegelt);
-			printASCII(collisionMapGespiegelt, name);
+			//printASCII(collisionMapGespiegelt, name);
 			spriteCollisionmapHashmap.put(name,  collisionMapGespiegelt);
 		}
 		textureData.disposePixmap();//weiﬂ nicht ob das muss :D

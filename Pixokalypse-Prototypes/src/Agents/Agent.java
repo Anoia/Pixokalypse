@@ -6,9 +6,10 @@ public abstract class Agent {
 	public float x;
 	public float y;
 	public float movementSpeed = 25;
+	public int maxHealth = 10;
+	public int currentHealth = maxHealth;
 	
-	//für zombies
-	//public Target target;
+	
 	
 	public Agent(float x, float y){
 		this.x = x;

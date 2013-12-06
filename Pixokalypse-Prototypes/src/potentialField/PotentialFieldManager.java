@@ -6,7 +6,7 @@ import util.GridPoint2;
 
 
 import agents.Agent;
-import agents.PlayerCharacter;
+import agents.Character;
 
 import com.badlogic.gdx.Gdx;
 import com.we.PixokalypsePrototypes.test.Map;
@@ -20,7 +20,7 @@ public class PotentialFieldManager {
 	public boolean neuRendernB = false;
 	
 	
-	private ArrayList<PlayerCharacter> playerCharacters;
+	private ArrayList<Character> playerCharacters;
 	private CircleDynamicPotentialField pushingPlayerCharacterPotentialFieldMap; //wird auf andere playerCharacters angewendet, damit sie nicht ineinander laufen
 	private Target playerCharacterTarget;
 	
@@ -28,7 +28,7 @@ public class PotentialFieldManager {
 	public PotentialFieldManager(StaticPotentialField environmentMap){
 		
 		this.environmentMap = environmentMap;
-		this.playerCharacters = new ArrayList<PlayerCharacter>();
+		this.playerCharacters = new ArrayList<Character>();
 		pushingPlayerCharacterPotentialFieldMap = new CircleDynamicPotentialField(7, true);
 		this.setPlayerCharacterTarget((int)Gdx.graphics.getWidth()/2, (int)Gdx.graphics.getHeight());	
 	}
@@ -41,11 +41,11 @@ public class PotentialFieldManager {
 	public void stepPlayerCharacters(float delta){
 		combinedMap = new CombinedFields(environmentMap);
 		combinedMap.add(playerCharacterTarget);		
-		for(PlayerCharacter pc: playerCharacters){
+		for(Character pc: playerCharacters){
 			combinedMap.add(pushingPlayerCharacterPotentialFieldMap, pc);
 		}
 		
-		for(PlayerCharacter pc: playerCharacters){
+		for(Character pc: playerCharacters){
 			combinedMap.remove(pushingPlayerCharacterPotentialFieldMap, pc);
 			GridPoint2 destination = getDestination(pc, combinedMap);
 			int xDirection = destination.x - (int)pc.x;
@@ -79,7 +79,7 @@ public class PotentialFieldManager {
 		for(int i = 0; i < map.mapSize;i++){
 			for(int j = 0; j < map.mapSize;j++){
 				//Collisionmap in Environmentmap kopieren
-				int[][] collisionmap = spriteCollisionMapContainer.getSpriteCollisionmap(map.map[j][i].spriteName);
+				int[][] collisionmap = spriteCollisionMapContainer.getSpriteCollisionmap(map.data[j][i].spriteName);
 				for(int row = 0; row < tileSize;row++){
 					System.arraycopy( collisionmap[39-row], 0, environmentMap.fieldArray[row+j*tileSize], i*tileSize, tileSize);
 				}
@@ -87,7 +87,7 @@ public class PotentialFieldManager {
 		}
 	}
 		
-	public void addPlayerCharacter(PlayerCharacter pc){
+	public void addPlayerCharacter(Character pc){
 		playerCharacters.add(pc);
 	}
 	
@@ -129,7 +129,7 @@ public class PotentialFieldManager {
 	public void printZoneACII(int screenX, int screenY) {
 		int radius = 20;
 		System.out.println("\n\n");
-			for(PlayerCharacter player: playerCharacters){
+			for(Character player: playerCharacters){
 					System.out.println(player.x+","+player.y);
 				}
 		for(int y = screenY-radius; y < screenY+radius;y++){
@@ -139,7 +139,7 @@ public class PotentialFieldManager {
 				String stringValue = ""+value;
 				while (stringValue.length()<5)stringValue = " "+stringValue;
 				boolean playerposition = false;
-				for(PlayerCharacter player: playerCharacters){
+				for(Character player: playerCharacters){
 					if((int)player.x == x && (int)player.y == y)playerposition = true;
 				}
 				if(playerposition){
