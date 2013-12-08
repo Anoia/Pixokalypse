@@ -3,8 +3,6 @@ package potentialField;
 import java.util.ArrayList;
 
 import util.GridPoint2;
-
-
 import agents.Agent;
 import agents.Character;
 

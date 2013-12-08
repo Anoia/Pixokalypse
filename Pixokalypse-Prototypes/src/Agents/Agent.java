@@ -1,11 +1,10 @@
 package agents;
 
-import potentialField.Target;
 
 public abstract class Agent {
 	public float x;
 	public float y;
-	public float movementSpeed = 20;
+	public float movementSpeed = 10;
 	public int maxHealth = 10;
 	public int currentHealth = maxHealth;
 	

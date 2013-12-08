@@ -1,6 +1,5 @@
 package com.we.PixokalypsePrototypes.test;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 

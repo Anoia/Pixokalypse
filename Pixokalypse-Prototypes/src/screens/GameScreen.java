@@ -1,22 +1,20 @@
 package screens;
 
+import input.GameInputProcessor;
+
 import java.util.ArrayList;
 
-import input.GameInputProcessor;
 import potentialField.PotentialFieldManager;
 import potentialField.StaticPotentialField;
-
 import agents.Follower;
 import agents.Player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 import com.we.PixokalypsePrototypes.test.Map;
 import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
