@@ -27,22 +27,45 @@ public class Map {
 		this.initEmptyMap();
 		this.generateMap();
 		this.fixStreets();
-		this.addOuter();
-		this.addInner();
+		this.addInnerAndOuter();
 		this.setTileSprites();
 		//printASCII();
 		//Print Map
 	}
 
-	private void addOuter() {
-// TODO addOuter
-// Setzen wenn BEIDE horizontalen und/oder BEIDE vertikalen nachbarn straßen sind
-// Ground_Grass.png	
-	}
-	private void addInner() {
-// TODO addInner
-// Setzen wenn KEIN nachbar eine Straße ist
-// Ground_Parking.png	
+	private void addInnerAndOuter() {
+		boolean addedOuter = true;
+		
+		while(addedOuter){
+			addedOuter = false;
+			for(int x = 0; x < mapSize; x++){
+				for(int y = 0; y < mapSize; y++){	
+					Field field = data[x][y];
+					if(field.fieldCategory == FieldCategory.BUILDING){
+						// Outer: Setzen wenn BEIDE horizontalen und/oder BEIDE vertikalen nachbarn straßen sind
+						// Ground_Grass.png	
+						//else					
+						// Inner:Setzen wenn KEIN nachbar eine Straße ist
+						// Ground_Parking.png
+						//SOOOOOOOOOOOOORRRRRRRRRYYYYYYYYYY WERDE AUFRAUMEN! DACHTE DIE FUNKTION WÄRE NÜTZLICHER UND EINFACHER ZU GEBRAUCHEN :D
+						if(((this.testNeighboursForFieldType(field, true, FieldCategory.STREET, true, false, false, false, false, false, false, false) || (this.testNeighboursForFieldType(field, true, FieldCategory.OUTER, true, false, false, false, false, false, false, false)))
+							&&
+							(this.testNeighboursForFieldType(field, true, FieldCategory.STREET, false, false, false, false, true, false, false, false) || (this.testNeighboursForFieldType(field, true, FieldCategory.OUTER, false, false, false, false, true, false, false, false)))) 
+								||
+							((this.testNeighboursForFieldType(field, true, FieldCategory.STREET, false, false, true, false, false, false, false, false) || (this.testNeighboursForFieldType(field, true, FieldCategory.OUTER, false, false, true, false, false, false, false, false)))
+							&&
+							(this.testNeighboursForFieldType(field, true, FieldCategory.STREET, false, false, false, false, false, false, true, false) || (this.testNeighboursForFieldType(field, true, FieldCategory.OUTER, false, false, false, false, false, false, true, false)))) 
+							){
+							field.fieldCategory = FieldCategory.OUTER;
+							addedOuter = true;
+						}else if(this.testNeighboursForFieldType(field, false, FieldCategory.STREET, true, true, true, true, true, true, true, true)){
+							field.fieldCategory = FieldCategory.INNER;
+						}	
+					}
+				}
+			}	
+		}
+		
 	}
 
 	private void setTileSprites() {
@@ -57,7 +80,9 @@ public class Map {
 			for(int y = 0; y < mapSize; y++){
 				Field field = data[x][y];
 				if(field.fieldCategory == FieldCategory.EMPTY)setRandomeEmptyField(x, y);
-				else if(field.fieldCategory == FieldCategory.BUILDING)setRandomNonStreetTile(x, y);
+				else if(field.fieldCategory == FieldCategory.BUILDING)field.spriteName = "gC1";
+				else if(field.fieldCategory == FieldCategory.INNER)field.spriteName = "strORUL1";
+				else if(field.fieldCategory == FieldCategory.OUTER)field.spriteName = "empty1";
 			}
 		}
 	}
@@ -199,6 +224,45 @@ public class Map {
 				whenIGrowUpIWantToBeAStreet.fieldCategory = FieldCategory.STREET;
 			}
 		}
+	}
+	
+	private boolean testNeighboursForFieldType(Field field,boolean equal, FieldCategory fieldCategory, boolean north, boolean northEast, boolean east, boolean eastSouth, boolean south, boolean southWest, boolean west, boolean westNorth){
+		boolean returnValue = true;
+		int x = field.xAxis, y = field.yAxis;
+		
+		//North test
+		if(returnValue && north == true){
+			returnValue = !((data[x][y-1].fieldCategory == fieldCategory) ^ equal);
+		}
+		//NorthEast test
+		if(returnValue && northEast == true){
+			returnValue = !((data[x+1][y-1].fieldCategory == fieldCategory) ^ equal);
+		}
+		//East test
+		if(returnValue && east == true){
+			returnValue = !((data[x+1][y].fieldCategory == fieldCategory) ^ equal);
+		}
+		//EastSouth test
+		if(returnValue && eastSouth == true){
+			returnValue = !((data[x+1][y+1].fieldCategory == fieldCategory) ^ equal);
+		}
+		//South test
+		if(returnValue && south == true){
+			returnValue = !((data[x][y+1].fieldCategory == fieldCategory) ^ equal);
+		}
+		//SouthWest test
+		if(returnValue && southWest == true){
+			returnValue = !((data[x-1][y+1].fieldCategory == fieldCategory) ^ equal);
+		}
+		//West test
+		if(returnValue && west == true){
+			returnValue = !((data[x-1][y].fieldCategory == fieldCategory) ^ equal);
+		}
+		//WestNorth test
+		if(returnValue && westNorth == true){
+			returnValue = !((data[x-1][y-1].fieldCategory == fieldCategory) ^ equal);
+		}
+		return returnValue;
 	}
 	
 	/**
