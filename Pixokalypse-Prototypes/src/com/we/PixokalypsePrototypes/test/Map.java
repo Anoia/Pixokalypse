@@ -9,8 +9,8 @@ enum Direction{
 public class Map {
 	
 	public int mapSize; //Anzahl der Felder(sprite tiles) auf der Karte
-	private int minFieldsPerBlock; //min Fields per Häuserblock
-	private int randomFieldsPerBlock; //optionale Fields per Häuserblock
+	private int minFieldsPerBlock; //min Fields per Hï¿½userblock
+	private int randomFieldsPerBlock; //optionale Fields per Hï¿½userblock
 	public Field[][] data; //die Karte
 	private int mapBorder; //rand der map, wenn der erreicht ist wird nicht mehr generiert
 	
@@ -27,11 +27,23 @@ public class Map {
 		this.initEmptyMap();
 		this.generateMap();
 		this.fixStreets();
+		this.addOuter();
+		this.addInner();
 		this.setTileSprites();
 		//printASCII();
 		//Print Map
 	}
-	
+
+	private void addOuter() {
+// TODO addOuter
+// Setzen wenn BEIDE horizontalen und/oder BEIDE vertikalen nachbarn straÃŸen sind
+// Ground_Grass.png	
+	}
+	private void addInner() {
+// TODO addInner
+// Setzen wenn KEIN nachbar eine StraÃŸe ist
+// Ground_Parking.png	
+	}
 
 	private void setTileSprites() {
 		for(int x = 1; x < mapSize-1; x++){
@@ -66,9 +78,9 @@ public class Map {
 		int currentFieldX = (int) mapSize/2;
 		int currentFieldY = currentFieldX;
 		
-		int turnTimes = 2; //anzahl der drehungen bis die strecke verlängert werden muss
+		int turnTimes = 2; //anzahl der drehungen bis die strecke verlï¿½ngert werden muss
 		int distance = 1; //schritte zu gehen bis richtung gewechselt werden muss
-		int distanceCounter = distance; //um schritte runter zu zählen
+		int distanceCounter = distance; //um schritte runter zu zï¿½hlen
 		Boolean keepGenerating = true;
 		
 		Direction direction = Direction.DOWN;
@@ -80,13 +92,13 @@ public class Map {
 		while(keepGenerating){
 			
 			if(distanceCounter == 0){ //wenn aktuelle strecke zuende gelaufen
-				turnTimes--; //dehungen bis streckenänderung verringern
+				turnTimes--; //dehungen bis streckenï¿½nderung verringern
 				
-				//richtungsänderung
+				//richtungsï¿½nderung
 				int newDirection = (direction.ordinal() + 1) % Direction.values().length;
 				direction = Direction.values()[newDirection];
 				
-				//distance erhöhen wenn turnTimes = 0;
+				//distance erhï¿½hen wenn turnTimes = 0;
 				if(turnTimes == 0){
 					turnTimes = 2;
 					distance++;
@@ -131,7 +143,7 @@ public class Map {
 		field.blockID = currentBlockId;
 		field.fieldCategory = FieldCategory.BUILDING;
 		
-		//emptyNeigbours enthält alle direkten Nachbarn zu field, auf denen Gebäude platziert werden können
+		//emptyNeigbours enthï¿½lt alle direkten Nachbarn zu field, auf denen Gebï¿½ude platziert werden kï¿½nnen
 		HashSet<Field> emptyNeighbours = new HashSet<Field>();
 		HashSet<Field> fieldsAddedToBlock  = new HashSet<Field>();
 		HashSet<Field> possibleStartFields  = new HashSet<Field>();
@@ -273,11 +285,11 @@ public class Map {
 						if(data[x][y+2].fieldCategory == FieldCategory.STREET && data[x+1][y+2].fieldCategory == FieldCategory.STREET){
 							//vertikaler 6er
 							if(data[x-1][y+1].fieldCategory != FieldCategory.STREET){
-								//12 ist keine Straße, 4 kann weg
+								//12 ist keine Straï¿½e, 4 kann weg
 								makeBuilding(x, y+1, data[x-1][y+1].blockID);
 								
 							}else if(data[x+2][y+1].fieldCategory != FieldCategory.STREET){
-								//9 ist keine Straße, 3 kann weg
+								//9 ist keine Straï¿½e, 3 kann weg
 								makeBuilding(x+1, y+1, data[x+2][y+1].blockID);
 								
 							}
@@ -285,11 +297,11 @@ public class Map {
 						}else if(data[x+2][y].fieldCategory == FieldCategory.STREET && data[x+2][y+1].fieldCategory == FieldCategory.STREET){
 							//horizontaler 6er
 							if(data[x+1][y-1].fieldCategory != FieldCategory.STREET){
-								//7 ist keine straße, 2 kann weg
+								//7 ist keine straï¿½e, 2 kann weg
 								makeBuilding(x+1, y, data[x+1][y-1].blockID);
 								
 							}else if(data[x+1][y+2].fieldCategory != FieldCategory.STREET){
-								//10 ist keine Straße, 3 kann weg
+								//10 ist keine Straï¿½e, 3 kann weg
 								makeBuilding(x+1, y+1, data[x+1][y+2].blockID);
 							}
 							
