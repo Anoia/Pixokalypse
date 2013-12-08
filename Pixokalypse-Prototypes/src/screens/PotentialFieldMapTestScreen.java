@@ -55,8 +55,8 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 		manager.addPlayerCharacter(player4);
 		player5 = new Character(150, 80);
 		manager.addPlayerCharacter(player5);
-		spriteContainer = new SpriteContainer();	
-		spriteCollisionMapConainer = new SpriteCollisionMapContainer();
+		spriteContainer = new SpriteContainer("data/textures/pack.atlas");	
+		spriteCollisionMapConainer = new SpriteCollisionMapContainer("data/heightmap/collisionpack.atlas", "data/heightmap/collisionpack.png");
 		mainMap = new Map();
 		manager.addCollisionMapToEnvironment(mainMap, spriteCollisionMapConainer);
 	}

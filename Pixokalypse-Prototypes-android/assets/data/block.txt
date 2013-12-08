@@ -1,0 +1,88 @@
+block.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Block_A_SO
+  rotate: false
+  xy: 44, 104
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block_A_W
+  rotate: false
+  xy: 212, 104
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block_A_N
+  rotate: false
+  xy: 2, 2
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block_A_NW
+  rotate: false
+  xy: 128, 2
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block_A_SW
+  rotate: false
+  xy: 128, 104
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block_A_NWi
+  rotate: false
+  xy: 170, 2
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block_A_O
+  rotate: false
+  xy: 212, 2
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block_A_SWi
+  rotate: false
+  xy: 170, 104
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block_A_SOi
+  rotate: false
+  xy: 86, 104
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block_A_NO
+  rotate: false
+  xy: 44, 2
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block_A_NOi
+  rotate: false
+  xy: 86, 2
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block_A_S
+  rotate: false
+  xy: 2, 104
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1

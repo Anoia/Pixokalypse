@@ -20,7 +20,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 	public CreateMapTestScreen(PixokalypsePrototypes game) {
 		this.game = game;
 		mainMap = new Map();
-		spriteContainer = new SpriteContainer();
+		spriteContainer = new SpriteContainer("data/textures/pack.atlas");
 		System.out.println("alles fertig");
 	}
 	
@@ -50,7 +50,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 		
 		
 		
-//		angeblich für transparenz notwendig
+//		angeblich fï¿½r transparenz notwendig
 		Gdx.gl.glEnable(GL10.GL_BLEND);
 		Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 		
@@ -96,7 +96,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 			
 		game.shapeRenderer.end();
 		*/
-//      angeblich für transparenz notwendig ende
+//      angeblich fï¿½r transparenz notwendig ende
 		Gdx.gl.glDisable(GL10.GL_BLEND);
 		
 

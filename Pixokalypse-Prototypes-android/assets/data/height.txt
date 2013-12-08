@@ -1,0 +1,179 @@
+height.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Heightmap_A_W
+  rotate: false
+  xy: 86, 128
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_strOL1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_A_SWi
+  rotate: false
+  xy: 44, 128
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_A_SW
+  rotate: false
+  xy: 2, 128
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_A_O
+  rotate: false
+  xy: 86, 44
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_strRU1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_A_SO
+  rotate: false
+  xy: 44, 86
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_A_NO
+  rotate: false
+  xy: 44, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_Grass
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_A_NW
+  rotate: false
+  xy: 2, 44
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_strRL1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_A_N
+  rotate: false
+  xy: 2, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_A_SOi
+  rotate: false
+  xy: 86, 86
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_Parking
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_strUL1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_strRUL1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_A_NWi
+  rotate: false
+  xy: 44, 44
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_strORL1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_strORUL1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_strOUL1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_A_NOi
+  rotate: false
+  xy: 86, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_strOR1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_strORU1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_strOU1
+  rotate: false
+  xy: 2, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Heightmap_A_S
+  rotate: false
+  xy: 2, 86
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
