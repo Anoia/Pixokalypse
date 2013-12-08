@@ -1,4 +1,4 @@
-package agents;
+package Agents;
 
 public class Follower extends Character {
 

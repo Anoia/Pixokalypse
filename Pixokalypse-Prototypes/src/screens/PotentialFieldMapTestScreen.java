@@ -4,7 +4,7 @@ package screens;
 import input.PotentialFieldInputProcessor;
 import potentialField.PotentialFieldManager;
 import potentialField.StaticPotentialField;
-import agents.Character;
+import Agents.Character;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -125,7 +125,7 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 		
 		
 		
-//		angeblich für transparenz notwendig
+//		angeblich fï¿½r transparenz notwendig
 		Gdx.gl.glEnable(GL10.GL_BLEND);
 		Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 		
@@ -143,7 +143,7 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 			}
 		}
 
-		//combinedMapField Rendern für Debugzwecke
+		//combinedMapField Rendern fï¿½r Debugzwecke
 		if(debugSprite != null){
 			debugSprite.draw(game.batch);
 		}
@@ -167,7 +167,7 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 		game.shapeRenderer.end();
 		
 		
-//      angeblich für transparenz notwendig ende
+//      angeblich fï¿½r transparenz notwendig ende
 		Gdx.gl.glDisable(GL10.GL_BLEND);
 		
 

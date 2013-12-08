@@ -1,6 +1,6 @@
 package potentialField;
 
-import agents.Agent;
+import Agents.Agent;
 
 public class CombinedFields extends PotentialField {
 	
@@ -18,7 +18,7 @@ public class CombinedFields extends PotentialField {
 			}
 		}
 		
-		//auch 2-4 millisekunden :D soll bei großen Arrays Performanter sein :D
+		//auch 2-4 millisekunden :D soll bei groï¿½en Arrays Performanter sein :D
 		/*
 		for(int i = 0; i < environment.potentialFieldMap.length;i++){
 		System.arraycopy(environment.potentialFieldMap[i], 0, this.potentialFieldMap[i], 0, environment.potentialFieldMap[0].length);

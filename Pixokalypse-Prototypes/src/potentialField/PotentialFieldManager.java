@@ -3,8 +3,8 @@ package potentialField;
 import java.util.ArrayList;
 
 import util.GridPoint2;
-import agents.Agent;
-import agents.Character;
+import Agents.Agent;
+import Agents.Character;
 
 import com.badlogic.gdx.Gdx;
 import com.we.PixokalypsePrototypes.test.Map;
@@ -72,8 +72,8 @@ public class PotentialFieldManager {
 	}
 
 	public void addCollisionMapToEnvironment(Map map, SpriteCollisionMapContainer spriteCollisionMapContainer){
-		//Für jeden MapTile
-		int tileSize = 40;// müssen wir in der Map Speichern :D
+		//Fï¿½r jeden MapTile
+		int tileSize = 40;// mï¿½ssen wir in der Map Speichern :D
 		for(int i = 0; i < map.mapSize;i++){
 			for(int j = 0; j < map.mapSize;j++){
 				//Collisionmap in Environmentmap kopieren
@@ -99,7 +99,7 @@ public class PotentialFieldManager {
 	}
 
 	//Hilfsfunktion zum Debugen
-	//Setzt ein "Gebäude" in die environmentMap
+	//Setzt ein "Gebï¿½ude" in die environmentMap
 	public void drawOnEnvironmentMap(int screenX, int screenY) {
 		int radius = 10;
 		

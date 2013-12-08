@@ -1,4 +1,4 @@
-package agents;
+package Agents;
 
 public class Player extends Character {
 
