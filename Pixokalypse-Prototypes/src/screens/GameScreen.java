@@ -37,12 +37,12 @@ public class GameScreen implements Screen {
 	
 	public GameScreen(PixokalypsePrototypes game){
 		this.game = game;
-		map = new Map(60, 2, 2, 6);
+		map = new Map(60, 6, 2, 6);
 		manager = new PotentialFieldManager(new StaticPotentialField(map.mapSize*tileSize, map.mapSize*tileSize));
 		
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(true);
-		camera.zoom = 0.1f;
+		camera.zoom = 1f;
 		
 		Gdx.input.setInputProcessor(new GameInputProcessor(manager, camera));
 		spriteContainer = new SpriteContainer();
