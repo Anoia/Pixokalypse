@@ -1,4 +1,4 @@
-package com.we.PixocalypsePrototypes.PotentialField;
+package util;
 
 /**
  * A point in a 2D grid, with integer x and y coordinates

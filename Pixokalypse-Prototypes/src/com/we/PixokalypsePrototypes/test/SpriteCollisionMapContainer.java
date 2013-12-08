@@ -1,8 +1,9 @@
 package com.we.PixokalypsePrototypes.test;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+
+import util.GridPoint2;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -12,20 +13,19 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.we.PixocalypsePrototypes.PotentialField.GridPoint2;
 
 
 public class SpriteCollisionMapContainer {
 	public static final int TILE_SIZE = 40;
 		TextureAtlas spriteSheet;
 		HashMap<String,int[][]> spriteCollisionmapHashmap;
-	public SpriteCollisionMapContainer(){
+	public SpriteCollisionMapContainer(String sourceAtlas, String sourcePNG){
 		
-		spriteSheet = new TextureAtlas(Gdx.files.internal("data/heightmap/collisionpack.atlas"));
+		spriteSheet = new TextureAtlas(Gdx.files.internal(sourceAtlas));
 		spriteCollisionmapHashmap = new HashMap<String, int[][]>();
 				
-		//Für alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
-		Texture fullexture = new Texture(Gdx.files.internal("data/heightmap/collisionpack.png"));
+		//Fï¿½r alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
+		Texture fullexture = new Texture(Gdx.files.internal(sourcePNG));
 		fullexture.dispose();
 		TextureData textureData = fullexture.getTextureData();
 		textureData.prepare();
@@ -44,7 +44,7 @@ public class SpriteCollisionMapContainer {
 					color = new Color(pixMap.getPixel(x, y));
 					String blub = color.toString();
 
-					if(0 == blub.compareToIgnoreCase("ffffff00"))System.out.print("Darf nicht würd ich sagen");
+					if(0 == blub.compareToIgnoreCase("ffffff00"))System.out.print("Darf nicht wï¿½rd ich sagen");
 					else if(0 == blub.compareToIgnoreCase("000000ff"))collisionMap[x-tr.getRegionX()][y-tr.getRegionY()] = -1;
 					else if(0 == blub.compareToIgnoreCase("ffffffff"))collisionMap[x-tr.getRegionX()][y-tr.getRegionY()] = 0;
 				}
@@ -58,10 +58,10 @@ public class SpriteCollisionMapContainer {
 			}
 			
 			makeBuildingsPushFromCenter(collisionMapGespiegelt);
-			printASCII(collisionMapGespiegelt, name);
+			//printASCII(collisionMapGespiegelt, name);
 			spriteCollisionmapHashmap.put(name,  collisionMapGespiegelt);
 		}
-		textureData.disposePixmap();//weiß nicht ob das muss :D
+		textureData.disposePixmap();//weiï¿½ nicht ob das muss :D
 		fullexture.dispose();
 		pixMap.dispose();
 	}

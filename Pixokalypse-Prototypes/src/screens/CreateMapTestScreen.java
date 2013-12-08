@@ -1,25 +1,26 @@
-package com.we.PixokalypsePrototypes;
+package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 import com.we.PixokalypsePrototypes.test.Map;
 import com.we.PixokalypsePrototypes.test.SpriteContainer;
 
 public class CreateMapTestScreen implements Screen{ //,InputProcessor {
- final PixokalypsePrototypes game;
+	PixokalypsePrototypes game;
 	
- private OrthographicCamera camera;
+ 	private OrthographicCamera camera;
 	private Map mainMap;
 
 	private SpriteContainer spriteContainer;
 	
-	public CreateMapTestScreen(final PixokalypsePrototypes gam) {
-		this.game = gam;
+	public CreateMapTestScreen(PixokalypsePrototypes game) {
+		this.game = game;
 		mainMap = new Map();
-		spriteContainer = new SpriteContainer();
+		spriteContainer = new SpriteContainer("data/textures/pack.atlas");
 		System.out.println("alles fertig");
 	}
 	
@@ -31,6 +32,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 	public void resize(int width, int height) {
 		camera = new OrthographicCamera(width, height);
 		camera.setToOrtho(true, width, height);
+		
 	}
 
 	@Override
@@ -48,7 +50,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 		
 		
 		
-//		angeblich für transparenz notwendig
+//		angeblich fï¿½r transparenz notwendig
 		Gdx.gl.glEnable(GL10.GL_BLEND);
 		Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 		
@@ -59,7 +61,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 		Sprite sprite;
 		for(int x = 0; x < mainMap.mapSize; x ++){
 			for(int y = 0; y < mainMap.mapSize; y++){
-				String spriteName = mainMap.map[x][y].spriteName;
+				String spriteName = mainMap.data[x][y].spriteName;
 				sprite = spriteContainer.getSprite(spriteName);
 				sprite.setPosition(x*tileSize,y*tileSize);
 				sprite.draw(game.batch);	
@@ -94,7 +96,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 			
 		game.shapeRenderer.end();
 		*/
-//      angeblich für transparenz notwendig ende
+//      angeblich fï¿½r transparenz notwendig ende
 		Gdx.gl.glDisable(GL10.GL_BLEND);
 		
 

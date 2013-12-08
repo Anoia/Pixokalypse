@@ -1,8 +1,8 @@
-package com.we.PixocalypsePrototypes.PotentialField;
+package potentialField;
 
 public abstract class PotentialField {
 	
-	public int[][] potentialFieldMap;
+	public int[][] fieldArray;
 	
 	public int width;
 	public int height;

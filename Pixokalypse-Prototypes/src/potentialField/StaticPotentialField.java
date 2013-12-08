@@ -1,4 +1,4 @@
-package com.we.PixocalypsePrototypes.PotentialField;
+package potentialField;
 
 public class StaticPotentialField extends PotentialField{
 	
@@ -11,10 +11,10 @@ public class StaticPotentialField extends PotentialField{
 		this.y = 0;
 		this.width = width;
 		this.height = height;
-		potentialFieldMap = new int[width][height];
+		fieldArray = new int[width][height];
 		for(int i = 0; i < width; i++){
 			for(int j = 0; j < height; j++){
-				potentialFieldMap[i][j] = 0;
+				fieldArray[i][j] = 0;
 			}
 		}
 	}

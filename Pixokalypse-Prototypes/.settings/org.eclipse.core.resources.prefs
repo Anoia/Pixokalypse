@@ -1,2 +1,11 @@
 eclipse.preferences.version=1
-encoding//src/com/we/PixokalypsePrototypes/test/MapTest.java=UTF-8
+encoding//src/com/we/PixokalypsePrototypes/test/FieldCategory.java=UTF-8
+encoding//src/com/we/PixokalypsePrototypes/test/Map.java=UTF-8
+encoding//src/com/we/PixokalypsePrototypes/test/SpriteCollisionMapContainer.java=UTF-8
+encoding//src/com/we/PixokalypsePrototypes/test/SpriteContainer.java=UTF-8
+encoding//src/potentialField/CombinedFields.java=UTF-8
+encoding//src/potentialField/PotentialFieldManager.java=UTF-8
+encoding//src/screens/CreateMapTestScreen.java=UTF-8
+encoding//src/screens/ParseTextureAtlasTestScreen.java=UTF-8
+encoding//src/screens/PotentialFieldMapTestScreen.java=UTF-8
+encoding//src/screens/PotentialFieldTestScreen.java=UTF-8

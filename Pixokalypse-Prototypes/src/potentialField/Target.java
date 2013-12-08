@@ -1,4 +1,4 @@
-package com.we.PixocalypsePrototypes.PotentialField;
+package potentialField;
 
 public class Target {
 	

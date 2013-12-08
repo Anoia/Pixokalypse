@@ -1,4 +1,4 @@
-package com.we.PixokalypsePrototypes;
+package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,15 +8,16 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 
 public class MainMenuScreen implements Screen {
 	
-	final PixokalypsePrototypes game;
+	PixokalypsePrototypes game;
  	OrthographicCamera camera;
 	Stage stage;
 	
-	public MainMenuScreen(final PixokalypsePrototypes gam) {
-		game = gam;
+	public MainMenuScreen(PixokalypsePrototypes game) {
+		this.game = game;
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 960, 640);
@@ -52,7 +53,7 @@ public class MainMenuScreen implements Screen {
 		button.setPosition(Gdx.graphics.getWidth()/2, (Gdx.graphics.getHeight()/10*9)-Gdx.graphics.getWidth()/5/2);
 		button.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
 		
-		final TextButton button2 = new TextButton("  MapTest  ", game.skin);
+		final TextButton button2 = new TextButton("  GameTest  ", game.skin);
 		button2.setPosition(Gdx.graphics.getWidth()/2, (Gdx.graphics.getHeight()/10*7)-Gdx.graphics.getWidth()/5/2);
 		button2.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
 		
@@ -84,7 +85,7 @@ public class MainMenuScreen implements Screen {
 		
 		button2.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				game.setScreen(new CreateMapTestScreen(game));
+				game.setScreen(new GameScreen(game));
 				dispose();
 			}
 		});

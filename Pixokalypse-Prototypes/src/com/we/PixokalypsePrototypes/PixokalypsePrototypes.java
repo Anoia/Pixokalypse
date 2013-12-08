@@ -1,4 +1,6 @@
 package com.we.PixokalypsePrototypes;
+import screens.MainMenuScreen;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -16,10 +18,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 public class PixokalypsePrototypes extends Game {
         
-    	SpriteBatch batch;
-    	BitmapFont font12, font24;
-    	ShapeRenderer shapeRenderer;
-    	Skin skin;
+    	public SpriteBatch batch;
+    	public BitmapFont font12, font24;
+    	public ShapeRenderer shapeRenderer;
+    	public Skin skin;
 
     	public PixokalypsePrototypes(){
     	}

@@ -1,6 +1,8 @@
-package com.we.PixocalypsePrototypes.PotentialField;
+package potentialField;
 
 import java.util.HashSet;
+
+import util.GridPoint2;
 
 public class CircleDynamicPotentialField extends DynamicPotentialField{
 	
@@ -21,7 +23,7 @@ public class CircleDynamicPotentialField extends DynamicPotentialField{
 		HashSet<GridPoint2> done = new HashSet<GridPoint2>(); 
 		HashSet<GridPoint2> todo;
 		
-		potentialFieldMap[center.x][center.y] = pushing? radius : 0;
+		fieldArray[center.x][center.y] = pushing? radius : 0;
 		done.add(center);
 
 		for(int i = 1; i <= radius; i++){
@@ -31,10 +33,10 @@ public class CircleDynamicPotentialField extends DynamicPotentialField{
 		} 
 		
 		//temp
-		for(int i = 0; i < potentialFieldMap.length; i++){
-			for(int j = 0; j < potentialFieldMap[0].length; j++){
-				if(potentialFieldMap[i][j] == -1){
-					potentialFieldMap[i][j] = 0;
+		for(int i = 0; i < fieldArray.length; i++){
+			for(int j = 0; j < fieldArray[0].length; j++){
+				if(fieldArray[i][j] == -1){
+					fieldArray[i][j] = 0;
 				}
 			}
 		}
@@ -44,7 +46,7 @@ public class CircleDynamicPotentialField extends DynamicPotentialField{
 	private void setAllPoints(HashSet<GridPoint2> points, int value){
 		value = pushing ? radius-value : value;
 		for(GridPoint2 point: points){
-			potentialFieldMap[point.x][point.y] = value; 
+			fieldArray[point.x][point.y] = value; 
 		}
 	}
 	
@@ -71,16 +73,16 @@ public class CircleDynamicPotentialField extends DynamicPotentialField{
 		
 		
 		for(GridPoint2 point: points){
-			if(potentialFieldMap[point.x-1][point.y] == -1){
+			if(fieldArray[point.x-1][point.y] == -1){
 				neighbours.add(new GridPoint2(point.x-1, point.y));	
 			}
-			if(potentialFieldMap[point.x][point.y-1] == -1){
+			if(fieldArray[point.x][point.y-1] == -1){
 				neighbours.add(new GridPoint2(point.x, point.y-1));	
 			}
-			if(potentialFieldMap[point.x+1][point.y] == -1){
+			if(fieldArray[point.x+1][point.y] == -1){
 				neighbours.add(new GridPoint2(point.x+1, point.y));	
 			}
-			if(potentialFieldMap[point.x][point.y+1] == -1){
+			if(fieldArray[point.x][point.y+1] == -1){
 				neighbours.add(new GridPoint2(point.x, point.y+1));	
 			}
 		}
@@ -90,10 +92,10 @@ public class CircleDynamicPotentialField extends DynamicPotentialField{
 	}
 	
 	public void printASCII(){
-		for(int i = 0; i < potentialFieldMap.length; i++){
+		for(int i = 0; i < fieldArray.length; i++){
 			System.out.println("");
-			for(int j = 0; j < potentialFieldMap[i].length; j++){
-				System.out.print(potentialFieldMap[i][j]);
+			for(int j = 0; j < fieldArray[i].length; j++){
+				System.out.print(fieldArray[i][j]);
 			}
 		}
 	}

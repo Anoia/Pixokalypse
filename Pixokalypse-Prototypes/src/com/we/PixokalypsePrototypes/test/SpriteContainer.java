@@ -14,12 +14,12 @@ public class SpriteContainer {
 	//HashMap die auf Sprites des Atlassssses zeigt
 		HashMap<String,Sprite> spriteHashmap;
 		
-	public SpriteContainer(){
+	public SpriteContainer(String sourceAtlas){
 		
-		spriteSheet = new TextureAtlas(Gdx.files.internal("data/textures/pack.atlas"));
+		spriteSheet = new TextureAtlas(Gdx.files.internal(sourceAtlas));
 		spriteHashmap = new HashMap<String,Sprite>();
 		
-		//Für alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
+		//Fï¿½r alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
 		for(AtlasRegion item:spriteSheet.getRegions()){
 			String name = item.name;
 			Sprite sprite = spriteSheet.createSprite(name);
