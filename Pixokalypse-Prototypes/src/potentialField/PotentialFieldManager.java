@@ -3,8 +3,8 @@ package potentialField;
 import java.util.ArrayList;
 
 import util.GridPoint2;
-import Agents.Agent;
-import Agents.Character;
+import agents.Agent;
+import agents.Character;
 
 import com.badlogic.gdx.Gdx;
 import com.we.PixokalypsePrototypes.test.Map;
