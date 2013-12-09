@@ -66,6 +66,10 @@ public class SpriteCollisionMapContainer {
 		pixMap.dispose();
 	}
 	
+	public int getCollisionmapCount(){
+		return this.spriteCollisionmapHashmap.size();
+	}
+	
 	private void makeBuildingsPushFromCenter(int[][] collisionMapGespiegelt) {
 		//erstelle Startset mit Randcollisionspixeln
 		int potentialFieldValue = 10001;

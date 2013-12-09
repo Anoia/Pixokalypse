@@ -45,8 +45,10 @@ public class GameScreen implements Screen {
 		camera.zoom = 1f;
 		
 		Gdx.input.setInputProcessor(new GameInputProcessor(manager, camera));
-		spriteContainer = new SpriteContainer("data/textures/pack.atlas");
-		spriteCollisionMapContainer = new SpriteCollisionMapContainer("data/heightmap/collisionpack.atlas", "data/heightmap/collisionpack.png");
+		spriteContainer = new SpriteContainer("data/ground.txt");
+		System.out.println("Spriteanz: "+spriteContainer.getSpriteCount());
+		spriteCollisionMapContainer = new SpriteCollisionMapContainer("data/height.txt", "data/height.png");
+		System.out.println("Collisionmapanz: "+spriteCollisionMapContainer.getCollisionmapCount());
 		manager.addCollisionMapToEnvironment(map, spriteCollisionMapContainer);
 		System.out.println("GAME SCREEN");
 		

@@ -30,6 +30,10 @@ public class SpriteContainer {
 		System.out.println("anzahl Sprites: " + spriteHashmap.size());
 	}
 	
+	public int getSpriteCount(){
+		return this.spriteHashmap.size();
+	}
+	
 	public Sprite getSprite(String spriteName){
 		return spriteHashmap.get(spriteName);
 	}

@@ -2,175 +2,175 @@ ground.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-Ground_strOL1
+strOL1
   rotate: false
   xy: 86, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_strORUL1
+strORUL1
   rotate: false
   xy: 2, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_SWi
+A-SWi
   rotate: false
   xy: 170, 44
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_strOUL1
+strOUL1
   rotate: false
   xy: 86, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_NWi
+A-NWi
   rotate: false
   xy: 170, 2
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_strUL1
+strUL1
   rotate: false
   xy: 2, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_strRU1
+strRU1
   rotate: false
   xy: 170, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_strRUL1
+strRUL1
   rotate: false
   xy: 212, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_NOi
+A-NOi
   rotate: false
   xy: 86, 2
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_N
+A-N
   rotate: false
   xy: 2, 2
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_strOU1
+strOU1
   rotate: false
   xy: 44, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_S
+A-S
   rotate: false
   xy: 2, 44
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_W
+A-W
   rotate: false
   xy: 212, 44
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_Grass
+Grass
   rotate: false
   xy: 2, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_NO
+A-NO
   rotate: false
   xy: 44, 2
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_SW
+A-SW
   rotate: false
   xy: 128, 44
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_strORU1
+strORU1
   rotate: false
   xy: 212, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_NW
+A-NW
   rotate: false
   xy: 128, 2
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_O
+A-O
   rotate: false
   xy: 212, 2
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_strORL1
+strORL1
   rotate: false
   xy: 170, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_SOi
+A-SOi
   rotate: false
   xy: 86, 44
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_Parking
+Parking
   rotate: false
   xy: 44, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_strRL1
+strRL1
   rotate: false
   xy: 128, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_A_SO
+A-SO
   rotate: false
   xy: 44, 44
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Ground_strOR1
+strOR1
   rotate: false
   xy: 128, 86
   size: 40, 40
