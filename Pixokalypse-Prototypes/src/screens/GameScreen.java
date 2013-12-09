@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 import potentialField.PotentialFieldManager;
 import potentialField.StaticPotentialField;
-import agents.Follower;
-import agents.Player;
+import Agents.Follower;
+import Agents.Player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
