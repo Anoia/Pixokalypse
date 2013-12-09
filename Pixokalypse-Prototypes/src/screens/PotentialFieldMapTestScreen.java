@@ -4,7 +4,7 @@ package screens;
 import input.PotentialFieldInputProcessor;
 import potentialField.PotentialFieldManager;
 import potentialField.StaticPotentialField;
-import Agents.Character;
+import agents.Character;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;

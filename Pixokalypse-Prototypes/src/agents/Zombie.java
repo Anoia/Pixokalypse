@@ -1,4 +1,4 @@
-package Agents;
+package agents;
 
 public class Zombie extends Enemy {
 

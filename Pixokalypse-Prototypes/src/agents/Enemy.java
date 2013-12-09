@@ -1,4 +1,4 @@
-package Agents;
+package agents;
 
 import potentialField.Target;
 
