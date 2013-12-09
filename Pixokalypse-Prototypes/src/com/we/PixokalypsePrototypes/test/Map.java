@@ -192,11 +192,16 @@ public class Map {
 				done = true;
 				//in dem Fall könnte es aber ein aufgeteieltes Gebäude sein!
 				//Testen
-				//if(this.testNeighboursForFieldType(field, true,
-				//		FieldCategory.BUILDING, false, false, false, false, false,
-				//		false, true, false) && this.testNeighboursForFieldType(field, true,
-				//				FieldCategory.STREET, false, false, true, false, false,
-				//				false, false, false))field.spriteName = gebtyp+"-NW";
+				if(this.testNeighboursForFieldType(field, true,
+						FieldCategory.INNER, false, false, false, false, false,
+						true, false, false) || this.testNeighboursForFieldType(field, true,
+								FieldCategory.STREET, false, false, false, false, false,
+								true, false, false))field.spriteName = gebtyp+"-NW";
+				else if(this.testNeighboursForFieldType(field, true,
+						FieldCategory.INNER, false, false, false, true, false,
+						false, false, false) || this.testNeighboursForFieldType(field, true,
+								FieldCategory.STREET, false, false, false, true, false,
+								false, false, false))field.spriteName = gebtyp+"-NO";
 			}
 			// links und rechts sind Gebäude Felder!!! Wenn unten Straße oder
 			// Outer dann Südblock =)
@@ -211,9 +216,16 @@ public class Map {
 					done = true;
 					//in dem Fall könnte es aber ein aufgeteieltes Gebäude sein!
 					//Testen
-				//	if(this.testNeighboursForFieldType(field, true,
-				//		FieldCategory.BUILDING, true, false, false, false, false,
-				//		false, false, false))field.spriteName = gebtyp+"-SO";
+					if(this.testNeighboursForFieldType(field, true,
+							FieldCategory.INNER, false, true, false, false, false,
+							false, false, false) || this.testNeighboursForFieldType(field, true,
+									FieldCategory.STREET, false, true, false, false, false,
+									false, false, false))field.spriteName = gebtyp+"-SO";
+					else if(this.testNeighboursForFieldType(field, true,
+							FieldCategory.INNER, false, false, false, false, false,
+							false, false, true) || this.testNeighboursForFieldType(field, true,
+									FieldCategory.STREET, false, false, false, false, false,
+									false, false, true))field.spriteName = gebtyp+"-SW";
 				}
 		}
 
@@ -233,11 +245,16 @@ public class Map {
 				done = true;
 				//in dem Fall könnte es aber ein aufgeteieltes Gebäude sein!
 				//Testen
-				//if(this.testNeighboursForFieldType(field, true,
-				//	FieldCategory.BUILDING, false, false, true, false, false,
-				//	false, false, false) && this.testNeighboursForFieldType(field, true,
-				//			FieldCategory.STREET, false, false, false, true, false,
-				//			false, true, false))field.spriteName = gebtyp+"-SW";
+				if(this.testNeighboursForFieldType(field, true,
+						FieldCategory.INNER, false, true, false, false, false,
+						false, false, false) || this.testNeighboursForFieldType(field, true,
+								FieldCategory.STREET, false, true, false, false, false,
+								false, false, false))field.spriteName = gebtyp+"-NW";
+				else if(this.testNeighboursForFieldType(field, true,
+						FieldCategory.INNER, false, false, false, true, false,
+						false, false, false) || this.testNeighboursForFieldType(field, true,
+								FieldCategory.STREET, false, false, false, true, false,
+								false, false, false))field.spriteName = gebtyp+"-SW";
 			}
 			// oben und unten sind Gebäude Felder!!! Wenn rechts Straße oder
 			// Outer dann Ostblock =)
@@ -252,11 +269,16 @@ public class Map {
 					done = true;
 					//in dem Fall könnte es aber ein aufgeteieltes Gebäude sein!
 					//Testen
-					//if(this.testNeighboursForFieldType(field, true,
-					//	FieldCategory.BUILDING, false, false, false, false, false,
-					//	false, true, false) && this.testNeighboursForFieldType(field, true,
-					//			FieldCategory.STREET, false, true, false, false, false,
-					//			false, false, true))field.spriteName = gebtyp+"-NO";
+					if(this.testNeighboursForFieldType(field, true,
+							FieldCategory.INNER, false, false, false, false, false,
+							true, false, false) || this.testNeighboursForFieldType(field, true,
+									FieldCategory.STREET, false, false, false, false, false,
+									true, false, false))field.spriteName = gebtyp+"-SO";
+					else if(this.testNeighboursForFieldType(field, true,
+							FieldCategory.INNER, false, false, false, false, false,
+							false, false, true) || this.testNeighboursForFieldType(field, true,
+									FieldCategory.STREET, false, false, false, false, false,
+									false, false, true))field.spriteName = gebtyp+"-NO";
 				}
 		}
 
