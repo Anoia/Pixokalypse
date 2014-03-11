@@ -1,17 +1,24 @@
 block.png
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
 A-SO
   rotate: false
-  xy: 44, 104
+  xy: 44, 206
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+A-X1
+  rotate: false
+  xy: 44, 410
   size: 40, 100
   orig: 40, 100
   offset: 0, 0
   index: -1
 A-W
   rotate: false
-  xy: 212, 104
+  xy: 86, 308
   size: 40, 100
   orig: 40, 100
   offset: 0, 0
@@ -25,42 +32,42 @@ A-N
   index: -1
 A-NW
   rotate: false
-  xy: 128, 2
+  xy: 2, 104
   size: 40, 100
   orig: 40, 100
   offset: 0, 0
   index: -1
 A-SW
   rotate: false
-  xy: 128, 104
+  xy: 2, 308
   size: 40, 100
   orig: 40, 100
   offset: 0, 0
   index: -1
 A-NWi
   rotate: false
-  xy: 170, 2
+  xy: 44, 104
   size: 40, 100
   orig: 40, 100
   offset: 0, 0
   index: -1
 A-O
   rotate: false
-  xy: 212, 2
+  xy: 86, 104
   size: 40, 100
   orig: 40, 100
   offset: 0, 0
   index: -1
 A-SWi
   rotate: false
-  xy: 170, 104
+  xy: 44, 308
   size: 40, 100
   orig: 40, 100
   offset: 0, 0
   index: -1
 A-SOi
   rotate: false
-  xy: 86, 104
+  xy: 86, 206
   size: 40, 100
   orig: 40, 100
   offset: 0, 0
@@ -81,7 +88,14 @@ A-NOi
   index: -1
 A-S
   rotate: false
-  xy: 2, 104
+  xy: 2, 206
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+A-X0
+  rotate: false
+  xy: 2, 410
   size: 40, 100
   orig: 40, 100
   offset: 0, 0

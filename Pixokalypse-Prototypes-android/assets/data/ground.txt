@@ -1,17 +1,17 @@
 ground.png
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
 strOL1
   rotate: false
-  xy: 86, 86
+  xy: 170, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 strORUL1
   rotate: false
-  xy: 2, 128
+  xy: 86, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -25,7 +25,7 @@ A-SWi
   index: -1
 strOUL1
   rotate: false
-  xy: 86, 128
+  xy: 170, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -39,21 +39,21 @@ A-NWi
   index: -1
 strUL1
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 strRU1
   rotate: false
-  xy: 170, 128
+  xy: 2, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 strRUL1
   rotate: false
-  xy: 212, 128
+  xy: 44, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -72,9 +72,16 @@ A-N
   orig: 40, 40
   offset: 0, 0
   index: -1
+A-X0
+  rotate: false
+  xy: 2, 86
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
 strOU1
   rotate: false
-  xy: 44, 128
+  xy: 128, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -95,7 +102,7 @@ A-W
   index: -1
 Grass
   rotate: false
-  xy: 2, 86
+  xy: 86, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -116,7 +123,7 @@ A-SW
   index: -1
 strORU1
   rotate: false
-  xy: 212, 86
+  xy: 44, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -137,7 +144,14 @@ A-O
   index: -1
 strORL1
   rotate: false
-  xy: 170, 86
+  xy: 2, 128
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+A-X1
+  rotate: false
+  xy: 44, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -151,14 +165,14 @@ A-SOi
   index: -1
 Parking
   rotate: false
-  xy: 44, 86
+  xy: 128, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 strRL1
   rotate: false
-  xy: 128, 128
+  xy: 212, 128
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -172,7 +186,7 @@ A-SO
   index: -1
 strOR1
   rotate: false
-  xy: 128, 86
+  xy: 212, 86
   size: 40, 40
   orig: 40, 40
   offset: 0, 0

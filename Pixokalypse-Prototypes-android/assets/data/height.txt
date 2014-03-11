@@ -11,7 +11,7 @@ A-W
   index: -1
 strOL1
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -39,7 +39,7 @@ A-O
   index: -1
 strRU1
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -60,7 +60,7 @@ A-NO
   index: -1
 Grass
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -74,7 +74,7 @@ A-NW
   index: -1
 strRL1
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -93,23 +93,30 @@ A-SOi
   orig: 40, 40
   offset: 0, 0
   index: -1
+A-X1
+  rotate: false
+  xy: 44, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
 Parking
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 strUL1
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 strRUL1
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -123,6 +130,13 @@ A-NWi
   index: -1
 strORL1
   rotate: false
+  xy: 86, 170
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+A-X0
+  rotate: false
   xy: 2, 170
   size: 40, 40
   orig: 40, 40
@@ -130,14 +144,14 @@ strORL1
   index: -1
 strORUL1
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 strOUL1
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
@@ -151,21 +165,21 @@ A-NOi
   index: -1
 strOR1
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 strORU1
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 strOU1
   rotate: false
-  xy: 2, 170
+  xy: 86, 170
   size: 40, 40
   orig: 40, 40
   offset: 0, 0

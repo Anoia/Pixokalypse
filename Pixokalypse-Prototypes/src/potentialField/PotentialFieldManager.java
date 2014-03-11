@@ -80,7 +80,7 @@ public class PotentialFieldManager {
 				System.out.println("Spritename: "+map.data[j][i].spriteName);
 				int[][] collisionmap = spriteCollisionMapContainer.getSpriteCollisionmap(map.data[j][i].spriteName);
 				for(int row = 0; row < tileSize;row++){
-					if(collisionmap == null)System.out.println("collisionMap is NULL");
+					if(collisionmap == null)System.out.println("collisionMap is NULL für sprite: "+map.data[j][i].spriteName);
 					if(environmentMap == null)System.out.println("enviromentnMap is NULL");
 					System.arraycopy( collisionmap[39-row], 0, environmentMap.fieldArray[row+j*tileSize], i*tileSize, tileSize);
 				}

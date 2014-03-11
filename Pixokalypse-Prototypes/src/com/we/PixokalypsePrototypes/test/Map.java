@@ -133,7 +133,7 @@ public class Map {
 
 //		Geb.kreuzung also Nord Ost Süd West Geb.
 		
-		if(!done)if((this.testNeighboursForFieldType(field, 
+		if(!done)if(this.testNeighboursForFieldType(field, 
 				true,//auf true prüfen? true
 				FieldCategory.BUILDING, 
 				true, 	//Nord
@@ -156,8 +156,16 @@ public class Map {
 						true, 	//Süd-West
 						false, 	//West
 						false)	//Nord-West
-				)||
-				(this.testNeighboursForFieldType(field, 
+				){
+			field.spriteName = "A-X1";
+			done = true;			
+		}
+				
+				
+				
+				
+				
+		if(!done)if(this.testNeighboursForFieldType(field, 
 				true,//auf true prüfen? true
 				FieldCategory.BUILDING, 
 				true, 	//Nord
@@ -180,9 +188,8 @@ public class Map {
 						false, 	//Süd-West
 						false, 	//West
 						true)	//Nord-West)
-						)){
-			
-			field.spriteName = "strORUL1";
+						){
+			field.spriteName = "A-X0";
 			done = true;
 		}
 	
