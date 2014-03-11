@@ -10,35 +10,67 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 public class SpriteContainer {
 	//Sprite atlas
-		TextureAtlas spriteSheet;
+	TextureAtlas groundSpriteSheet;
+	TextureAtlas blockSpriteSheet;
 	//HashMap die auf Sprites des Atlassssses zeigt
-		HashMap<String,Sprite> spriteHashmap;
-		
+	HashMap<String,Sprite> groundSpriteHashmap;
+	HashMap<String,Sprite> blockSpriteHashmap;
+	
+	//Funktion entfernen
 	public SpriteContainer(String sourceAtlas){
 		
-		spriteSheet = new TextureAtlas(Gdx.files.internal(sourceAtlas));
-		spriteHashmap = new HashMap<String,Sprite>();
+		groundSpriteSheet = new TextureAtlas(Gdx.files.internal(sourceAtlas));
+		groundSpriteHashmap = new HashMap<String,Sprite>();
 		
 		//F�r alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
-		for(AtlasRegion item:spriteSheet.getRegions()){
+		for(AtlasRegion item:groundSpriteSheet.getRegions()){
 			String name = item.name;
-			Sprite sprite = spriteSheet.createSprite(name);
+			Sprite sprite = groundSpriteSheet.createSprite(name);
 			sprite.flip(false, true);
-			spriteHashmap.put(name, sprite);
+			groundSpriteHashmap.put(name, sprite);
 			//spriteHashmap.get(name).setSize(width, height);
 		}
-		System.out.println("anzahl Sprites: " + spriteHashmap.size());
 	}
 	
+	public SpriteContainer() {
+		groundSpriteSheet = new TextureAtlas(Gdx.files.internal("data/ground.txt"));
+		groundSpriteHashmap = new HashMap<String,Sprite>();
+		
+		//F�r alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
+		for(AtlasRegion item:groundSpriteSheet.getRegions()){
+			String name = item.name;
+			Sprite sprite = groundSpriteSheet.createSprite(name);
+			sprite.flip(false, true);
+			groundSpriteHashmap.put(name, sprite);
+			//spriteHashmap.get(name).setSize(width, height);
+		}
+		
+		blockSpriteSheet = new TextureAtlas(Gdx.files.internal("data/block.txt"));
+		blockSpriteHashmap = new HashMap<String,Sprite>();
+		
+		//F�r alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
+		for(AtlasRegion item:blockSpriteSheet.getRegions()){
+			String name = item.name;
+			Sprite sprite = blockSpriteSheet.createSprite(name);
+			sprite.flip(false, true);
+			blockSpriteHashmap.put(name, sprite);
+			//spriteHashmap.get(name).setSize(width, height);
+		}
+	}
+
 	public int getSpriteCount(){
-		return this.spriteHashmap.size();
+		return this.groundSpriteHashmap.size() + this.blockSpriteHashmap.size();
 	}
 	
-	public Sprite getSprite(String spriteName){
-		return spriteHashmap.get(spriteName);
+	public Sprite getGroundSprite(String spriteName){
+		return groundSpriteHashmap.get(spriteName);
+	}
+	
+	public Sprite getBlockSprite(String spriteName){
+		return blockSpriteHashmap.get(spriteName);
 	}
 	
 	public String getRandomSpriteName(){
-		return (String) spriteHashmap.keySet().toArray()[(int) (Math.random()*spriteHashmap.size())];
+		return (String) groundSpriteHashmap.keySet().toArray()[(int) (Math.random()*groundSpriteHashmap.size())];
 	}
 }

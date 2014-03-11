@@ -62,7 +62,7 @@ public class CreateMapTestScreen implements Screen{ //,InputProcessor {
 		for(int x = 0; x < mainMap.mapSize; x ++){
 			for(int y = 0; y < mainMap.mapSize; y++){
 				String spriteName = mainMap.data[x][y].spriteName;
-				sprite = spriteContainer.getSprite(spriteName);
+				sprite = spriteContainer.getGroundSprite(spriteName);
 				sprite.setPosition(x*tileSize,y*tileSize);
 				sprite.draw(game.batch);	
 			}

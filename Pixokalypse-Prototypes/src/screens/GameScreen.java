@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
+import com.we.PixokalypsePrototypes.test.FieldCategory;
 import com.we.PixokalypsePrototypes.test.Map;
 import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
 import com.we.PixokalypsePrototypes.test.SpriteContainer;
@@ -34,6 +35,13 @@ public class GameScreen implements Screen {
 	private Player player;
 	private ArrayList<Follower> followers = new ArrayList<Follower>();
 
+	//sprites
+
+	Sprite playersprite;
+	Texture playerTexture;
+	Texture followerTexture;
+	Sprite followerSprite;
+	
 	public GameScreen(PixokalypsePrototypes game) {
 		this.game = game;
 		map = new Map(40,8,4,10);
@@ -46,7 +54,7 @@ public class GameScreen implements Screen {
 		camera.zoom = 1f;
 
 		Gdx.input.setInputProcessor(new GameInputProcessor(manager, camera));
-		spriteContainer = new SpriteContainer("data/ground.txt");
+		spriteContainer = new SpriteContainer();
 		System.out.println("Spriteanz: " + spriteContainer.getSpriteCount());
 		spriteCollisionMapContainer = new SpriteCollisionMapContainer(
 				"data/height.txt", "data/height.png");
@@ -64,7 +72,12 @@ public class GameScreen implements Screen {
 			followers.add(f);
 			manager.addPlayerCharacter(f);
 		}
-
+		//charaktersprites
+		playerTexture = new Texture(Gdx.files.internal("data/characters/char_1.png"));
+		playersprite = new Sprite(playerTexture, 0, 0, 6, 8);
+		followerTexture = new Texture(Gdx.files.internal("data/characters/char_2.png"));
+		followerSprite = new Sprite(followerTexture, 0, 0, 6, 8);
+		
 	}
 
 	@Override
@@ -84,6 +97,7 @@ public class GameScreen implements Screen {
 		// Sprites Rendern anfang
 		Sprite sprite;
 		
+		//Bodenebene Rendern
 		for (int x = 0; x < map.mapSize; x++) {
 			for (int y = 0; y < map.mapSize; y++) {
 				// skip wenn nicht im Sichtbarem bereich
@@ -96,7 +110,7 @@ public class GameScreen implements Screen {
 										&& camera.position.y < (y * tileSize + (Gdx.graphics
 												.getHeight() * 0.6f))) {
 					String spriteName = map.data[x][y].spriteName;
-					sprite = spriteContainer.getSprite(spriteName);
+					sprite = spriteContainer.getGroundSprite(spriteName);
 					sprite.setBounds(x * tileSize, y * tileSize, tileSize,
 							tileSize);
 					sprite.draw(game.batch);
@@ -107,18 +121,14 @@ public class GameScreen implements Screen {
 		}
 
 		// Render Player
-		Texture playerTexture = new Texture(
-				Gdx.files.internal("data/characters/char_1.png"));
-		sprite = new Sprite(playerTexture, 0, 0, 6, 8);
+		sprite = playersprite;
 		sprite.setPosition(player.x - sprite.getWidth() / 2,
 				player.y - sprite.getHeight());
 		sprite.flip(false, true);
 		sprite.draw(game.batch);
 
 		// render followers
-		Texture followerTexture = new Texture(
-				Gdx.files.internal("data/characters/char_2.png"));
-		sprite = new Sprite(followerTexture, 0, 0, 6, 8);
+		sprite = followerSprite;
 		sprite.flip(false, true);
 		if (!followers.isEmpty()) {
 			for (Follower f : followers) {
@@ -128,6 +138,34 @@ public class GameScreen implements Screen {
 			}
 		}
 
+		
+		for (int x = 0; x < map.mapSize; x++) {
+			for (int y = 0; y < map.mapSize; y++) {
+				// skip wenn nicht im Sichtbarem bereich
+				if (camera.position.x > (x * tileSize - (Gdx.graphics
+						.getWidth() * 0.6f))
+						&& camera.position.x < (x * tileSize + (Gdx.graphics
+								.getWidth() * 0.6f))
+								&& camera.position.y > (y * tileSize - (Gdx.graphics
+										.getHeight() * 0.6f))
+										&& camera.position.y < (y * tileSize + (Gdx.graphics
+												.getHeight() * 0.6f))) {
+					
+					if(map.data[x][y].fieldCategory == FieldCategory.BUILDING){
+						String spriteName = map.data[x][y].spriteName;
+						System.out.println();		
+						sprite = spriteContainer.getBlockSprite(spriteName);
+						if(sprite != null){
+							sprite.setBounds((x * tileSize), (y * tileSize)-tileSize*1.5f, tileSize,tileSize*2.5f);
+							sprite.draw(game.batch);
+						}else System.out.println("Fehler: "+spriteName+" gibt null");
+						
+					}
+				}
+
+			}
+
+		}
 		// Sprites Rendern ende
 		//FPS
 		
@@ -173,6 +211,8 @@ public class GameScreen implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+		playerTexture.dispose();
+		followerTexture.dispose();
 
 	}
 
