@@ -51,7 +51,7 @@ public class GameScreen implements Screen {
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
 		camera.setToOrtho(true);
-		camera.zoom = 1f;
+		camera.zoom = 0.5f;
 
 		Gdx.input.setInputProcessor(new GameInputProcessor(manager, camera));
 		spriteContainer = new SpriteContainer();
@@ -75,9 +75,11 @@ public class GameScreen implements Screen {
 		//charaktersprites
 		playerTexture = new Texture(Gdx.files.internal("data/characters/char_1.png"));
 		playersprite = new Sprite(playerTexture, 0, 0, 6, 8);
+		playersprite.flip(false, true);
+
 		followerTexture = new Texture(Gdx.files.internal("data/characters/char_2.png"));
 		followerSprite = new Sprite(followerTexture, 0, 0, 6, 8);
-		
+		followerSprite.flip(false, true);
 	}
 
 	@Override
@@ -124,12 +126,10 @@ public class GameScreen implements Screen {
 		sprite = playersprite;
 		sprite.setPosition(player.x - sprite.getWidth() / 2,
 				player.y - sprite.getHeight());
-		sprite.flip(false, true);
 		sprite.draw(game.batch);
 
 		// render followers
 		sprite = followerSprite;
-		sprite.flip(false, true);
 		if (!followers.isEmpty()) {
 			for (Follower f : followers) {
 				sprite.setPosition(f.x - sprite.getWidth() / 2,
