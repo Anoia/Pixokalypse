@@ -77,7 +77,7 @@ public class PotentialFieldManager {
 		for(int i = 0; i < map.mapSize;i++){
 			for(int j = 0; j < map.mapSize;j++){
 				//Collisionmap in Environmentmap kopieren
-				System.out.println("Spritename: "+map.data[j][i].spriteName);
+				//System.out.println("Spritename: "+map.data[j][i].spriteName);
 				int[][] collisionmap = spriteCollisionMapContainer.getSpriteCollisionmap(map.data[j][i].spriteName);
 				for(int row = 0; row < tileSize;row++){
 					if(collisionmap == null)System.out.println("collisionMap is NULL für sprite: "+map.data[j][i].spriteName);
@@ -150,6 +150,9 @@ public class PotentialFieldManager {
 				System.out.print("["+stringValue+"]");
 			}	
 		}
+	}
+	public StaticPotentialField getEnvironmentMap(){
+		return environmentMap;		
 	}
 
 }

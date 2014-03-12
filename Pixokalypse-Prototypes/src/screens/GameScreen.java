@@ -8,8 +8,12 @@ import potentialField.PotentialFieldManager;
 import potentialField.StaticPotentialField;
 import renderer.GameRenderer;
 import util.Constants;
+import util.RayTracer;
+import util.Utils;
+import agents.Enemy;
 import agents.Follower;
 import agents.Player;
+import agents.Zombie;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -36,9 +40,12 @@ public class GameScreen implements Screen {
 
 	private Player player;
 	private ArrayList<Follower> followers = new ArrayList<Follower>();
+	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 	
 	GameRenderer renderer;
+
+	private RayTracer rayTracer;
 	
 
 	
@@ -51,7 +58,7 @@ public class GameScreen implements Screen {
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
 		camera.setToOrtho(true);
-		camera.zoom = 0.5f;
+		camera.zoom = 0.3f;
 
 		Gdx.input.setInputProcessor(new GameInputProcessor(manager, camera));
 		
@@ -75,10 +82,15 @@ public class GameScreen implements Screen {
 		
 		renderer = new GameRenderer(this, game.batch, camera, map);
 		renderer.setFonts(game.font12, game.font24);
+		rayTracer = new RayTracer(manager.getEnvironmentMap());
+		
+		createZombies();
 		
 
 	}
 	
+
+
 	public void updateGame(float delta){
 		manager.step(delta);
 		camera.position.set(player.x, player.y, 0);
@@ -129,5 +141,26 @@ public class GameScreen implements Screen {
 	
 	public ArrayList<Follower> getFollowers(){
 		return followers;
+	}
+	
+	
+	public ArrayList<Enemy> getEnemies(){
+		return enemies;
+	}
+	
+	
+	/* Brute Force Zombie Creation :D */
+	private void createZombies() {
+		for(int i = 0; i < 400; i++){
+			int x = Utils.random(100, map.mapSize * tileSize-100);
+			int y = Utils.random(100, map.mapSize * tileSize-100);
+			if(manager.getEnvironmentMap().fieldArray[x][y] == 0){
+				//create Zombie
+				enemies.add(new Zombie(x, y));
+			}else{
+				i--;
+			}
+		}
+		
 	}
 }

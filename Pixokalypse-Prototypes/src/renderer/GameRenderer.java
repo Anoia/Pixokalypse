@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import screens.GameScreen;
 import util.Constants;
 
+import agents.Enemy;
 import agents.Follower;
 import agents.Player;
 
@@ -39,6 +40,8 @@ public class GameRenderer {
 	Texture playerTexture;
 	Texture followerTexture;
 	Sprite followerSprite;
+	Sprite zombieSprite;
+	Texture zombieTexture;
 	
 	public GameRenderer(GameScreen game, SpriteBatch batch, OrthographicCamera camera, Map map){
 		this.game = game;
@@ -58,13 +61,17 @@ public class GameRenderer {
 		followerTexture = new Texture(Gdx.files.internal("data/characters/char_2.png"));
 		followerSprite = new Sprite(followerTexture, 0, 0, 6, 8);
 		followerSprite.flip(false, true);
+		
+		zombieTexture = new Texture(Gdx.files.internal("data/characters/zombie.png"));
+		zombieSprite = new Sprite(zombieTexture, 0, 0, 6, 8);
+		zombieSprite.flip(false, true);
 	}
 	
 	public void update(float delta){
 		
 		camera.update();
 		
-		Gdx.gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
 		batch.setProjectionMatrix(camera.combined);
@@ -73,8 +80,9 @@ public class GameRenderer {
 		renderGround(delta);
 		renderPlayer(delta);
 		renderFollowers(delta);
-		renderZombies(delta);
+		
 		renderBuildings(delta);
+		renderZombies(delta);
 		
 		batch.end();
 		renderFPS();
@@ -156,7 +164,15 @@ public class GameRenderer {
 	}
 	
 	private void renderZombies(float delta){
-		
+		ArrayList<Enemy> enemies = game.getEnemies();
+		Sprite sprite = zombieSprite;
+		if (!enemies.isEmpty()) {
+			for (Enemy e : enemies) {
+				sprite.setPosition(e.x - sprite.getWidth() / 2,
+						e.y - sprite.getHeight());
+				sprite.draw(batch);
+			}
+		}
 	}
 	
 	public void setFonts(BitmapFont font12, BitmapFont font24){
