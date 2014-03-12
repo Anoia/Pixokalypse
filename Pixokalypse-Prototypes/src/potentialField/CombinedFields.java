@@ -1,6 +1,6 @@
 package potentialField;
 
-import Agents.Agent;
+import agents.Agent;
 
 public class CombinedFields extends PotentialField {
 	
