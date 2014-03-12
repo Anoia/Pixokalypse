@@ -1,22 +1,27 @@
 package agents;
 
+import items.Pistol;
 import items.Weapon;
 
 public class Character extends Agent {
 	
-	private Weapon equipppedWeapon;
+	private String CharacterName;
+	
 	
 	public Character(float x, float y){
 		super(x, y);
-		
+		setEquipppedWeapon(new Pistol());
 	}
 
-	public Weapon getEquipppedWeapon() {
-		return equipppedWeapon;
+
+	public String getCharacterName() {
+		return CharacterName;
 	}
 
-	public void setEquipppedWeapon(Weapon equipppedWeapon) {
-		this.equipppedWeapon = equipppedWeapon;
+
+	public void setCharacterName(String characterName) {
+		CharacterName = characterName;
 	}
+
 	
 }

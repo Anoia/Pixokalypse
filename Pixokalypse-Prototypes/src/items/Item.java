@@ -1,14 +1,23 @@
 package items;
 
 public abstract class Item {
-	private String name;
+	private String itemName;
+	private String spriteName;
 	
 	
-	public String getName(){
-		return this.name;
+	public String getItemName(){
+		return this.itemName;
 	}
 	
-	public void setName(String name){
-		this.name = name;
+	public void setItemName(String name){
+		this.itemName = name;
+	}
+
+	public String getSpriteName() {
+		return spriteName;
+	}
+
+	public void setSpriteName(String spriteName) {
+		this.spriteName = spriteName;
 	}
 }
