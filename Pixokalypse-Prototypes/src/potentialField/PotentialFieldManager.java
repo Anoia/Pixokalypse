@@ -2,6 +2,7 @@ package potentialField;
 
 import java.util.ArrayList;
 
+import util.Constants;
 import util.GridPoint2;
 import agents.Agent;
 import agents.Character;
@@ -73,7 +74,7 @@ public class PotentialFieldManager {
 
 	public void addCollisionMapToEnvironment(Map map, SpriteCollisionMapContainer spriteCollisionMapContainer){
 		//F�r jeden MapTile
-		int tileSize = 40;// m�ssen wir in der Map Speichern :D
+		int tileSize = Constants.TILE_SIZE;// m�ssen wir in der Map Speichern :D
 		for(int i = 0; i < map.mapSize;i++){
 			for(int j = 0; j < map.mapSize;j++){
 				//Collisionmap in Environmentmap kopieren

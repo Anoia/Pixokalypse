@@ -3,12 +3,13 @@ package items;
 public abstract class Weapon extends Item{
 	private int range;
 	private int damage;
-	private int firerate;
+	private float fireCooldown;
+	private float fireCounter = 0;  //wenn 0 oder kleinerkann geschossen werden;
 	
-	public Weapon(int range, int damage, int firerate){
+	public Weapon(int range, int damage, float fireCooldown){
 		this.range = range;
 		this.damage = damage;
-		this.firerate = firerate;
+		this.fireCooldown = fireCooldown;
 	}
 	
 	public int getRange() {
@@ -24,12 +25,31 @@ public abstract class Weapon extends Item{
 		this.damage = damage;
 	}
 
-	public int getFirerate() {
-		return firerate;
+	public float getFirerate() {
+		return fireCooldown;
 	}
 
-	public void setFirerate(int firerate) {
-		this.firerate = firerate;
+	public void setFireCooldown(int fireCooldown) {
+		this.fireCooldown = fireCooldown;
+	}
+	
+	public void tick(float delta){
+		if(fireCounter > 0){
+			fireCounter -= delta;
+		}
+	}
+	
+	public void shoot(){
+		if(fireCounter <=0){
+			//do damage to something
+			fireCounter = fireCooldown;
+		}
+		
+		
+	}
+	
+	public boolean isReadyToShoot(){
+		return (fireCounter <= 0);
 	}
 	
 	

@@ -67,7 +67,6 @@ public class RayTracer {
                 return false;
             }
         }
-
         return true;
 	}
 	
@@ -77,11 +76,13 @@ public class RayTracer {
 			//do some marking
 			return true;
 		}
-		return isSolid(x, y);
+		return !isSolid(x, y);
 	}
 	
 	private boolean isSolid(int x, int y){
-		return levelData[x][y] != 0;
+		boolean solid = levelData[x][y] != 0;
+		
+		return solid;
 	}
 
 	/* gibt das Vorzeichen einer Zahl wieder */
