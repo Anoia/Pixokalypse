@@ -3,6 +3,7 @@ package com.we.PixokalypsePrototypes.test;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import util.Constants;
 import util.GridPoint2;
 
 import com.badlogic.gdx.Gdx;
@@ -16,7 +17,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
 public class SpriteCollisionMapContainer {
-	public static final int TILE_SIZE = 40;
 		TextureAtlas spriteSheet;
 		HashMap<String,int[][]> spriteCollisionmapHashmap;
 	public SpriteCollisionMapContainer(String sourceAtlas, String sourcePNG){
@@ -25,11 +25,11 @@ public class SpriteCollisionMapContainer {
 		spriteCollisionmapHashmap = new HashMap<String, int[][]>();
 				
 		//F�r alle definierten Spriteregions einen neuen Eintrag in der Hashmap anlegen
-		Texture fullexture = new Texture(Gdx.files.internal(sourcePNG));
-		fullexture.dispose();
-		TextureData textureData = fullexture.getTextureData();
+		Texture fulltexture = new Texture(Gdx.files.internal(sourcePNG));
+		fulltexture.dispose();
+		TextureData textureData = fulltexture.getTextureData();
 		textureData.prepare();
-		Pixmap pixMap = new Pixmap(fullexture.getWidth(),fullexture.getHeight(),textureData.getFormat());
+		Pixmap pixMap = new Pixmap(fulltexture.getWidth(),fulltexture.getHeight(),textureData.getFormat());
 		pixMap = textureData.consumePixmap();
 		
 		
@@ -62,7 +62,7 @@ public class SpriteCollisionMapContainer {
 			spriteCollisionmapHashmap.put(name,  collisionMapGespiegelt);
 		}
 		textureData.disposePixmap();//wei� nicht ob das muss :D
-		fullexture.dispose();
+		fulltexture.dispose();
 		pixMap.dispose();
 	}
 	
@@ -113,7 +113,7 @@ public class SpriteCollisionMapContainer {
 		HashSet<GridPoint2> neighbours = new HashSet<GridPoint2>();
 		for(int x = point.x-1; x<=point.x+1;x++){
 			for(int y = point.y-1; y <=point.y+1;y++){
-				if(isOutOfBound(x, y, this.TILE_SIZE)) continue;
+				if(isOutOfBound(x, y, Constants.TILE_SIZE)) continue;
 				if(collisionMapGespiegelt[x][y]==value) neighbours.add(new GridPoint2(x,y));
 			}
 		}
@@ -129,7 +129,7 @@ public class SpriteCollisionMapContainer {
 	private boolean hasNeighbourWithValue(GridPoint2 currentPoint, int value, int[][] collisionMapGespiegelt) {
 		for(int x = currentPoint.x-1; x<=currentPoint.x+1;x++){
 			for(int y = currentPoint.y-1; y <=currentPoint.y+1;y++){
-				if(isOutOfBound(x, y, this.TILE_SIZE)) continue;
+				if(isOutOfBound(x, y, Constants.TILE_SIZE)) continue;
 				if(collisionMapGespiegelt[x][y]==value) return true;
 			}
 		}

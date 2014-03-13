@@ -2,6 +2,8 @@ package com.we.PixokalypsePrototypes.test;
 
 import java.util.HashMap;
 
+import util.Constants;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -26,6 +28,7 @@ public class SpriteContainer {
 		for(AtlasRegion item:groundSpriteSheet.getRegions()){
 			String name = item.name;
 			Sprite sprite = groundSpriteSheet.createSprite(name);
+			sprite.setSize(Constants.TILE_SIZE, Constants.TILE_SIZE);
 			sprite.flip(false, true);
 			groundSpriteHashmap.put(name, sprite);
 			//spriteHashmap.get(name).setSize(width, height);
@@ -40,6 +43,7 @@ public class SpriteContainer {
 		for(AtlasRegion item:groundSpriteSheet.getRegions()){
 			String name = item.name;
 			Sprite sprite = groundSpriteSheet.createSprite(name);
+			sprite.setSize(Constants.TILE_SIZE, Constants.TILE_SIZE);
 			sprite.flip(false, true);
 			groundSpriteHashmap.put(name, sprite);
 			//spriteHashmap.get(name).setSize(width, height);
@@ -52,6 +56,7 @@ public class SpriteContainer {
 		for(AtlasRegion item:blockSpriteSheet.getRegions()){
 			String name = item.name;
 			Sprite sprite = blockSpriteSheet.createSprite(name);
+			sprite.setSize(Constants.TILE_SIZE, Constants.TILE_SIZE);
 			sprite.flip(false, true);
 			blockSpriteHashmap.put(name, sprite);
 			//spriteHashmap.get(name).setSize(width, height);

@@ -70,7 +70,7 @@ public class GameScreen implements Screen {
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
 		camera.setToOrtho(true);
-		camera.zoom = 0.3f;
+		camera.zoom = 0.5f;
 
 		Gdx.input.setInputProcessor(new GameInputProcessor(manager, camera));
 		

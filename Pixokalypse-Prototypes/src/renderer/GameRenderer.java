@@ -57,14 +57,17 @@ public class GameRenderer {
 		//charaktersprites
 		playerTexture = new Texture(Gdx.files.internal("data/characters/char_1.png"));
 		playersprite = new Sprite(playerTexture, 0, 0, 6, 8);
+		playersprite.setSize(6*3, 8*3);
 		playersprite.flip(false, true);
 
 		followerTexture = new Texture(Gdx.files.internal("data/characters/char_2.png"));
 		followerSprite = new Sprite(followerTexture, 0, 0, 6, 8);
+		followerSprite.setSize(6*3, 8*3);
 		followerSprite.flip(false, true);
 		
 		zombieTexture = new Texture(Gdx.files.internal("data/characters/zombie.png"));
 		zombieSprite = new Sprite(zombieTexture, 0, 0, 6, 8);
+		zombieSprite.setSize(6*3, 8*3);
 		zombieSprite.flip(false, true);
 	}
 	
