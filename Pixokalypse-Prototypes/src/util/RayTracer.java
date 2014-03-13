@@ -74,7 +74,6 @@ public class RayTracer {
 	private boolean setPixel(int x, int y, boolean markInLightMap) {
 		if(markInLightMap){
 			//do some marking
-			return true;
 		}
 		return !isSolid(x, y);
 	}

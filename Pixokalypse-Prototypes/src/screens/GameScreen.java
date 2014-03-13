@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import potentialField.PotentialFieldManager;
 import potentialField.StaticPotentialField;
 import renderer.GameRenderer;
+import renderer.effects.Effect;
+import renderer.effects.ShootingEffect;
+import renderer.effects.TextEffect;
 import util.Constants;
 import util.RayTracer;
 import util.Utils;
@@ -48,6 +51,8 @@ public class GameScreen implements Screen {
 	private ArrayList<Follower> followers = new ArrayList<Follower>();
 	private ArrayList<Character> playerCharacters = new ArrayList<Character>();
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	
+	private ArrayList<Effect> renderEffects = new ArrayList<Effect>();
 
 	
 	GameRenderer renderer;
@@ -79,13 +84,11 @@ public class GameScreen implements Screen {
 
 		// The Player, only one!
 		player = new Player(200, 200);
-		player.setEquipppedWeapon(new Pistol());
 		manager.addPlayerCharacter(player);
 		playerCharacters.add(player);
 
 		for (int i = 0; i < 3; i++) {
 			Follower f = new Follower(200 + 3 * i, 200 + 3 * i);
-			f.setEquipppedWeapon(new Pistol());
 			followers.add(f);
 			playerCharacters.add(f);
 			manager.addPlayerCharacter(f);
@@ -106,11 +109,24 @@ public class GameScreen implements Screen {
 		//move all Actors
 		manager.step(delta);
 		coolDownWeapons(delta);
+		tickRenderEffects(delta);
 		action(delta);
 		
 		camera.position.set(player.x, player.y, 0);
 	}
 	
+	private void tickRenderEffects(float delta) {
+		ArrayList<Effect> dead = new ArrayList<Effect>();
+		for(Effect e: renderEffects){
+			e.tick(delta);
+			if(e.isDead()) dead.add(e);
+		}
+		renderEffects.removeAll(dead);
+		
+	}
+
+
+
 	private void coolDownWeapons(float delta) {
 		for(Character c: playerCharacters){
 			c.getEquipppedWeapon().tick(delta);
@@ -125,7 +141,7 @@ public class GameScreen implements Screen {
 		ArrayList<Enemy> enemiesCloseToPlayer = new ArrayList<Enemy>();
 		
 		for(Enemy e: enemies){
-			if(getDistance(player, e) < 100){
+			if(Utils.getDistance(player, e) < 100){
 				enemiesCloseToPlayer.add(e);
 			}
 		}
@@ -143,6 +159,8 @@ public class GameScreen implements Screen {
 					weapon.shoot();
 					enemy.currentHealth -= weapon.getDamage();
 					System.out.print("PEW! ");
+					//renderEffects.add(new TextEffect(enemy.x, enemy.y, ""+weapon.getDamage()));
+					renderEffects.add(new ShootingEffect(character, enemy));
 					if(enemy.currentHealth <= 0){
 						dead.add(enemy);
 						System.out.println("KILL");
@@ -153,6 +171,10 @@ public class GameScreen implements Screen {
 			enemies.removeAll(dead);
 			enemiesCloseToPlayer.removeAll(dead);
 			dead.clear();
+			if(!weapon.isReadyToShoot()){
+				//only one char can shoot
+				break;
+			}
 		}
 		
 		
@@ -161,10 +183,7 @@ public class GameScreen implements Screen {
 		
 	}
 	
-	private float getDistance (Agent a1, Agent a2){
-		float distance = (float) Math.sqrt(Math.pow(a1.x-a2.x, 2) + Math.pow(a1.y-a2.y, 2));
-		return distance;
-	}
+
 
 	@Override
 	public void render(float delta) {
@@ -232,5 +251,11 @@ public class GameScreen implements Screen {
 			}
 		}
 		
+	}
+
+
+
+	public ArrayList<Effect> getRenderEffects() {
+		return renderEffects;
 	}
 }

@@ -1,6 +1,7 @@
 package agents;
 
 import items.Pistol;
+import items.Unarmed;
 import items.Weapon;
 
 public class Character extends Agent {
