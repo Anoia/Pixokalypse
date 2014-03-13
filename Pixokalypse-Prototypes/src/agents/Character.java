@@ -9,8 +9,8 @@ public class Character extends Agent {
 	private String CharacterName;
 	
 	
-	public Character(float x, float y){
-		super(x, y);
+	public Character(float x, float y, String spriteName){
+		super(x, y, spriteName);
 		setEquipppedWeapon(new Pistol());
 	}
 
@@ -22,6 +22,12 @@ public class Character extends Agent {
 
 	public void setCharacterName(String characterName) {
 		CharacterName = characterName;
+	}
+
+
+	@Override
+	public int getZIndex() {
+		return (int) y;
 	}
 
 	

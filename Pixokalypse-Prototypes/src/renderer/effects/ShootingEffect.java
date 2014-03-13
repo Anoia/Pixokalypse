@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class ShootingEffect extends Effect{
 	
 	float startX, startY, endX, endY;
-	Texture shotTexture;
+	static Texture shotTexture = new Texture(Gdx.files.internal("data/shot.png"));
 	float alpha = 1f;
 	
 	public ShootingEffect(float startX, float startY, float endX, float endY){
@@ -22,7 +22,6 @@ public class ShootingEffect extends Effect{
 		this.startY = startY-4;
 		this.endX = endX;
 		this.endY = endY-4;
-		shotTexture = new Texture(Gdx.files.internal("data/shot.png"));
 		displayDuration = 0.25f;
     	remainingDisplayDuration = displayDuration;
 	}

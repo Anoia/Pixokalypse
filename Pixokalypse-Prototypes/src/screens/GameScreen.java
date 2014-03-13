@@ -258,4 +258,10 @@ public class GameScreen implements Screen {
 	public ArrayList<Effect> getRenderEffects() {
 		return renderEffects;
 	}
+
+
+
+	public ArrayList<Character> getPlayerCharacters() {
+		return playerCharacters;
+	}
 }

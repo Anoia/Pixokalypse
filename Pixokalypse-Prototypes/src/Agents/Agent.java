@@ -1,10 +1,11 @@
 package agents;
 
+import renderer.ElementWithZIndex;
 import items.Unarmed;
 import items.Weapon;
 
 
-public abstract class Agent {
+public abstract class Agent implements ElementWithZIndex{
 	public float x;
 	public float y;
 	public float movementSpeed = 20;
@@ -16,9 +17,10 @@ public abstract class Agent {
 	private String spriteName;
 	
 	
-	public Agent(float x, float y){
+	public Agent(float x, float y, String spriteName){
 		this.x = x;
 		this.y = y;
+		this.spriteName = spriteName;
 		setEquipppedWeapon(new Unarmed());
 	}
 	
@@ -49,6 +51,16 @@ public abstract class Agent {
 
 	public void setSpriteName(String spriteName) {
 		this.spriteName = spriteName;
+	}
+	
+	@Override
+	public int getX() {
+		return (int) x;
+	}
+	
+	@Override
+	public int getY() {
+		return (int) y;
 	}
 	
 }

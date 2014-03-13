@@ -1,15 +1,22 @@
 package renderer;
 
 import java.awt.Font;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 
 import renderer.effects.Effect;
 import screens.GameScreen;
 import util.Constants;
 
+import agents.Agent;
 import agents.Enemy;
 import agents.Follower;
 import agents.Player;
+import agents.Zombie;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -35,14 +42,13 @@ public class GameRenderer {
 	
 	public BitmapFont font12, font24;
 	
+	Sprite testSprite;
+	
 	//sprites
 
-	Sprite playersprite;
-	Texture playerTexture;
-	Texture followerTexture;
-	Sprite followerSprite;
-	Sprite zombieSprite;
-	Texture zombieTexture;
+	HashMap<String, Sprite> agentSprites = new HashMap<String, Sprite>();
+	
+	Comparator<ElementWithZIndex> comparator;
 	
 	public GameRenderer(GameScreen game, SpriteBatch batch, OrthographicCamera camera, Map map){
 		this.game = game;
@@ -51,24 +57,38 @@ public class GameRenderer {
 		this.map = map;
 		spriteContainer = new SpriteContainer();
 		initialize();
+		comparator = new Comparator<ElementWithZIndex>() {
+			@Override
+			public int compare(ElementWithZIndex o1, ElementWithZIndex o2) {
+				return o1.getZIndex() - o2.getZIndex();
+			}
+		};
+		
 	}
 	
 	private void initialize(){
 		//charaktersprites
-		playerTexture = new Texture(Gdx.files.internal("data/characters/char_1.png"));
-		playersprite = new Sprite(playerTexture, 0, 0, 6, 8);
+		Texture playerTexture = new Texture(Gdx.files.internal("data/characters/char_1.png"));
+		Sprite playersprite = new Sprite(playerTexture, 0, 0, 6, 8);
 		playersprite.setSize(6*3, 8*3);
 		playersprite.flip(false, true);
+		agentSprites.put("player", playersprite);
 
-		followerTexture = new Texture(Gdx.files.internal("data/characters/char_2.png"));
-		followerSprite = new Sprite(followerTexture, 0, 0, 6, 8);
+		Texture followerTexture = new Texture(Gdx.files.internal("data/characters/char_2.png"));
+		Sprite followerSprite = new Sprite(followerTexture, 0, 0, 6, 8);
 		followerSprite.setSize(6*3, 8*3);
 		followerSprite.flip(false, true);
+		agentSprites.put("follower", followerSprite);
 		
-		zombieTexture = new Texture(Gdx.files.internal("data/characters/zombie.png"));
-		zombieSprite = new Sprite(zombieTexture, 0, 0, 6, 8);
+		Texture zombieTexture = new Texture(Gdx.files.internal("data/characters/zombie.png"));
+		Sprite zombieSprite = new Sprite(zombieTexture, 0, 0, 6, 8);
 		zombieSprite.setSize(6*3, 8*3);
 		zombieSprite.flip(false, true);
+		agentSprites.put("zombie", zombieSprite);
+		
+		Texture testTexture = new Texture(Gdx.files.internal("data/test.png"));
+		testSprite = new Sprite(testTexture);
+		
 	}
 	
 	public void update(float delta){
@@ -81,12 +101,15 @@ public class GameRenderer {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		// Sprites Rendern anfang
-		renderGround(delta);
-		renderPlayer(delta);
-		renderFollowers(delta);
-		
-		renderBuildings(delta);
-		renderZombies(delta);
+		renderGround();
+		//renderWithZIndex(delta);
+		//renderAgents();
+		renderPlayer();
+		renderFollowers();
+		renderZombies();
+		renderBuildings();
+	
+	//	renderWithZIndex();
 		
 		renderEffects();
 		
@@ -94,7 +117,63 @@ public class GameRenderer {
 		renderFPS();
 	}
 	
-	private void renderGround(float delta){
+	private void renderWithZIndex() {
+		ArrayList<ElementWithZIndex> toRender = new ArrayList<ElementWithZIndex>();
+		
+		//Add Elements To List
+		toRender.addAll(game.getPlayerCharacters());
+		toRender.addAll(getZombiesToRender());
+		toRender.addAll(getBuildingsToRender());
+		Collections.sort(toRender, comparator);
+		
+		//Actual Rendering
+		String lastSpriteName = "";
+		String spriteName = "";
+		Sprite sprite = null;
+		
+		for(ElementWithZIndex element: toRender){
+			// TODO Replace with subtype polymorphism: every ElementWithZIndex should have required information to render!
+			if(element instanceof Building){
+				Building b = (Building) element;
+				spriteName = b.getSpriteName();
+				if(!spriteName.equals(lastSpriteName)){
+					sprite = spriteContainer.getBlockSprite(spriteName);
+					lastSpriteName = spriteName;
+				}
+				
+				sprite.setBounds(b.getX(), b.getY(), b.getWidth(),b.getHeight());
+				sprite.draw(batch);
+				
+			}else{
+				//it's an agent
+				spriteName = element.getSpriteName();
+				if(!spriteName.equals(lastSpriteName)){
+					sprite = agentSprites.get(spriteName);
+					lastSpriteName = spriteName;
+				}
+				sprite.setPosition(element.getX()-sprite.getWidth() / 2, element.getY() - sprite.getHeight());
+				sprite.draw(batch);	
+			}
+		}
+		
+	}
+
+	private ArrayList<Enemy> getZombiesToRender() {
+		ArrayList<Enemy> enemies = game.getEnemies();
+		ArrayList<Enemy> toRender = new ArrayList<Enemy>();
+		for(Enemy e: enemies){
+			if (e.getX() > camera.position.x-Gdx.graphics.getWidth()/2
+					&& e.getX() < camera.position.x+Gdx.graphics.getWidth()/2
+					&& e.getY() > camera.position.y-Gdx.graphics.getHeight()/2
+					&& e.getY() < camera.position.y+Gdx.graphics.getHeight()/2
+					) {
+				toRender.add(e);
+			}
+		}
+		return toRender;
+	}
+
+	private void renderGround(){
 		Sprite sprite;
 		//Bodenebene Rendern
 		for (int x = 0; x < map.mapSize; x++) {
@@ -120,7 +199,7 @@ public class GameRenderer {
 		}
 	}
 	
-	private void renderBuildings(float delta){
+	private void renderBuildings(){
 		Sprite sprite;
 		for (int x = 0; x < map.mapSize; x++) {
 			for (int y = 0; y < map.mapSize; y++) {
@@ -140,6 +219,7 @@ public class GameRenderer {
 						if(sprite != null){
 							sprite.setBounds((x * tileSize), (y * tileSize)-tileSize*1.5f, tileSize,tileSize*2.5f);
 							sprite.draw(batch);
+							
 						}else System.out.println("Fehler: "+spriteName+" gibt null");
 						
 					}
@@ -150,16 +230,64 @@ public class GameRenderer {
 		}
 	}
 	
-	private void renderPlayer(float delta){
+	private ArrayList<Building> getBuildingsToRender(){
+		ArrayList<Building> buildings = new ArrayList<Building>();
+		for (int x = 0; x < map.mapSize; x++) {
+			for (int y = 0; y < map.mapSize; y++) {
+				// skip wenn nicht im Sichtbarem bereich
+				if (camera.position.x > (x * tileSize - (Gdx.graphics
+						.getWidth() * 0.6f))
+						&& camera.position.x < (x * tileSize + (Gdx.graphics
+								.getWidth() * 0.6f))
+								&& camera.position.y > (y * tileSize - (Gdx.graphics
+										.getHeight() * 0.6f))
+										&& camera.position.y < (y * tileSize + (Gdx.graphics
+												.getHeight() * 0.6f))) {
+					
+					if(map.data[x][y].fieldCategory == FieldCategory.BUILDING){
+						String spriteName = map.data[x][y].spriteName;	
+						int xPos = x*tileSize;
+						int yPos = (int)(y*tileSize - tileSize*1.5f);
+						int width = tileSize;
+						int height = (int) (tileSize * 2.5);
+						buildings.add(new Building(xPos, yPos, width, height, spriteName));
+					}
+				}
+
+			}
+
+		}
+		
+		return buildings;
+	}
+	
+	private void renderAgents(){
+		ArrayList<Agent> agents = new ArrayList<Agent>();
+		agents.addAll(game.getPlayerCharacters());
+		agents.addAll(getZombiesToRender());
+		String lastSpriteName = "";
+		Sprite sprite = null;
+		for(Agent a: agents){
+			String spriteName = a.getSpriteName();
+			if(!spriteName.equals(lastSpriteName)){
+				sprite = agentSprites.get(spriteName);
+				lastSpriteName = spriteName;
+			}
+			sprite.setPosition(a.getX()-sprite.getWidth() / 2, a.getY() - sprite.getHeight());
+			sprite.draw(batch);
+		}
+	}
+	
+	private void renderPlayer(){
 		Player player = game.getPlayer();
-		Sprite sprite = playersprite;
+		Sprite sprite = agentSprites.get(player.getSpriteName());
 		sprite.setPosition(player.x - sprite.getWidth() / 2, player.y - sprite.getHeight());
 		sprite.draw(batch);
 	}
 	
-	private void renderFollowers(float delta){
+	private void renderFollowers(){
 		ArrayList<Follower> followers = game.getFollowers();
-		Sprite sprite = followerSprite;
+		Sprite sprite = agentSprites.get("follower");
 		if (!followers.isEmpty()) {
 			for (Follower f : followers) {
 				sprite.setPosition(f.x - sprite.getWidth() / 2,
@@ -169,9 +297,9 @@ public class GameRenderer {
 		}
 	}
 	
-	private void renderZombies(float delta){
-		ArrayList<Enemy> enemies = game.getEnemies();
-		Sprite sprite = zombieSprite;
+	private void renderZombies(){
+		ArrayList<Enemy> enemies = getZombiesToRender();
+		Sprite sprite = agentSprites.get("zombie");
 		if (!enemies.isEmpty()) {
 			for (Enemy e : enemies) {
 				sprite.setPosition(e.x - sprite.getWidth() / 2,
@@ -200,8 +328,7 @@ public class GameRenderer {
 	}
 	
 	public void dispose(){
-		playerTexture.dispose();
-		followerTexture.dispose();
+
 	}
 
 }
