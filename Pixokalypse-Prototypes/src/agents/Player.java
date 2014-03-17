@@ -7,4 +7,8 @@ public class Player extends Character {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Player(float x, float y, String spriteName) {
+		super(x, y, spriteName);
+	}
+
 }

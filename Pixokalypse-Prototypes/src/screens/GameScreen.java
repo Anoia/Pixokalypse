@@ -1,21 +1,19 @@
 package screens;
 
 import input.GameInputProcessor;
-import items.Pistol;
 import items.Weapon;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import potentialField.PotentialFieldManager;
 import potentialField.StaticPotentialField;
 import renderer.GameRenderer;
 import renderer.effects.Effect;
 import renderer.effects.ShootingEffect;
-import renderer.effects.TextEffect;
 import util.Constants;
 import util.RayTracer;
 import util.Utils;
-import agents.Agent;
 import agents.Character;
 import agents.Enemy;
 import agents.Follower;
@@ -24,15 +22,8 @@ import agents.Zombie;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.physics.box2d.RayCastCallback;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.sun.xml.internal.bind.v2.TODO;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
-import com.we.PixokalypsePrototypes.test.FieldCategory;
 import com.we.PixokalypsePrototypes.test.Map;
 import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
 import com.we.PixokalypsePrototypes.test.SpriteContainer;
@@ -85,13 +76,14 @@ public class GameScreen implements Screen {
 
 		// The Player, only one!
 		//PLAYERNAMEN SETZEN!!!!!!!!!!!!!
-		player = new Player(200, 200);
+		Random rand = new Random();
+		player = new Player(200, 200, "Char-"+(rand.nextInt(4)+1)+"-alive");
 		manager.addPlayerCharacter(player);
 		playerCharacters.add(player);
 
 		// zufallsnamen!!
 		for (int i = 0; i < 3; i++) {
-			Follower f = new Follower(200 + 3 * i, 200 + 3 * i,"Char-1-alive");
+			Follower f = new Follower(200 + 3 * i, 200 + 3 * i,"Char-"+(rand.nextInt(4)+1)+"-alive");
 			followers.add(f);
 			playerCharacters.add(f);
 			manager.addPlayerCharacter(f);
@@ -243,12 +235,14 @@ public class GameScreen implements Screen {
 	
 	/* Brute Force Zombie Creation :D */
 	private void createZombies() {
+		String spriteNameArray[] = {"Zombie-slow-2", "Zombie-slow-3", "Zombie-slow-1", "Zombie-default-1", "Zombie-default-2", "Zombie-default-4", "Zombie-default-3", "Zombie-fat-1", "Zombie-fat-2", "Zombie-fast-1", "Zombie-fast-2"};
+		Random rand = new Random();
 		for(int i = 0; i < 400; i++){
 			int x = Utils.random(100, map.mapSize * tileSize-100);
 			int y = Utils.random(100, map.mapSize * tileSize-100);
 			if(manager.getEnvironmentMap().fieldArray[x][y] == 0){
 				//create Zombie
-				enemies.add(new Zombie(x, y));
+				enemies.add(new Zombie(x, y, spriteNameArray[(rand.nextInt(spriteNameArray.length))]));
 			}else{
 				i--;
 			}

@@ -259,7 +259,7 @@ public class GameRenderer {
 	
 	private void renderPlayer(){
 		Player player = game.getPlayer();
-		Sprite sprite = spriteContainer.getSprite("Char-3-alive");
+		Sprite sprite = spriteContainer.getSprite(player.getSpriteName());
 		sprite.setPosition(player.x - sprite.getWidth() / 2, player.y - sprite.getHeight());
 		sprite.draw(batch);
 	}
@@ -279,9 +279,10 @@ public class GameRenderer {
 	
 	private void renderZombies(){
 		ArrayList<Enemy> enemies = getZombiesToRender();
-		Sprite sprite = spriteContainer.getSprite("Zombie-default-2");
+		Sprite sprite;
 		if (!enemies.isEmpty()) {
 			for (Enemy e : enemies) {
+				sprite = spriteContainer.getSprite(e.getSpriteName());				
 				sprite.setPosition(e.x - sprite.getWidth() / 2,
 						e.y - sprite.getHeight());
 				sprite.draw(batch);
