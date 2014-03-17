@@ -42,8 +42,6 @@ public class GameRenderer {
 	
 	public BitmapFont font12, font24;
 	
-	Sprite testSprite;
-	
 	Comparator<ElementWithZIndex> comparator;
 	
 	public GameRenderer(GameScreen game, SpriteBatch batch, OrthographicCamera camera, Map map){
@@ -63,10 +61,6 @@ public class GameRenderer {
 	}
 	
 	private void initialize(){
-		//charaktersprites		
-		Texture testTexture = new Texture(Gdx.files.internal("data/test.png"));
-		testSprite = new Sprite(testTexture);
-		
 	}
 	
 	public void update(float delta){

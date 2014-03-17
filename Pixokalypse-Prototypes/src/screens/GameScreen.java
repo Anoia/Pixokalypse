@@ -155,6 +155,7 @@ public class GameScreen implements Screen {
 					enemy.currentHealth -= weapon.getDamage();
 					System.out.print("PEW! ");
 					//renderEffects.add(new TextEffect(enemy.x, enemy.y, ""+weapon.getDamage()));
+					//renderEffects.add(new ShootingEffect(character, enemy, spriteContainer.getSprite("shot")));
 					renderEffects.add(new ShootingEffect(character, enemy));
 					if(enemy.currentHealth <= 0){
 						dead.add(enemy);
