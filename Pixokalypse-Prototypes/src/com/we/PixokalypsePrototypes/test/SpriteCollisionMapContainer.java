@@ -44,15 +44,19 @@ public class SpriteCollisionMapContainer {
 					color = new Color(pixMap.getPixel(x, y));
 					String blub = color.toString();
 
-					if(0 == blub.compareToIgnoreCase("ffffff00"))System.out.print("Darf nicht w�rd ich sagen");
+					if(0 == blub.compareToIgnoreCase("ffffff00")){
+						System.out.println("Darf nicht w�rd ich sagen, Xians Bunte Farben vielleicht :D");
+						collisionMap[x-tr.getRegionX()][y-tr.getRegionY()] = 0;
+					}
 					else if(0 == blub.compareToIgnoreCase("000000ff"))collisionMap[x-tr.getRegionX()][y-tr.getRegionY()] = -1;
 					else if(0 == blub.compareToIgnoreCase("ffffffff"))collisionMap[x-tr.getRegionX()][y-tr.getRegionY()] = 0;
 				}
 			}
 			//Vertikal Spiegeln vorher!
 			int[][] collisionMapGespiegelt = new int[tr.getRegionWidth()][tr.getRegionHeight()];
+			
 			for(int x = 0; x<collisionMap.length;x++){
-				for(int y = 0; y<collisionMap.length;y++){
+				for(int y = 0; y<collisionMap[0].length;y++){
 					collisionMapGespiegelt[collisionMap.length-1-x][y] = collisionMap[x][y];
 				}
 			}
@@ -75,7 +79,7 @@ public class SpriteCollisionMapContainer {
 		int potentialFieldValue = 10001;
 		HashSet<GridPoint2> points = new HashSet<GridPoint2>();
 		for(int x = 0; x<collisionMapGespiegelt.length;x++){
-			for(int y = 0; y<collisionMapGespiegelt.length;y++){
+			for(int y = 0; y<collisionMapGespiegelt[0].length;y++){
 				GridPoint2 currentPoint = new GridPoint2(x,y);
 				if(collisionMapGespiegelt[x][y]==-1 && hasNeighbourWithValue(currentPoint, 0, collisionMapGespiegelt)) points.add(currentPoint);
 			}

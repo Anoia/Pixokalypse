@@ -2,191 +2,198 @@ height.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-A-W
+Heightmap-strRL-1
   rotate: false
-  xy: 86, 128
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-strOL1
+Heightmap-A-N
   rotate: false
-  xy: 86, 170
+  xy: 3, 3
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-SWi
+Heightmap-strORUL-1
   rotate: false
-  xy: 44, 128
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-SW
+Heightmap-A-X0
   rotate: false
-  xy: 2, 128
+  xy: 91, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-O
+Heightmap-strOU-1
   rotate: false
-  xy: 86, 44
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-strRU1
+Heightmap-strUL-1
   rotate: false
-  xy: 86, 170
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-SO
+Heightmap-A-SOi
   rotate: false
-  xy: 44, 86
+  xy: 135, 47
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-NO
+Heightmap-strRU-1
   rotate: false
-  xy: 44, 2
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Grass
+Heightmap-A-NWi
   rotate: false
-  xy: 86, 170
+  xy: 179, 3
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-NW
+Heightmap-Parking
   rotate: false
-  xy: 2, 44
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-strRL1
+Heightmap-A-NO
   rotate: false
-  xy: 86, 170
+  xy: 47, 3
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-N
+Heightmap-strRUL-1
   rotate: false
-  xy: 2, 2
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-SOi
+Heightmap-A-SW
   rotate: false
-  xy: 86, 86
+  xy: 179, 47
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-X1
+Heightmap-A-NW
   rotate: false
-  xy: 44, 170
+  xy: 135, 3
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-Parking
+Heightmap-A-NOi
   rotate: false
-  xy: 86, 170
+  xy: 91, 3
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-strUL1
+Heightmap-A-SO
   rotate: false
-  xy: 86, 170
+  xy: 91, 47
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-strRUL1
+Heightmap-strOUL-1
   rotate: false
-  xy: 86, 170
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-NWi
+Heightmap-strORL-1
   rotate: false
-  xy: 44, 44
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-strORL1
+Heightmap-Object-01
   rotate: false
-  xy: 86, 170
+  xy: 223, 91
+  size: 28, 13
+  orig: 28, 13
+  offset: 0, 0
+  index: -1
+Heightmap-A-O
+  rotate: false
+  xy: 3, 47
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-X0
+Heightmap-A-S
   rotate: false
-  xy: 2, 170
+  xy: 47, 47
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-strORUL1
+Heightmap-A-X1
   rotate: false
-  xy: 86, 170
+  xy: 135, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-strOUL1
+Heightmap-A-W
   rotate: false
-  xy: 86, 170
+  xy: 47, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-NOi
+Heightmap-strOL-1
   rotate: false
-  xy: 86, 2
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-strOR1
+Heightmap-strORU-1
   rotate: false
-  xy: 86, 170
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-strORU1
+Heightmap-strOR-1
   rotate: false
-  xy: 86, 170
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-strOU1
+Heightmap-Grass
   rotate: false
-  xy: 86, 170
+  xy: 179, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-A-S
+Heightmap-A-SWi
   rotate: false
-  xy: 2, 86
+  xy: 3, 91
   size: 40, 40
   orig: 40, 40
   offset: 0, 0

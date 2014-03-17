@@ -1,0 +1,529 @@
+textures.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Zombie-dead-1
+  rotate: false
+  xy: 67, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Char-4-dead
+  rotate: false
+  xy: 205, 107
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-strRL-1
+  rotate: false
+  xy: 267, 255
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Block-A-SW
+  rotate: false
+  xy: 399, 3
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Zombie-slow-3
+  rotate: false
+  xy: 247, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Block-A-X1
+  rotate: false
+  xy: 91, 107
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Char-2-dead
+  rotate: false
+  xy: 165, 107
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Block-A-O
+  rotate: false
+  xy: 223, 3
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Ground-A-NO
+  rotate: false
+  xy: 259, 107
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Zombie-part-3
+  rotate: false
+  xy: 197, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Char-3-alive
+  rotate: false
+  xy: 175, 107
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-A-SOi
+  rotate: false
+  xy: 91, 211
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Zombie-fat-1
+  rotate: false
+  xy: 157, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Block-A-NO
+  rotate: false
+  xy: 47, 3
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Zombie-default-2
+  rotate: false
+  xy: 107, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-strORUL-1
+  rotate: false
+  xy: 135, 255
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Ground-strUL-1
+  rotate: false
+  xy: 399, 255
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Block-A-X0
+  rotate: false
+  xy: 47, 107
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Char-1-alive
+  rotate: false
+  xy: 135, 107
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Item-weapon-3
+  rotate: false
+  xy: 473, 255
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-strORU-1
+  rotate: false
+  xy: 91, 255
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Ground-strORL-1
+  rotate: false
+  xy: 47, 255
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Block-A-N
+  rotate: false
+  xy: 3, 3
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+shot
+  rotate: false
+  xy: 257, 299
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+Block-A-W
+  rotate: false
+  xy: 3, 107
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Zombie-part-2
+  rotate: false
+  xy: 187, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Zombie-dead-2
+  rotate: false
+  xy: 77, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-strOU-1
+  rotate: false
+  xy: 179, 255
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Ground-A-N
+  rotate: false
+  xy: 215, 107
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Block-A-NW
+  rotate: false
+  xy: 135, 3
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block-A-NOi
+  rotate: false
+  xy: 91, 3
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Ground-A-W
+  rotate: false
+  xy: 223, 211
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Item-weapon-2
+  rotate: false
+  xy: 463, 255
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-strOUL-1
+  rotate: false
+  xy: 223, 255
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Ground-Grass
+  rotate: false
+  xy: 355, 211
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Zombie-fat-2
+  rotate: false
+  xy: 167, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Zombie-default-3
+  rotate: false
+  xy: 117, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-A-X1
+  rotate: false
+  xy: 311, 211
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Zombie-fast-1
+  rotate: false
+  xy: 137, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Char-3-dead
+  rotate: false
+  xy: 185, 107
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-strRUL-1
+  rotate: false
+  xy: 355, 255
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Ground-A-NWi
+  rotate: false
+  xy: 391, 107
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Ground-A-SW
+  rotate: false
+  xy: 135, 211
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Block-A-SO
+  rotate: false
+  xy: 311, 3
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Block-A-NWi
+  rotate: false
+  xy: 179, 3
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Char-1-dead
+  rotate: false
+  xy: 145, 107
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-strOR-1
+  rotate: false
+  xy: 3, 255
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Ground-Parking
+  rotate: false
+  xy: 399, 211
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Object-01-dark
+  rotate: false
+  xy: 3, 299
+  size: 28, 13
+  orig: 28, 13
+  offset: 0, 0
+  index: -1
+Block-A-S
+  rotate: false
+  xy: 267, 3
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Ground-strRU-1
+  rotate: false
+  xy: 311, 255
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Zombie-dead-3
+  rotate: false
+  xy: 87, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-A-O
+  rotate: false
+  xy: 435, 107
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Zombie-default-4
+  rotate: false
+  xy: 127, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-A-X0
+  rotate: false
+  xy: 267, 211
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Ground-A-SWi
+  rotate: false
+  xy: 179, 211
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Zombie-slow-1
+  rotate: false
+  xy: 227, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Zombie-part-5
+  rotate: false
+  xy: 217, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Char-4-alive
+  rotate: false
+  xy: 195, 107
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-A-NOi
+  rotate: false
+  xy: 303, 107
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Ground-A-S
+  rotate: false
+  xy: 3, 211
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Object-01-glow
+  rotate: false
+  xy: 35, 299
+  size: 28, 13
+  orig: 28, 13
+  offset: 0, 0
+  index: -1
+Ground-A-SO
+  rotate: false
+  xy: 47, 211
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Block-A-SWi
+  rotate: false
+  xy: 443, 3
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Zombie-slow-2
+  rotate: false
+  xy: 237, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-strOL-1
+  rotate: false
+  xy: 443, 211
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+Zombie-part-1
+  rotate: false
+  xy: 177, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Char-2-alive
+  rotate: false
+  xy: 155, 107
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Block-A-SOi
+  rotate: false
+  xy: 355, 3
+  size: 40, 100
+  orig: 40, 100
+  offset: 0, 0
+  index: -1
+Zombie-default-1
+  rotate: false
+  xy: 97, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Item-backpack
+  rotate: false
+  xy: 443, 255
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Zombie-fast-2
+  rotate: false
+  xy: 147, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Zombie-part-4
+  rotate: false
+  xy: 207, 299
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Item-weapon-1
+  rotate: false
+  xy: 453, 255
+  size: 6, 8
+  orig: 6, 8
+  offset: 0, 0
+  index: -1
+Ground-A-NW
+  rotate: false
+  xy: 347, 107
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1

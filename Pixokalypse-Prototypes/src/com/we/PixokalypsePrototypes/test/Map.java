@@ -1041,38 +1041,38 @@ public class Map {
 		// println strCount
 		switch (neigbouhrstreetsCount) {
 		case 1:
-			field.spriteName = "strORUL1";
+			field.spriteName = "strORUL-1";
 			break;
 		case 2:
 			if (strO && strL)
-				field.spriteName = "strOL1";
+				field.spriteName = "strOL-1";
 			else if (strO && strR)
-				field.spriteName = "strOR1";
+				field.spriteName = "strOR-1";
 			else if (strO && strU)
-				field.spriteName = "strOU1";
+				field.spriteName = "strOU-1";
 			else if (strR && strL)
-				field.spriteName = "strRL1";
+				field.spriteName = "strRL-1";
 			else if (strR && strU)
-				field.spriteName = "strRU1";
+				field.spriteName = "strRU-1";
 			else if (strU && strL)
-				field.spriteName = "strUL1";
+				field.spriteName = "strUL-1";
 			else
 				System.out.println("street 2neighbours fail");
 			break;
 		case 3:
 			if (strO && strR && strL)
-				field.spriteName = "strORL1";
+				field.spriteName = "strORL-1";
 			else if (strO && strR && strU)
-				field.spriteName = "strORU1";
+				field.spriteName = "strORU-1";
 			else if (strO && strU && strL)
-				field.spriteName = "strOUL1";
+				field.spriteName = "strOUL-1";
 			else if (strR && strU && strL)
-				field.spriteName = "strRUL1";
+				field.spriteName = "strRUL-1";
 			else
 				System.out.println("street 3neighbours fail");
 			break;
 		case 4:
-			field.spriteName = "strORUL1";
+			field.spriteName = "strORUL-1";
 			break;
 		}
 	}

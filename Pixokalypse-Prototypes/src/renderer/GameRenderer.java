@@ -133,11 +133,12 @@ public class GameRenderer {
 		
 		for(ElementWithZIndex element: toRender){
 			// TODO Replace with subtype polymorphism: every ElementWithZIndex should have required information to render!
+			// 
 			if(element instanceof Building){
 				Building b = (Building) element;
 				spriteName = b.getSpriteName();
 				if(!spriteName.equals(lastSpriteName)){
-					sprite = spriteContainer.getBlockSprite(spriteName);
+					sprite = spriteContainer.getSprite("Block-"+spriteName);
 					lastSpriteName = spriteName;
 				}
 				
@@ -188,7 +189,7 @@ public class GameRenderer {
 										&& camera.position.y < (y * tileSize + (Gdx.graphics
 												.getHeight() * 0.6f))) {
 					String spriteName = map.data[x][y].spriteName;
-					sprite = spriteContainer.getGroundSprite(spriteName);
+					sprite = spriteContainer.getSprite("Ground-"+spriteName);
 					sprite.setBounds(x * tileSize, y * tileSize, tileSize,
 							tileSize);
 					sprite.draw(batch);
@@ -215,7 +216,7 @@ public class GameRenderer {
 					
 					if(map.data[x][y].fieldCategory == FieldCategory.BUILDING){
 						String spriteName = map.data[x][y].spriteName;		
-						sprite = spriteContainer.getBlockSprite(spriteName);
+						sprite = spriteContainer.getSprite("Block-"+spriteName);
 						if(sprite != null){
 							sprite.setBounds((x * tileSize), (y * tileSize)-tileSize*1.5f, tileSize,tileSize*2.5f);
 							sprite.draw(batch);

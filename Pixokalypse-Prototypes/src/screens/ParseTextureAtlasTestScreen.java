@@ -27,7 +27,7 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 	private int countdownTillStop = 120;
 	public ParseTextureAtlasTestScreen(final PixokalypsePrototypes gam) {
 		this.game = gam;
-		spriteContainer = new SpriteContainer("data/ground.txt");
+		spriteContainer = new SpriteContainer();
 		spriteCollisionmapContainer = new SpriteCollisionMapContainer("data/height.txt", "data/height.png");
 		actorList = new ArrayList<TestActor>();
 		width = Gdx.graphics.getWidth();
@@ -87,7 +87,7 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 		itr = actorList.iterator();
 	    while(itr.hasNext()) {
 	    	testActor = (TestActor) itr.next();
-	    	sprite = spriteContainer.getGroundSprite(testActor.spriteName);
+	    	sprite = spriteContainer.getSprite("Ground-"+testActor.spriteName);
 			sprite.setPosition(testActor.x,testActor.y);
 			sprite.draw(game.batch);
 		}
