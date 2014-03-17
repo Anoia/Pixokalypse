@@ -44,10 +44,6 @@ public class GameRenderer {
 	
 	Sprite testSprite;
 	
-	//sprites
-
-	HashMap<String, Sprite> agentSprites = new HashMap<String, Sprite>();
-	
 	Comparator<ElementWithZIndex> comparator;
 	
 	public GameRenderer(GameScreen game, SpriteBatch batch, OrthographicCamera camera, Map map){
@@ -67,25 +63,7 @@ public class GameRenderer {
 	}
 	
 	private void initialize(){
-		//charaktersprites
-		Texture playerTexture = new Texture(Gdx.files.internal("data/characters/char_1.png"));
-		Sprite playersprite = new Sprite(playerTexture, 0, 0, 6, 8);
-		playersprite.setSize(6*3, 8*3);
-		playersprite.flip(false, true);
-		agentSprites.put("player", playersprite);
-
-		Texture followerTexture = new Texture(Gdx.files.internal("data/characters/char_2.png"));
-		Sprite followerSprite = new Sprite(followerTexture, 0, 0, 6, 8);
-		followerSprite.setSize(6*3, 8*3);
-		followerSprite.flip(false, true);
-		agentSprites.put("follower", followerSprite);
-		
-		Texture zombieTexture = new Texture(Gdx.files.internal("data/characters/zombie.png"));
-		Sprite zombieSprite = new Sprite(zombieTexture, 0, 0, 6, 8);
-		zombieSprite.setSize(6*3, 8*3);
-		zombieSprite.flip(false, true);
-		agentSprites.put("zombie", zombieSprite);
-		
+		//charaktersprites		
 		Texture testTexture = new Texture(Gdx.files.internal("data/test.png"));
 		testSprite = new Sprite(testTexture);
 		
@@ -149,7 +127,7 @@ public class GameRenderer {
 				//it's an agent
 				spriteName = element.getSpriteName();
 				if(!spriteName.equals(lastSpriteName)){
-					sprite = agentSprites.get(spriteName);
+					sprite = spriteContainer.getSprite(spriteName);
 					lastSpriteName = spriteName;
 				}
 				sprite.setPosition(element.getX()-sprite.getWidth() / 2, element.getY() - sprite.getHeight());
@@ -271,7 +249,7 @@ public class GameRenderer {
 		for(Agent a: agents){
 			String spriteName = a.getSpriteName();
 			if(!spriteName.equals(lastSpriteName)){
-				sprite = agentSprites.get(spriteName);
+				sprite = spriteContainer.getSprite(spriteName);
 				lastSpriteName = spriteName;
 			}
 			sprite.setPosition(a.getX()-sprite.getWidth() / 2, a.getY() - sprite.getHeight());
@@ -281,16 +259,17 @@ public class GameRenderer {
 	
 	private void renderPlayer(){
 		Player player = game.getPlayer();
-		Sprite sprite = agentSprites.get(player.getSpriteName());
+		Sprite sprite = spriteContainer.getSprite("Char-3-alive");
 		sprite.setPosition(player.x - sprite.getWidth() / 2, player.y - sprite.getHeight());
 		sprite.draw(batch);
 	}
 	
 	private void renderFollowers(){
 		ArrayList<Follower> followers = game.getFollowers();
-		Sprite sprite = agentSprites.get("follower");
+		Sprite sprite;
 		if (!followers.isEmpty()) {
 			for (Follower f : followers) {
+				sprite = spriteContainer.getSprite(f.getSpriteName());
 				sprite.setPosition(f.x - sprite.getWidth() / 2,
 						f.y - sprite.getHeight());
 				sprite.draw(batch);
@@ -300,7 +279,7 @@ public class GameRenderer {
 	
 	private void renderZombies(){
 		ArrayList<Enemy> enemies = getZombiesToRender();
-		Sprite sprite = agentSprites.get("zombie");
+		Sprite sprite = spriteContainer.getSprite("Zombie-default-2");
 		if (!enemies.isEmpty()) {
 			for (Enemy e : enemies) {
 				sprite.setPosition(e.x - sprite.getWidth() / 2,

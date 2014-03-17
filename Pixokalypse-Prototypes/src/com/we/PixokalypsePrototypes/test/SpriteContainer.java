@@ -37,7 +37,7 @@ public class SpriteContainer {
 		for(AtlasRegion item:spriteSheet.getRegions()){
 			String name = item.name;
 			Sprite sprite = spriteSheet.createSprite(name);
-			sprite.setSize(Constants.TILE_SIZE, Constants.TILE_SIZE);
+			sprite.setSize(item.getRegionWidth(), item.getRegionHeight());
 			sprite.flip(false, true);
 			spriteHashmap.put(name, sprite);
 			//spriteHashmap.get(name).setSize(width, height);

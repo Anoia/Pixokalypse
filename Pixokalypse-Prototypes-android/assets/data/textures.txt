@@ -1,6 +1,6 @@
 textures.png
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
 Zombie-dead-1
   rotate: false

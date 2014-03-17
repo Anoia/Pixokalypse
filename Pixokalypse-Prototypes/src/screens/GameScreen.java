@@ -30,6 +30,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.RayCastCallback;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.sun.xml.internal.bind.v2.TODO;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 import com.we.PixokalypsePrototypes.test.FieldCategory;
 import com.we.PixokalypsePrototypes.test.Map;
@@ -83,12 +84,14 @@ public class GameScreen implements Screen {
 		manager.addCollisionMapToEnvironment(map, spriteCollisionMapContainer);
 
 		// The Player, only one!
+		//PLAYERNAMEN SETZEN!!!!!!!!!!!!!
 		player = new Player(200, 200);
 		manager.addPlayerCharacter(player);
 		playerCharacters.add(player);
 
+		// zufallsnamen!!
 		for (int i = 0; i < 3; i++) {
-			Follower f = new Follower(200 + 3 * i, 200 + 3 * i);
+			Follower f = new Follower(200 + 3 * i, 200 + 3 * i,"Char-1-alive");
 			followers.add(f);
 			playerCharacters.add(f);
 			manager.addPlayerCharacter(f);

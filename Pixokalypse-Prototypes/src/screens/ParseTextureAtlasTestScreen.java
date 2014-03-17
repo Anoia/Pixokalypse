@@ -87,7 +87,7 @@ public class ParseTextureAtlasTestScreen implements Screen{ //,InputProcessor {
 		itr = actorList.iterator();
 	    while(itr.hasNext()) {
 	    	testActor = (TestActor) itr.next();
-	    	sprite = spriteContainer.getSprite("Ground-"+testActor.spriteName);
+	    	sprite = spriteContainer.getSprite(testActor.spriteName);
 			sprite.setPosition(testActor.x,testActor.y);
 			sprite.draw(game.batch);
 		}
