@@ -10,7 +10,7 @@ public class Main {
 		cfg.useGL20 = false;
 		cfg.width = 960;
 		cfg.height = 640;
-		//test :D
+		//test zwei :D
 		//cfg.foregroundFPS = 60;
 		new LwjglApplication(new PixokalypsePrototypes(), cfg);
 	}
