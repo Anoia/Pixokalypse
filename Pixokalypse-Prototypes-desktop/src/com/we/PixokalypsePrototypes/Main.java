@@ -9,7 +9,9 @@ public class Main {
 		cfg.title = "Pixokalypse-Prototypes";
 		cfg.useGL20 = false;
 		cfg.width = 960;
-		cfg.height = 640;		
+		cfg.height = 640;
+		//test :D
+		//cfg.foregroundFPS = 60;
 		new LwjglApplication(new PixokalypsePrototypes(), cfg);
 	}
 }
