@@ -83,10 +83,10 @@ public class GameRenderer {
 	
 	//	renderWithZIndex();
 		
-		renderEffects();
+		//renderEffects();
 		
 		batch.end();
-		renderFPS();
+		//renderFPS();
 	}
 	
 	private void renderWithZIndex() {

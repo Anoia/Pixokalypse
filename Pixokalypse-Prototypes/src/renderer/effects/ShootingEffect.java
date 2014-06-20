@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 
 public class ShootingEffect extends Effect{
 	
@@ -19,17 +20,12 @@ public class ShootingEffect extends Effect{
 	
 	public ShootingEffect(float startX, float startY, float endX, float endY){
 		this.startX = startX;
-		this.startY = startY-4;
+		this.startY = startY;
 		this.endX = endX;
-		this.endY = endY-4;
+		this.endY = endY;
 		displayDuration = 0.25f;
     	remainingDisplayDuration = displayDuration;
 	}
-	
-	public ShootingEffect(Agent start, Agent goal){
-		this(start.x, start.y, goal.x, goal.y);
-	}
-
 	
     @Override
 	public void tick(float delta){

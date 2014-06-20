@@ -8,12 +8,14 @@ import java.util.Random;
 
 import potentialField.PotentialFieldManager;
 import potentialField.StaticPotentialField;
+import renderer.EffectsRenderer;
 import renderer.GameRenderer;
 import renderer.effects.Effect;
 import renderer.effects.ShootingEffect;
 import util.Constants;
 import util.RayTracer;
 import util.Utils;
+import agents.Agent;
 import agents.Character;
 import agents.Enemy;
 import agents.Follower;
@@ -23,6 +25,7 @@ import agents.Zombie;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector3;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 import com.we.PixokalypsePrototypes.test.Map;
 import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
@@ -48,6 +51,7 @@ public class GameScreen implements Screen {
 
 	
 	GameRenderer renderer;
+	EffectsRenderer effectsRenderer;
 
 	private RayTracer rayTracer;
 	
@@ -62,7 +66,7 @@ public class GameScreen implements Screen {
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
 		camera.setToOrtho(true);
-		camera.zoom = 0.5f;
+		camera.zoom = 0.2f;
 
 		Gdx.input.setInputProcessor(new GameInputProcessor(manager, camera));
 		
@@ -91,6 +95,8 @@ public class GameScreen implements Screen {
 		
 		renderer = new GameRenderer(this, game.batch, camera, map);
 		renderer.setFonts(game.font12, game.font24);
+		effectsRenderer = new EffectsRenderer(this, game.batch);
+		effectsRenderer.setFonts(game.font12, game.font24);
 		rayTracer = new RayTracer(manager.getEnvironmentMap());
 		
 		createZombies();
@@ -155,8 +161,8 @@ public class GameScreen implements Screen {
 					enemy.currentHealth -= weapon.getDamage();
 					System.out.print("PEW! ");
 					//renderEffects.add(new TextEffect(enemy.x, enemy.y, ""+weapon.getDamage()));
-					//renderEffects.add(new ShootingEffect(character, enemy, spriteContainer.getSprite("shot")));
-					renderEffects.add(new ShootingEffect(character, enemy));
+					addShootingEffect(character, enemy);
+					
 					if(enemy.currentHealth <= 0){
 						dead.add(enemy);
 						System.out.println("KILL");
@@ -179,12 +185,22 @@ public class GameScreen implements Screen {
 		
 	}
 	
+	private void addShootingEffect(Agent start, Agent goal){
+		Vector3 startVector = new Vector3(start.x, start.y-4, 0);
+		Vector3 goalVector = new Vector3(goal.x, goal.y-4, 0);
+		camera.project(startVector);
+		camera.project(goalVector);
+		
+		renderEffects.add(new ShootingEffect(startVector.x, startVector.y, goalVector.x, goalVector.y));
+	}
+	
 
 
 	@Override
 	public void render(float delta) {
 		updateGame(delta);		
 		renderer.update(delta);
+		effectsRenderer.update(delta);
 	}
 
 	@Override
