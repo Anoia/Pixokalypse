@@ -12,14 +12,14 @@ public class EffectsRenderer {
 	
 	private GameScreen game;
 	private SpriteBatch batch;
-	//private OrthographicCamera camera;
+	private OrthographicCamera camera;
 	
 	public BitmapFont font12, font24;
 		
-	public EffectsRenderer(GameScreen game, SpriteBatch batch){ //,OrthographicCamera camera){
+	public EffectsRenderer(GameScreen game, SpriteBatch batch, OrthographicCamera camera){ //,OrthographicCamera camera){
 		this.game = game;
 		this.batch = batch;
-	//	this.camera = camera;
+		this.camera = camera;
 	}
 	
 	public void update (float delta){
@@ -37,7 +37,7 @@ public class EffectsRenderer {
 	
 	private void renderEffects(){
 		for(Effect e: game.getRenderEffects()){
-			e.render(batch, font12);
+			e.render(batch, font12, camera);
 		}
 	}
 

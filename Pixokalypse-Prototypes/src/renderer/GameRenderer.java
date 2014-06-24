@@ -83,8 +83,6 @@ public class GameRenderer {
 	
 	//	renderWithZIndex();
 		
-		//renderEffects();
-		
 		batch.end();
 		//renderFPS();
 	}
@@ -294,12 +292,6 @@ public class GameRenderer {
 		batch.begin();
 		font24.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 30, Gdx.graphics.getHeight() - 30);
 		batch.end();
-	}
-	
-	private void renderEffects(){
-		for(Effect e: game.getRenderEffects()){
-			e.render(batch, font12);
-		}
 	}
 	
 	public void dispose(){

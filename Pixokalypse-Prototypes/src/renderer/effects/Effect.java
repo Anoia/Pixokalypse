@@ -1,5 +1,6 @@
 package renderer.effects;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -20,7 +21,7 @@ public abstract class Effect {
 		}
 	}
 	
-	public abstract void render(SpriteBatch batch, BitmapFont font);
+	public abstract void render(SpriteBatch batch, BitmapFont font, OrthographicCamera camera);
 
 	public boolean isDead() {
 		return dead;

@@ -1,6 +1,7 @@
 package renderer.effects;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -38,7 +39,7 @@ public class TextEffect extends Effect{
 	}
     
 	@Override
-	public void render(SpriteBatch batch, BitmapFont font) {
+	public void render(SpriteBatch batch, BitmapFont font, OrthographicCamera camera) {
 		font.setColor(color);
 		font.draw(batch, text, x, y);
 	}

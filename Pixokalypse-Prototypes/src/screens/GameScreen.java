@@ -95,7 +95,7 @@ public class GameScreen implements Screen {
 		
 		renderer = new GameRenderer(this, game.batch, camera, map);
 		renderer.setFonts(game.font12, game.font24);
-		effectsRenderer = new EffectsRenderer(this, game.batch);
+		effectsRenderer = new EffectsRenderer(this, game.batch, camera);
 		effectsRenderer.setFonts(game.font12, game.font24);
 		rayTracer = new RayTracer(manager.getEnvironmentMap());
 		
@@ -185,13 +185,8 @@ public class GameScreen implements Screen {
 		
 	}
 	
-	private void addShootingEffect(Agent start, Agent goal){
-		Vector3 startVector = new Vector3(start.x, start.y-4, 0);
-		Vector3 goalVector = new Vector3(goal.x, goal.y-4, 0);
-		camera.project(startVector);
-		camera.project(goalVector);
-		
-		renderEffects.add(new ShootingEffect(startVector.x, startVector.y, goalVector.x, goalVector.y));
+	private void addShootingEffect(Agent start, Agent end){
+		renderEffects.add(new ShootingEffect(start, end));
 	}
 	
 
