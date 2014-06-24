@@ -73,7 +73,6 @@ public class GameRenderer {
 		this.camera = camera;
 		this.map = map;
 		spriteContainer = new SpriteContainer();
-		System.out.println(vertexShader);
 		initializeShader();
 		comparator = new Comparator<ElementWithZIndex>() {
 			@Override
