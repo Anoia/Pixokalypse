@@ -19,12 +19,19 @@ import agents.Player;
 import agents.Zombie;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector3;
 import com.we.PixokalypsePrototypes.test.FieldCategory;
 import com.we.PixokalypsePrototypes.test.Map;
 import com.we.PixokalypsePrototypes.test.SpriteContainer;
@@ -44,13 +51,30 @@ public class GameRenderer {
 	
 	Comparator<ElementWithZIndex> comparator;
 	
+	
+	// Shader stuff
+	private FrameBuffer fbo;	
+	
+	private ShaderProgram defaultShader;
+	private ShaderProgram finalShader;
+	
+	public static final float ambientIntensity = .7f;
+	public static final Vector3 ambientColor = new Vector3(0.3f, 0.3f, 0.7f);
+	
+	final String vertexShader = Gdx.files.internal("data/shader/vertexShader.glsl").readString();
+	final String defaultPixelShader = Gdx.files.internal("data/shader/defaultPixelShader.glsl").readString();
+	final String finalPixelShader =  Gdx.files.internal("data/shader/pixelShader.glsl").readString();
+	
+	private Texture light;
+	
 	public GameRenderer(GameScreen game, SpriteBatch batch, OrthographicCamera camera, Map map){
 		this.game = game;
 		this.batch = batch;
 		this.camera = camera;
 		this.map = map;
 		spriteContainer = new SpriteContainer();
-		initialize();
+		System.out.println(vertexShader);
+		initializeShader();
 		comparator = new Comparator<ElementWithZIndex>() {
 			@Override
 			public int compare(ElementWithZIndex o1, ElementWithZIndex o2) {
@@ -60,10 +84,25 @@ public class GameRenderer {
 		
 	}
 	
-	private void initialize(){
+	private void initializeShader(){
+		
+		ShaderProgram.pedantic = false;
+		defaultShader = new ShaderProgram(vertexShader, defaultPixelShader);
+		finalShader = new ShaderProgram(vertexShader, finalPixelShader);	
+		
+		finalShader.begin();
+		finalShader.setUniformi("u_lightmap", 1);
+		finalShader.setUniformf("ambientColor", ambientColor.x, ambientColor.y,
+				ambientColor.z, ambientIntensity);
+		finalShader.end();
+		
+		light = new Texture("data/shader/light.png");
+		
 	}
 	
 	public void update(float delta){
+		
+		drawLightToFBO();
 		
 		camera.update();
 		
@@ -71,7 +110,11 @@ public class GameRenderer {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
 		batch.setProjectionMatrix(camera.combined);
+		batch.setShader(finalShader);
 		batch.begin();
+		fbo.getColorBufferTexture().bind(1);
+		light.bind(0);
+		
 		// Sprites Rendern anfang
 		renderGround();
 		//renderWithZIndex(delta);
@@ -87,6 +130,20 @@ public class GameRenderer {
 		//renderFPS();
 	}
 	
+	private void drawLightToFBO() {
+		fbo.begin();
+		batch.setProjectionMatrix(camera.combined);
+		batch.setShader(defaultShader);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.begin();
+		float lightSize = 150.0f;
+		Player p = game.getPlayer();
+		batch.draw(light, p.x - lightSize*0.5f , p.y-4 - lightSize*0.5f, lightSize, lightSize);
+		batch.end();
+		fbo.end();
+		
+	}
+
 	private void renderWithZIndex() {
 		ArrayList<ElementWithZIndex> toRender = new ArrayList<ElementWithZIndex>();
 		
@@ -296,6 +353,14 @@ public class GameRenderer {
 	
 	public void dispose(){
 
+	}
+	
+	public void resize(int width, int height){
+		fbo = new FrameBuffer(Format.RGBA8888, width, height, false);
+
+		finalShader.begin();
+		finalShader.setUniformf("resolution", width, height);
+		finalShader.end();	
 	}
 
 }

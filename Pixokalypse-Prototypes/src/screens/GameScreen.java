@@ -203,6 +203,7 @@ public class GameScreen implements Screen {
 		// camera = new OrthographicCamera(width, height);
 		// camera.setToOrtho(true);
 		// camera.zoom = 0.5f;
+		renderer.resize(width, height);
 	}
 
 	@Override

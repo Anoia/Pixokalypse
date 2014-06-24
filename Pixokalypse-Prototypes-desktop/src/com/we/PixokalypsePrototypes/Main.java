@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "Pixokalypse-Prototypes";
-		cfg.useGL20 = false;
+		cfg.useGL20 = true;
 		cfg.width = 960;
 		cfg.height = 640;
 		//test zwei :D
