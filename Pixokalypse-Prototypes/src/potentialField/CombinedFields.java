@@ -10,20 +10,12 @@ public class CombinedFields extends PotentialField {
 		this.height = environment.height;
 		this.fieldArray = new int[width][height];
 		
-		//2-3 millisekunden
 		for(int i = 0; i < width; i++){
 			for(int j=0; j < height; j++){
 				this.fieldArray[i][j] = environment.fieldArray[i][j];
 				
 			}
 		}
-		
-		//auch 2-4 millisekunden :D soll bei gro�en Arrays Performanter sein :D
-		/*
-		for(int i = 0; i < environment.potentialFieldMap.length;i++){
-		System.arraycopy(environment.potentialFieldMap[i], 0, this.potentialFieldMap[i], 0, environment.potentialFieldMap[0].length);
-		}
-		*/
 	}
 	
 	public void add(Target target){

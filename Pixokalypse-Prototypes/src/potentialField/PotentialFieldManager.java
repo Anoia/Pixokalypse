@@ -55,11 +55,17 @@ public class PotentialFieldManager {
 
 	}
 	
-	private GridPoint2 getDestination(Agent pc, CombinedFields map) {
-		int smallest = map.fieldArray[(int)pc.x][(int)pc.y];
-		GridPoint2 pos = new GridPoint2((int)pc.x, (int)pc.y);
-		for(int i = (int)pc.x-1; i<=(int)pc.x+1; i++){
-			for(int j = (int)pc.y-1; j<=(int)pc.y+1; j++){
+	/**
+	 * Checks the Fields around the Agent and chooses the one with the lowest value as the destination
+	 * @param agent The Agent whose destination should be determined
+	 * @param map The PotentialFieldMap for that Agent 
+	 * @return the Position the Agent should choose
+	 */
+	private GridPoint2 getDestination(Agent agent, CombinedFields map) {
+		int smallest = map.fieldArray[(int)agent.x][(int)agent.y];
+		GridPoint2 pos = new GridPoint2((int)agent.x, (int)agent.y);
+		for(int i = (int)agent.x-1; i<=(int)agent.x+1; i++){
+			for(int j = (int)agent.y-1; j<=(int)agent.y+1; j++){
 				if(map.fieldArray[i][j] < smallest){
 					pos.set(i, j);
 					smallest = map.fieldArray[i][j];
@@ -94,11 +100,8 @@ public class PotentialFieldManager {
 	}
 	
 	public void setPlayerCharacterTarget(int x, int y){
-		System.out.println("new target");
 		int radius = 200;
-		//playerCharacterTarget = new Target(new CircleDynamicPotentialField(radius, false), x-radius, y-radius);
 		playerCharacterTarget = new Target(new SuperIntelligentDynamicPotentialField(environmentMap, radius, false,x-radius, y-radius), x-radius, y-radius);
-		
 		neuRendernA = true;
 	}
 
