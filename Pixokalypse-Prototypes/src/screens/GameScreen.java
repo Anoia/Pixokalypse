@@ -17,6 +17,7 @@ import renderer.EffectsRenderer;
 import renderer.GameRenderer;
 import renderer.effects.Effect;
 import renderer.effects.ShootingEffect;
+import ui.HUD;
 import util.Constants;
 import util.RayTracer;
 import util.Utils;
@@ -26,8 +27,10 @@ import agents.PlayerCharacter;
 import agents.Zombie;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 import com.we.PixokalypsePrototypes.test.Map;
 import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
@@ -39,7 +42,7 @@ public class GameScreen implements Screen {
 
 	EffectsRenderer effectsRenderer;
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-	private PixokalypsePrototypes game;
+	private PixokalypsePrototypes gameContainer;
 	private PotentialFieldManager manager;
 	private Map map;
 	private ArrayList<PlayerCharacter> playerCharacters = new ArrayList<PlayerCharacter>();
@@ -52,11 +55,15 @@ public class GameScreen implements Screen {
 
 	private SpriteCollisionMapContainer spriteCollisionMapContainer;
 	private SpriteContainer spriteContainer;
+	
+	private Stage stage;
 
 	int tileSize = Constants.TILE_SIZE; // one tile = one field on map
 
+	private HUD hud;
+
 	public GameScreen(PixokalypsePrototypes game) {
-		this.game = game;
+		this.gameContainer = game;
 		map = new Map(40, 8, 4, 10);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(),
@@ -72,9 +79,6 @@ public class GameScreen implements Screen {
 		manager = new PotentialFieldManager(this, new StaticPotentialField(
 				map.mapSize * tileSize, map.mapSize * tileSize));
 		getPotentialFieldManager().addCollisionMapToEnvironment(map, spriteCollisionMapContainer);
-
-		//Gdx.input.setInputProcessor(new GameInputProcessor(getPotentialFieldManager(), getCamera()));
-		Gdx.input.setInputProcessor(new CustomInputDetector(new CustomInputHandler(this)));
 
 		renderer = new GameRenderer(this, game.batch, getCamera(), map);
 		renderer.setFonts(game.font12, game.font24);
@@ -251,6 +255,7 @@ public class GameScreen implements Screen {
 	@Override
 	public void dispose() {
 		renderer.dispose();
+		stage.dispose();
 	}
 
 	public ArrayList<Enemy> getAllEnemies() {
@@ -296,8 +301,10 @@ public class GameScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		updateGame(delta);
+		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
 		renderer.update(delta);
 		effectsRenderer.update(delta);
+		stage.draw();
 	}
 
 	@Override
@@ -312,6 +319,14 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void show() {
+		stage = new Stage();
+		
+		CustomInputDetector inputDetector = new CustomInputDetector(new CustomInputHandler(this));
+        InputMultiplexer im = new InputMultiplexer(stage, inputDetector);
+        Gdx.input.setInputProcessor(im);
+        
+        hud = new HUD(this, stage, gameContainer.skin);
+		
 
 	}
 
