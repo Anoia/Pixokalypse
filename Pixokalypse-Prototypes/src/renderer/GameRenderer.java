@@ -95,38 +95,6 @@ public class GameRenderer {
 
 	}
 
-	private ArrayList<Building> getBuildingsToRender() {
-		ArrayList<Building> buildings = new ArrayList<Building>();
-		for (int x = 0; x < map.mapSize; x++) {
-			for (int y = 0; y < map.mapSize; y++) {
-				// skip wenn nicht im Sichtbarem bereich
-				if (camera.position.x > (x * tileSize - (Gdx.graphics
-						.getWidth() * 0.6f))
-						&& camera.position.x < (x * tileSize + (Gdx.graphics
-								.getWidth() * 0.6f))
-						&& camera.position.y > (y * tileSize - (Gdx.graphics
-								.getHeight() * 0.6f))
-						&& camera.position.y < (y * tileSize + (Gdx.graphics
-								.getHeight() * 0.6f))) {
-
-					if (map.data[x][y].fieldCategory == FieldCategory.BUILDING) {
-						String spriteName = map.data[x][y].spriteName;
-						int xPos = x * tileSize;
-						int yPos = (int) (y * tileSize - tileSize * 1.5f);
-						int width = tileSize;
-						int height = (int) (tileSize * 2.5);
-						buildings.add(new Building(xPos, yPos, width, height,
-								spriteName));
-					}
-				}
-
-			}
-
-		}
-
-		return buildings;
-	}
-
 	private ArrayList<Enemy> getZombiesToRender() {
 		ArrayList<Enemy> enemies = game.getEnemies();
 		ArrayList<Enemy> toRender = new ArrayList<Enemy>();
