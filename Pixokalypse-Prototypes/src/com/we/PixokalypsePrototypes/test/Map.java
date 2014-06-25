@@ -3,17 +3,17 @@ package com.we.PixokalypsePrototypes.test;
 import java.util.HashSet;
 
 enum Direction {
-	UP, RIGHT, DOWN, LEFT
+	DOWN, LEFT, RIGHT, UP
 }
 
 public class Map {
 
-	public int mapSize; // Anzahl der Felder(sprite tiles) auf der Karte
-	private int minFieldsPerBlock; // min Fields per H�userblock
-	private int randomFieldsPerBlock; // optionale Fields per H�userblock
 	public Field[][] data; // die Karte
 	private int mapBorder; // rand der map, wenn der erreicht ist wird nicht
 							// mehr generiert
+	public int mapSize; // Anzahl der Felder(sprite tiles) auf der Karte
+	private int minFieldsPerBlock; // min Fields per H�userblock
+	private int randomFieldsPerBlock; // optionale Fields per H�userblock
 
 	public Map() {
 		this(15, 2, 2, 3);
@@ -96,667 +96,6 @@ public class Map {
 
 	}
 
-	private void setTileSprites() {
-		for (int x = 1; x < mapSize - 1; x++) {
-			for (int y = 1; y < mapSize - 1; y++) {
-				Field field = data[x][y];
-				if (field.fieldCategory == FieldCategory.STREET)
-					setStreetTile(x, y);
-			}
-		}
-
-		for (int x = 0; x < mapSize; x++) {
-			for (int y = 0; y < mapSize; y++) {
-				Field field = data[x][y];
-				if (field.fieldCategory == FieldCategory.EMPTY)
-					field.spriteName = "Grass";
-				else if (field.fieldCategory == FieldCategory.BUILDING)
-					setBuildingTexture(field);
-				else if (field.fieldCategory == FieldCategory.INNER)
-					field.spriteName = "Parking";
-				else if (field.fieldCategory == FieldCategory.OUTER)
-					field.spriteName = "Grass";
-			}
-		}
-	}
-/**
- * 
- * @param field
- */
-	private void setBuildingTexture(Field field) {
-		String gebtyp = "A";
-		// Prüfen der verschiedenen fälle
-		boolean done = false;
-
-		
-		//NEUE LÖSUNG mit hässlichen Kommentaren aber übersichtlicher
-
-//		Geb.kreuzung also Nord Ost Süd West Geb.
-		
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				true, 	//Nord
-				false,	//Nord-Ost 
-				true, 	//Ost
-				true, 	//Süd-Ost
-				true,	//Süd
-				false, 	//Süd-West
-				true, 	//West
-				true)	//Nord-West
-				&&
-				this.testNeighboursForFieldType(field, 
-						false,//auf true prüfen? true
-						FieldCategory.BUILDING, 
-						false, 	//Nord
-						true,	//Nord-Ost 
-						false, 	//Ost
-						false, 	//Süd-Ost
-						false,	//Süd
-						true, 	//Süd-West
-						false, 	//West
-						false)	//Nord-West
-				){
-			field.spriteName = "A-X1";
-			done = true;			
-		}
-				
-				
-				
-				
-				
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				true, 	//Nord
-				true,	//Nord-Ost 
-				true, 	//Ost
-				false, 	//Süd-Ost
-				true,	//Süd
-				true, 	//Süd-West
-				true, 	//West
-				false)	//Nord-West
-				&&
-				this.testNeighboursForFieldType(field, 
-						false,//auf true prüfen? true
-						FieldCategory.BUILDING, 
-						false, 	//Nord
-						false,	//Nord-Ost 
-						false, 	//Ost
-						true, 	//Süd-Ost
-						false,	//Süd
-						false, 	//Süd-West
-						false, 	//West
-						true)	//Nord-West)
-						){
-			field.spriteName = "A-X0";
-			done = true;
-		}
-	
-		
-		//N, O, S und W müssen auf (STR oder OUTER) Testen an der stelle (NICHT GEB)
-//		N
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				false, 	//Nord
-				false,	//Nord-Ost 
-				true, 	//Ost
-				false, 	//Süd-Ost
-				false,	//Süd
-				false, 	//Süd-West
-				true, 	//West
-				false)	//Nord-West
-				&&
-				(this.testNeighboursForFieldType(field, 
-						false,//auf true prüfen? true
-						FieldCategory.BUILDING, 
-						true, 	//Nord
-						true,	//Nord-Ost 
-						false, 	//Ost
-						false, 	//Süd-Ost
-						false,	//Süd
-						false, 	//Süd-West
-						false, 	//West
-						false)	//Nord-West
-				||
-				this.testNeighboursForFieldType(field, 
-						false,//auf true prüfen? true
-						FieldCategory.BUILDING, 
-						true, 	//Nord
-						false,	//Nord-Ost 
-						false, 	//Ost
-						false, 	//Süd-Ost
-						false,	//Süd
-						false, 	//Süd-West
-						false, 	//West
-						true)	//Nord-West	
-						)){
-			if(this.testNeighboursForFieldType(field, 
-					false,//auf true prüfen? true
-					FieldCategory.INNER, 
-					true, 	//Nord
-					false,	//Nord-Ost 
-					false, 	//Ost
-					false, 	//Süd-Ost
-					false,	//Süd
-					false, 	//Süd-West
-					false, 	//West
-					false)	//Nord-West	
-					){
-				field.spriteName = gebtyp+"-N";
-				done = true;	
-			}
-		}
-//		S
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				false, 	//Nord
-				false,	//Nord-Ost 
-				true, 	//Ost
-				false, 	//Süd-Ost
-				false,	//Süd
-				false, 	//Süd-West
-				true, 	//West
-				false)	//Nord-West
-				&&
-				(this.testNeighboursForFieldType(field, 
-						false,//auf true prüfen? true
-						FieldCategory.BUILDING, 
-						false, 	//Nord
-						false,	//Nord-Ost 
-						false, 	//Ost
-						false, 	//Süd-Ost
-						true,	//Süd
-						true, 	//Süd-West
-						false, 	//West
-						false)	//Nord-West
-						||
-						this.testNeighboursForFieldType(field, 
-								false,//auf true prüfen? true
-								FieldCategory.BUILDING, 
-								false, 	//Nord
-								false,	//Nord-Ost 
-								false, 	//Ost
-								true, 	//Süd-Ost
-								true,	//Süd
-								false, 	//Süd-West
-								false, 	//West
-								false)	//Nord-West
-				)){
-			if(this.testNeighboursForFieldType(field, 
-					false,//auf true prüfen? true
-					FieldCategory.INNER, 
-					false, 	//Nord
-					false,	//Nord-Ost 
-					false, 	//Ost
-					false, 	//Süd-Ost
-					true,	//Süd
-					false, 	//Süd-West
-					false, 	//West
-					false)	//Nord-West	
-					){
-			field.spriteName = gebtyp+"-S";
-			done = true;
-			}
-		}		
-//		W
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				true, 	//Nord
-				false,	//Nord-Ost 
-				false, 	//Ost
-				false, 	//Süd-Ost
-				true,	//Süd
-				false, 	//Süd-West
-				false, 	//West
-				false)	//Nord-West
-				&&
-				(this.testNeighboursForFieldType(field, 
-						false,//auf true prüfen? true
-						FieldCategory.BUILDING, 
-						false, 	//Nord
-						false,	//Nord-Ost 
-						false, 	//Ost
-						false, 	//Süd-Ost
-						false,	//Süd
-						false, 	//Süd-West
-						true, 	//West
-						true)	//Nord-West
-						||
-						this.testNeighboursForFieldType(field, 
-								false,//auf true prüfen? true
-								FieldCategory.BUILDING, 
-								false, 	//Nord
-								false,	//Nord-Ost 
-								false, 	//Ost
-								false, 	//Süd-Ost
-								false,	//Süd
-								true, 	//Süd-West
-								true, 	//West
-								false)	//Nord-West
-				)){
-			if(this.testNeighboursForFieldType(field, 
-					false,//auf true prüfen? true
-					FieldCategory.INNER, 
-					false, 	//Nord
-					false,	//Nord-Ost 
-					false, 	//Ost
-					false, 	//Süd-Ost
-					false,	//Süd
-					false, 	//Süd-West
-					true, 	//West
-					false)	//Nord-West	
-					){
-			field.spriteName = gebtyp+"-W";
-			done = true;
-			}
-		}
-//		O
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				true, 	//Nord
-				false,	//Nord-Ost 
-				false, 	//Ost
-				false, 	//Süd-Ost
-				true,	//Süd
-				false, 	//Süd-West
-				false, 	//West
-				false)	//Nord-West
-				&&
-				(this.testNeighboursForFieldType(field, 
-						false,//auf true prüfen? true
-						FieldCategory.BUILDING, 
-						false, 	//Nord
-						false,	//Nord-Ost 
-						true, 	//Ost
-						true, 	//Süd-Ost
-						false,	//Süd
-						false, 	//Süd-West
-						false, 	//West
-						false)	//Nord-West
-						||
-						this.testNeighboursForFieldType(field, 
-								false,//auf true prüfen? true
-								FieldCategory.BUILDING, 
-								false, 	//Nord
-								true,	//Nord-Ost 
-								true, 	//Ost
-								false, 	//Süd-Ost
-								false,	//Süd
-								false, 	//Süd-West
-								false, 	//West
-								false)	//Nord-West
-				)){
-			if(this.testNeighboursForFieldType(field, 
-					false,//auf true prüfen? true
-					FieldCategory.INNER, 
-					false, 	//Nord
-					false,	//Nord-Ost 
-					true, 	//Ost
-					false, 	//Süd-Ost
-					false,	//Süd
-					false, 	//Süd-West
-					false, 	//West
-					false)	//Nord-West	
-					){
-			field.spriteName = gebtyp+"-O";
-			done = true;
-			}
-		}
-//		SWi
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				false, 	//Nord
-				false,	//Nord-Ost 
-				false, 	//Ost
-				false, 	//Süd-Ost
-				true,	//Süd
-				false, 	//Süd-West
-				true, 	//West
-				false)	//Nord-West
-				&&
-				(this.testNeighboursForFieldType(field, 
-						true,//auf true prüfen? true
-						FieldCategory.STREET, 
-						false, 	//Nord
-						false,	//Nord-Ost 
-						false, 	//Ost
-						false, 	//Süd-Ost
-						false,	//Süd
-						true, 	//Süd-West
-						false, 	//West
-						false)	//Nord-West
-						||
-						this.testNeighboursForFieldType(field, 
-								true,//auf true prüfen? true
-								FieldCategory.OUTER, 
-								false, 	//Nord
-								false,	//Nord-Ost 
-								false, 	//Ost
-								false, 	//Süd-Ost
-								false,	//Süd
-								true, 	//Süd-West
-								false, 	//West
-								false)	//Nord-West
-				)){
-			field.spriteName = gebtyp+"-SWi";
-			done = true;
-		}		
-//		NWi
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				true, 	//Nord
-				false,	//Nord-Ost 
-				false, 	//Ost
-				false, 	//Süd-Ost
-				false,	//Süd
-				false, 	//Süd-West
-				true, 	//West
-				false)	//Nord-West
-				&&
-				(this.testNeighboursForFieldType(field, 
-						true,//auf true prüfen? true
-						FieldCategory.STREET, 
-						false, 	//Nord
-						false,	//Nord-Ost 
-						false, 	//Ost
-						false, 	//Süd-Ost
-						false,	//Süd
-						false, 	//Süd-West
-						false, 	//West
-						true)	//Nord-West
-						||
-						this.testNeighboursForFieldType(field, 
-								true,//auf true prüfen? true
-								FieldCategory.OUTER, 
-								false, 	//Nord
-								false,	//Nord-Ost 
-								false, 	//Ost
-								false, 	//Süd-Ost
-								false,	//Süd
-								false, 	//Süd-West
-								false, 	//West
-								true)	//Nord-West
-				)){
-			field.spriteName = gebtyp+"-NWi";
-			done = true;
-		}
-//		NOi
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				true, 	//Nord
-				false,	//Nord-Ost 
-				true, 	//Ost
-				false, 	//Süd-Ost
-				false,	//Süd
-				false, 	//Süd-West
-				false, 	//West
-				false)	//Nord-West
-				&&
-				(this.testNeighboursForFieldType(field, 
-						true,//auf true prüfen? true
-						FieldCategory.STREET, 
-						false, 	//Nord
-						true,	//Nord-Ost 
-						false, 	//Ost
-						false, 	//Süd-Ost
-						false,	//Süd
-						false, 	//Süd-West
-						false, 	//West
-						false)	//Nord-West
-						||
-						this.testNeighboursForFieldType(field, 
-								true,//auf true prüfen? true
-								FieldCategory.OUTER, 
-								false, 	//Nord
-								true,	//Nord-Ost 
-								false, 	//Ost
-								false, 	//Süd-Ost
-								false,	//Süd
-								false, 	//Süd-West
-								false, 	//West
-								false)	//Nord-West
-				)){
-			field.spriteName = gebtyp+"-NOi";
-			done = true;
-		}
-//		SOi
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				false, 	//Nord
-				false,	//Nord-Ost 
-				true, 	//Ost
-				false, 	//Süd-Ost
-				true,	//Süd
-				false, 	//Süd-West
-				false, 	//West
-				false)	//Nord-West
-				&&
-				(this.testNeighboursForFieldType(field, 
-						true,//auf true prüfen? true
-						FieldCategory.STREET, 
-						false, 	//Nord
-						false,	//Nord-Ost 
-						false, 	//Ost
-						true, 	//Süd-Ost
-						false,	//Süd
-						false, 	//Süd-West
-						false, 	//West
-						false)	//Nord-West
-						||
-						this.testNeighboursForFieldType(field, 
-								true,//auf true prüfen? true
-								FieldCategory.OUTER, 
-								false, 	//Nord
-								false,	//Nord-Ost 
-								false, 	//Ost
-								true, 	//Süd-Ost
-								false,	//Süd
-								false, 	//Süd-West
-								false, 	//West
-								false)	//Nord-West
-				)){
-			field.spriteName = gebtyp+"-SOi";
-			done = true;
-		}
-//		SW
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				true, 	//Nord
-				false,	//Nord-Ost 
-				true, 	//Ost
-				false, 	//Süd-Ost
-				false,	//Süd
-				false, 	//Süd-West
-				false, 	//West
-				false)	//Nord-West
-				&&
-				this.testNeighboursForFieldType(field, 
-						false,//auf true prüfen? true
-						FieldCategory.BUILDING, 
-						false, 	//Nord
-						false,	//Nord-Ost 
-						false, 	//Ost
-						false, 	//Süd-Ost
-						true,	//Süd
-						true, 	//Süd-West
-						true, 	//West
-						false)	//Nord-West
-						){
-			field.spriteName = gebtyp+"-SW";
-			done = true;
-		}
-//		NO
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				false, 	//Nord
-				false,	//Nord-Ost 
-				false, 	//Ost
-				false, 	//Süd-Ost
-				true,	//Süd
-				false, 	//Süd-West
-				true, 	//West
-				false)	//Nord-West
-				&&
-				this.testNeighboursForFieldType(field, 
-						false,//auf true prüfen? true
-						FieldCategory.BUILDING, 
-						true, 	//Nord
-						true,	//Nord-Ost 
-						true, 	//Ost
-						false, 	//Süd-Ost
-						false,	//Süd
-						false, 	//Süd-West
-						false, 	//West
-						false)	//Nord-West
-						){
-			field.spriteName = gebtyp+"-NO";
-			done = true;
-		}
-//		SO
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				true, 	//Nord
-				false,	//Nord-Ost 
-				false, 	//Ost
-				false, 	//Süd-Ost
-				false,	//Süd
-				false, 	//Süd-West
-				true, 	//West
-				false)	//Nord-West
-				&&
-				this.testNeighboursForFieldType(field, 
-						false,//auf true prüfen? true
-						FieldCategory.BUILDING, 
-						false, 	//Nord
-						false,	//Nord-Ost 
-						true, 	//Ost
-						true, 	//Süd-Ost
-						true,	//Süd
-						false, 	//Süd-West
-						false, 	//West
-						false)	//Nord-West
-						){
-			field.spriteName = gebtyp+"-SO";
-			done = true;
-		}
-//		NW
-		if(!done)if(this.testNeighboursForFieldType(field, 
-				true,//auf true prüfen? true
-				FieldCategory.BUILDING, 
-				false, 	//Nord
-				false,	//Nord-Ost 
-				true, 	//Ost
-				false, 	//Süd-Ost
-				true,	//Süd
-				false, 	//Süd-West
-				false, 	//West
-				false)	//Nord-West
-				&&
-				this.testNeighboursForFieldType(field, 
-						false,//auf true prüfen? true
-						FieldCategory.BUILDING, 
-						true, 	//Nord
-						false,	//Nord-Ost 
-						false, 	//Ost
-						false, 	//Süd-Ost
-						false,	//Süd
-						false, 	//Süd-West
-						true, 	//West
-						true)	//Nord-West
-						){
-			field.spriteName = gebtyp+"-NW";
-			done = true;
-		}
-	}
-
-	private void initEmptyMap() {
-		for (int x = 0; x < mapSize; x++) {
-			for (int y = 0; y < mapSize; y++) {
-				data[x][y] = new Field(x, y);
-			}
-		}
-	}
-
-	/**
-	 * Generates the map by moving in a spiral path from the middle to the
-	 * outside and generating blocks of buildings with streets around them on
-	 * the way.
-	 */
-	private void generateMap() {
-		int currentFieldX = (int) mapSize / 2;
-		int currentFieldY = currentFieldX;
-
-		int turnTimes = 2; // anzahl der drehungen bis die strecke verl�ngert
-							// werden muss
-		int distance = 1; // schritte zu gehen bis richtung gewechselt werden
-							// muss
-		int distanceCounter = distance; // um schritte runter zu z�hlen
-		Boolean keepGenerating = true;
-
-		Direction direction = Direction.DOWN;
-		// int i = direction.ordinal();
-		// direction = Direction.values()[(i++)%Direction.values().length];
-
-		int currentBlockId = 1;
-
-		while (keepGenerating) {
-
-			if (distanceCounter == 0) { // wenn aktuelle strecke zuende gelaufen
-				turnTimes--; // dehungen bis strecken�nderung verringern
-
-				// richtungs�nderung
-				int newDirection = (direction.ordinal() + 1)
-						% Direction.values().length;
-				direction = Direction.values()[newDirection];
-
-				// distance erh�hen wenn turnTimes = 0;
-				if (turnTimes == 0) {
-					turnTimes = 2;
-					distance++;
-				}
-				// starte counter mit neuer distance von vorne
-				distanceCounter = distance;
-			}
-
-			distanceCounter--;
-			switch (direction) {
-			case UP:
-				currentFieldY--;
-				break;
-			case RIGHT:
-				currentFieldX++;
-				break;
-			case DOWN:
-				currentFieldY++;
-				break;
-			case LEFT:
-				currentFieldX--;
-				break;
-			}
-
-			Field field = data[currentFieldX][currentFieldY];
-			if (field.fieldCategory == FieldCategory.EMPTY) {
-				createBlock(field, currentBlockId);
-				currentBlockId++;
-			}
-
-			keepGenerating = !(currentFieldX == mapBorder || currentFieldY == mapBorder);
-
-		}
-	}
-
 	/**
 	 * generates a block of buildings around a field (including that field)
 	 * 
@@ -827,94 +166,6 @@ public class Map {
 				whenIGrowUpIWantToBeAStreet.fieldCategory = FieldCategory.STREET;
 			}
 		}
-	}
-
-	private boolean testNeighboursForFieldType(Field field, boolean equal,
-			FieldCategory fieldCategory, boolean north, boolean northEast,
-			boolean east, boolean eastSouth, boolean south, boolean southWest,
-			boolean west, boolean westNorth) {
-		boolean returnValue = true;
-		int x = field.xAxis, y = field.yAxis;
-
-		// North test
-		if (returnValue && north == true) {
-			returnValue = !((data[x][y - 1].fieldCategory == fieldCategory) ^ equal);
-		}
-		// NorthEast test
-		if (returnValue && northEast == true) {
-			returnValue = !((data[x + 1][y - 1].fieldCategory == fieldCategory) ^ equal);
-		}
-		// East test
-		if (returnValue && east == true) {
-			returnValue = !((data[x + 1][y].fieldCategory == fieldCategory) ^ equal);
-		}
-		// EastSouth test
-		if (returnValue && eastSouth == true) {
-			returnValue = !((data[x + 1][y + 1].fieldCategory == fieldCategory) ^ equal);
-		}
-		// South test
-		if (returnValue && south == true) {
-			returnValue = !((data[x][y + 1].fieldCategory == fieldCategory) ^ equal);
-		}
-		// SouthWest test
-		if (returnValue && southWest == true) {
-			returnValue = !((data[x - 1][y + 1].fieldCategory == fieldCategory) ^ equal);
-		}
-		// West test
-		if (returnValue && west == true) {
-			returnValue = !((data[x - 1][y].fieldCategory == fieldCategory) ^ equal);
-		}
-		// WestNorth test
-		if (returnValue && westNorth == true) {
-			returnValue = !((data[x - 1][y - 1].fieldCategory == fieldCategory) ^ equal);
-		}
-		return returnValue;
-	}
-
-	/**
-	 * finds all the neighbours of a field whose fieldCategory is EMPTY
-	 * 
-	 * @param field
-	 *            the field whose neighbours should be found
-	 * @return HashSet with all empty fields
-	 */
-	private HashSet<Field> getEmptyNeighbours(Field field) {
-		HashSet<Field> emptyNeighbours = new HashSet<Field>();
-		for (int x = field.xAxis - 1; x <= field.xAxis + 1; x++) {
-			for (int y = field.yAxis - 1; y <= field.yAxis + 1; y++) {
-				if (!(x == field.xAxis && y == field.yAxis)) {
-					Field candidate = data[x][y];
-					if (candidate.fieldCategory == FieldCategory.EMPTY) {
-						emptyNeighbours.add(candidate);
-					}
-				}
-			}
-		}
-
-		return emptyNeighbours;
-	}
-
-	/**
-	 * prints the map to the console
-	 */
-	public void printASCII() {
-		for (int i = 0; i < mapSize; i++) {
-			System.out.print("\n");
-			for (int j = 0; j < mapSize; j++) {
-				switch (data[j][i].fieldCategory) {
-				case EMPTY:
-					System.out.print("   ");
-					break;
-				case BUILDING:
-					System.out.print(" B ");
-					break;
-				case STREET:
-					System.out.print(" + ");
-					break;
-				}
-			}
-		}
-
 	}
 
 	/**
@@ -990,6 +241,679 @@ public class Map {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Generates the map by moving in a spiral path from the middle to the
+	 * outside and generating blocks of buildings with streets around them on
+	 * the way.
+	 */
+	private void generateMap() {
+		int currentFieldX = (int) mapSize / 2;
+		int currentFieldY = currentFieldX;
+
+		int turnTimes = 2; // anzahl der drehungen bis die strecke verl�ngert
+							// werden muss
+		int distance = 1; // schritte zu gehen bis richtung gewechselt werden
+							// muss
+		int distanceCounter = distance; // um schritte runter zu z�hlen
+		Boolean keepGenerating = true;
+
+		Direction direction = Direction.DOWN;
+		// int i = direction.ordinal();
+		// direction = Direction.values()[(i++)%Direction.values().length];
+
+		int currentBlockId = 1;
+
+		while (keepGenerating) {
+
+			if (distanceCounter == 0) { // wenn aktuelle strecke zuende gelaufen
+				turnTimes--; // dehungen bis strecken�nderung verringern
+
+				// richtungs�nderung
+				int newDirection = (direction.ordinal() + 1)
+						% Direction.values().length;
+				direction = Direction.values()[newDirection];
+
+				// distance erh�hen wenn turnTimes = 0;
+				if (turnTimes == 0) {
+					turnTimes = 2;
+					distance++;
+				}
+				// starte counter mit neuer distance von vorne
+				distanceCounter = distance;
+			}
+
+			distanceCounter--;
+			switch (direction) {
+			case UP:
+				currentFieldY--;
+				break;
+			case RIGHT:
+				currentFieldX++;
+				break;
+			case DOWN:
+				currentFieldY++;
+				break;
+			case LEFT:
+				currentFieldX--;
+				break;
+			}
+
+			Field field = data[currentFieldX][currentFieldY];
+			if (field.fieldCategory == FieldCategory.EMPTY) {
+				createBlock(field, currentBlockId);
+				currentBlockId++;
+			}
+
+			keepGenerating = !(currentFieldX == mapBorder || currentFieldY == mapBorder);
+
+		}
+	}
+
+	/**
+	 * finds all the neighbours of a field whose fieldCategory is EMPTY
+	 * 
+	 * @param field
+	 *            the field whose neighbours should be found
+	 * @return HashSet with all empty fields
+	 */
+	private HashSet<Field> getEmptyNeighbours(Field field) {
+		HashSet<Field> emptyNeighbours = new HashSet<Field>();
+		for (int x = field.xAxis - 1; x <= field.xAxis + 1; x++) {
+			for (int y = field.yAxis - 1; y <= field.yAxis + 1; y++) {
+				if (!(x == field.xAxis && y == field.yAxis)) {
+					Field candidate = data[x][y];
+					if (candidate.fieldCategory == FieldCategory.EMPTY) {
+						emptyNeighbours.add(candidate);
+					}
+				}
+			}
+		}
+
+		return emptyNeighbours;
+	}
+
+	private void initEmptyMap() {
+		for (int x = 0; x < mapSize; x++) {
+			for (int y = 0; y < mapSize; y++) {
+				data[x][y] = new Field(x, y);
+			}
+		}
+	}
+
+	/**
+	 * changes the Type of a Field to BUILDING, assignes blockID
+	 * 
+	 * @param x
+	 *            x-position of the field on the map
+	 * @param y
+	 *            y-position of the field on the map
+	 * @param blockID
+	 *            new Block id of the field
+	 */
+	private void makeBuilding(int x, int y, int blockID) {
+		Field f = data[x][y];
+		f.fieldCategory = FieldCategory.BUILDING;
+		f.blockID = blockID;
+	}
+
+	/**
+	 * prints the map to the console
+	 */
+	public void printASCII() {
+		for (int i = 0; i < mapSize; i++) {
+			System.out.print("\n");
+			for (int j = 0; j < mapSize; j++) {
+				switch (data[j][i].fieldCategory) {
+				case EMPTY:
+					System.out.print("   ");
+					break;
+				case BUILDING:
+					System.out.print(" B ");
+					break;
+				case STREET:
+					System.out.print(" + ");
+					break;
+				}
+			}
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param field
+	 */
+	private void setBuildingTexture(Field field) {
+		String gebtyp = "A";
+		// Prüfen der verschiedenen fälle
+		boolean done = false;
+
+		// NEUE LÖSUNG mit hässlichen Kommentaren aber übersichtlicher
+
+		// Geb.kreuzung also Nord Ost Süd West Geb.
+
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, true, // Nord
+					false, // Nord-Ost
+					true, // Ost
+					true, // Süd-Ost
+					true, // Süd
+					false, // Süd-West
+					true, // West
+					true) // Nord-West
+					&& this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.BUILDING, false, // Nord
+							true, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							true, // Süd-West
+							false, // West
+							false) // Nord-West
+			) {
+				field.spriteName = "A-X1";
+				done = true;
+			}
+
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, true, // Nord
+					true, // Nord-Ost
+					true, // Ost
+					false, // Süd-Ost
+					true, // Süd
+					true, // Süd-West
+					true, // West
+					false) // Nord-West
+					&& this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.BUILDING, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							true, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							true) // Nord-West)
+			) {
+				field.spriteName = "A-X0";
+				done = true;
+			}
+
+		// N, O, S und W müssen auf (STR oder OUTER) Testen an der stelle (NICHT
+		// GEB)
+		// N
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, false, // Nord
+					false, // Nord-Ost
+					true, // Ost
+					false, // Süd-Ost
+					false, // Süd
+					false, // Süd-West
+					true, // West
+					false) // Nord-West
+					&& (this.testNeighboursForFieldType(field, false,// auf true
+																		// prüfen?
+																		// true
+							FieldCategory.BUILDING, true, // Nord
+							true, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							false) // Nord-West
+					|| this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.BUILDING, true, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							true) // Nord-West
+					)) {
+				if (this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+						FieldCategory.INNER, true, // Nord
+						false, // Nord-Ost
+						false, // Ost
+						false, // Süd-Ost
+						false, // Süd
+						false, // Süd-West
+						false, // West
+						false) // Nord-West
+				) {
+					field.spriteName = gebtyp + "-N";
+					done = true;
+				}
+			}
+		// S
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, false, // Nord
+					false, // Nord-Ost
+					true, // Ost
+					false, // Süd-Ost
+					false, // Süd
+					false, // Süd-West
+					true, // West
+					false) // Nord-West
+					&& (this.testNeighboursForFieldType(field, false,// auf true
+																		// prüfen?
+																		// true
+							FieldCategory.BUILDING, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							true, // Süd
+							true, // Süd-West
+							false, // West
+							false) // Nord-West
+					|| this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.BUILDING, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							true, // Süd-Ost
+							true, // Süd
+							false, // Süd-West
+							false, // West
+							false) // Nord-West
+					)) {
+				if (this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+						FieldCategory.INNER, false, // Nord
+						false, // Nord-Ost
+						false, // Ost
+						false, // Süd-Ost
+						true, // Süd
+						false, // Süd-West
+						false, // West
+						false) // Nord-West
+				) {
+					field.spriteName = gebtyp + "-S";
+					done = true;
+				}
+			}
+		// W
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, true, // Nord
+					false, // Nord-Ost
+					false, // Ost
+					false, // Süd-Ost
+					true, // Süd
+					false, // Süd-West
+					false, // West
+					false) // Nord-West
+					&& (this.testNeighboursForFieldType(field, false,// auf true
+																		// prüfen?
+																		// true
+							FieldCategory.BUILDING, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							true, // West
+							true) // Nord-West
+					|| this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.BUILDING, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							true, // Süd-West
+							true, // West
+							false) // Nord-West
+					)) {
+				if (this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+						FieldCategory.INNER, false, // Nord
+						false, // Nord-Ost
+						false, // Ost
+						false, // Süd-Ost
+						false, // Süd
+						false, // Süd-West
+						true, // West
+						false) // Nord-West
+				) {
+					field.spriteName = gebtyp + "-W";
+					done = true;
+				}
+			}
+		// O
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, true, // Nord
+					false, // Nord-Ost
+					false, // Ost
+					false, // Süd-Ost
+					true, // Süd
+					false, // Süd-West
+					false, // West
+					false) // Nord-West
+					&& (this.testNeighboursForFieldType(field, false,// auf true
+																		// prüfen?
+																		// true
+							FieldCategory.BUILDING, false, // Nord
+							false, // Nord-Ost
+							true, // Ost
+							true, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							false) // Nord-West
+					|| this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.BUILDING, false, // Nord
+							true, // Nord-Ost
+							true, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							false) // Nord-West
+					)) {
+				if (this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+						FieldCategory.INNER, false, // Nord
+						false, // Nord-Ost
+						true, // Ost
+						false, // Süd-Ost
+						false, // Süd
+						false, // Süd-West
+						false, // West
+						false) // Nord-West
+				) {
+					field.spriteName = gebtyp + "-O";
+					done = true;
+				}
+			}
+		// SWi
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, false, // Nord
+					false, // Nord-Ost
+					false, // Ost
+					false, // Süd-Ost
+					true, // Süd
+					false, // Süd-West
+					true, // West
+					false) // Nord-West
+					&& (this.testNeighboursForFieldType(field, true,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.STREET, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							true, // Süd-West
+							false, // West
+							false) // Nord-West
+					|| this.testNeighboursForFieldType(field, true,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.OUTER, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							true, // Süd-West
+							false, // West
+							false) // Nord-West
+					)) {
+				field.spriteName = gebtyp + "-SWi";
+				done = true;
+			}
+		// NWi
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, true, // Nord
+					false, // Nord-Ost
+					false, // Ost
+					false, // Süd-Ost
+					false, // Süd
+					false, // Süd-West
+					true, // West
+					false) // Nord-West
+					&& (this.testNeighboursForFieldType(field, true,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.STREET, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							true) // Nord-West
+					|| this.testNeighboursForFieldType(field, true,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.OUTER, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							true) // Nord-West
+					)) {
+				field.spriteName = gebtyp + "-NWi";
+				done = true;
+			}
+		// NOi
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, true, // Nord
+					false, // Nord-Ost
+					true, // Ost
+					false, // Süd-Ost
+					false, // Süd
+					false, // Süd-West
+					false, // West
+					false) // Nord-West
+					&& (this.testNeighboursForFieldType(field, true,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.STREET, false, // Nord
+							true, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							false) // Nord-West
+					|| this.testNeighboursForFieldType(field, true,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.OUTER, false, // Nord
+							true, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							false) // Nord-West
+					)) {
+				field.spriteName = gebtyp + "-NOi";
+				done = true;
+			}
+		// SOi
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, false, // Nord
+					false, // Nord-Ost
+					true, // Ost
+					false, // Süd-Ost
+					true, // Süd
+					false, // Süd-West
+					false, // West
+					false) // Nord-West
+					&& (this.testNeighboursForFieldType(field, true,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.STREET, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							true, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							false) // Nord-West
+					|| this.testNeighboursForFieldType(field, true,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.OUTER, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							true, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							false) // Nord-West
+					)) {
+				field.spriteName = gebtyp + "-SOi";
+				done = true;
+			}
+		// SW
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, true, // Nord
+					false, // Nord-Ost
+					true, // Ost
+					false, // Süd-Ost
+					false, // Süd
+					false, // Süd-West
+					false, // West
+					false) // Nord-West
+					&& this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.BUILDING, false, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							true, // Süd
+							true, // Süd-West
+							true, // West
+							false) // Nord-West
+			) {
+				field.spriteName = gebtyp + "-SW";
+				done = true;
+			}
+		// NO
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, false, // Nord
+					false, // Nord-Ost
+					false, // Ost
+					false, // Süd-Ost
+					true, // Süd
+					false, // Süd-West
+					true, // West
+					false) // Nord-West
+					&& this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.BUILDING, true, // Nord
+							true, // Nord-Ost
+							true, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							false, // West
+							false) // Nord-West
+			) {
+				field.spriteName = gebtyp + "-NO";
+				done = true;
+			}
+		// SO
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, true, // Nord
+					false, // Nord-Ost
+					false, // Ost
+					false, // Süd-Ost
+					false, // Süd
+					false, // Süd-West
+					true, // West
+					false) // Nord-West
+					&& this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.BUILDING, false, // Nord
+							false, // Nord-Ost
+							true, // Ost
+							true, // Süd-Ost
+							true, // Süd
+							false, // Süd-West
+							false, // West
+							false) // Nord-West
+			) {
+				field.spriteName = gebtyp + "-SO";
+				done = true;
+			}
+		// NW
+		if (!done)
+			if (this.testNeighboursForFieldType(field, true,// auf true prüfen?
+															// true
+					FieldCategory.BUILDING, false, // Nord
+					false, // Nord-Ost
+					true, // Ost
+					false, // Süd-Ost
+					true, // Süd
+					false, // Süd-West
+					false, // West
+					false) // Nord-West
+					&& this.testNeighboursForFieldType(field, false,// auf true
+																	// prüfen?
+																	// true
+							FieldCategory.BUILDING, true, // Nord
+							false, // Nord-Ost
+							false, // Ost
+							false, // Süd-Ost
+							false, // Süd
+							false, // Süd-West
+							true, // West
+							true) // Nord-West
+			) {
+				field.spriteName = gebtyp + "-NW";
+				done = true;
+			}
 	}
 
 	private void setStreetTile(int x, int y) {
@@ -1077,20 +1001,70 @@ public class Map {
 		}
 	}
 
-	/**
-	 * changes the Type of a Field to BUILDING, assignes blockID
-	 * 
-	 * @param x
-	 *            x-position of the field on the map
-	 * @param y
-	 *            y-position of the field on the map
-	 * @param blockID
-	 *            new Block id of the field
-	 */
-	private void makeBuilding(int x, int y, int blockID) {
-		Field f = data[x][y];
-		f.fieldCategory = FieldCategory.BUILDING;
-		f.blockID = blockID;
+	private void setTileSprites() {
+		for (int x = 1; x < mapSize - 1; x++) {
+			for (int y = 1; y < mapSize - 1; y++) {
+				Field field = data[x][y];
+				if (field.fieldCategory == FieldCategory.STREET)
+					setStreetTile(x, y);
+			}
+		}
+
+		for (int x = 0; x < mapSize; x++) {
+			for (int y = 0; y < mapSize; y++) {
+				Field field = data[x][y];
+				if (field.fieldCategory == FieldCategory.EMPTY)
+					field.spriteName = "Grass";
+				else if (field.fieldCategory == FieldCategory.BUILDING)
+					setBuildingTexture(field);
+				else if (field.fieldCategory == FieldCategory.INNER)
+					field.spriteName = "Parking";
+				else if (field.fieldCategory == FieldCategory.OUTER)
+					field.spriteName = "Grass";
+			}
+		}
+	}
+
+	private boolean testNeighboursForFieldType(Field field, boolean equal,
+			FieldCategory fieldCategory, boolean north, boolean northEast,
+			boolean east, boolean eastSouth, boolean south, boolean southWest,
+			boolean west, boolean westNorth) {
+		boolean returnValue = true;
+		int x = field.xAxis, y = field.yAxis;
+
+		// North test
+		if (returnValue && north == true) {
+			returnValue = !((data[x][y - 1].fieldCategory == fieldCategory) ^ equal);
+		}
+		// NorthEast test
+		if (returnValue && northEast == true) {
+			returnValue = !((data[x + 1][y - 1].fieldCategory == fieldCategory) ^ equal);
+		}
+		// East test
+		if (returnValue && east == true) {
+			returnValue = !((data[x + 1][y].fieldCategory == fieldCategory) ^ equal);
+		}
+		// EastSouth test
+		if (returnValue && eastSouth == true) {
+			returnValue = !((data[x + 1][y + 1].fieldCategory == fieldCategory) ^ equal);
+		}
+		// South test
+		if (returnValue && south == true) {
+			returnValue = !((data[x][y + 1].fieldCategory == fieldCategory) ^ equal);
+		}
+		// SouthWest test
+		if (returnValue && southWest == true) {
+			returnValue = !((data[x - 1][y + 1].fieldCategory == fieldCategory) ^ equal);
+		}
+		// West test
+		if (returnValue && west == true) {
+			returnValue = !((data[x - 1][y].fieldCategory == fieldCategory) ^ equal);
+		}
+		// WestNorth test
+		if (returnValue && westNorth == true) {
+			returnValue = !((data[x - 1][y - 1].fieldCategory == fieldCategory) ^ equal);
+		}
+		return returnValue;
 	}
 
 }

@@ -1,11 +1,11 @@
 package renderer;
 
-public class Building implements ElementWithZIndex{
-	
-	int x, y, width, height;
+public class Building implements ElementWithZIndex {
+
 	String spriteName;
-	
-	public Building(int x, int y, int width, int height, String spriteName){
+	int x, y, width, height;
+
+	public Building(int x, int y, int width, int height, String spriteName) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -13,32 +13,32 @@ public class Building implements ElementWithZIndex{
 		this.spriteName = spriteName;
 	}
 
-	@Override
-	public int getZIndex() {
-		return y;
+	public int getHeight() {
+		return height;
 	}
 
 	@Override
-	public int getX() {
-		return x;
-	}
-	
-	@Override
-	public int getY() {
-		return y;
+	public String getSpriteName() {
+		return spriteName;
 	}
 
 	public int getWidth() {
 		return width;
 	}
 
-	public int getHeight() {
-		return height;
-	}
-	
 	@Override
-	public String getSpriteName() {
-		return spriteName;
+	public int getX() {
+		return x;
 	}
-	
+
+	@Override
+	public int getY() {
+		return y;
+	}
+
+	@Override
+	public int getZIndex() {
+		return y;
+	}
+
 }

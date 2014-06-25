@@ -3,64 +3,63 @@ package agents;
 import items.Unarmed;
 import items.Weapon;
 
-
-public abstract class Agent{
-	public float x;
-	public float y;
-	public float movementSpeed = 20;
-	public int maxHealth = 20;
-	public int currentHealth = maxHealth;
-	private int visualRange = 100;
+public abstract class Agent {
+	public int currentHealth;
 	private Weapon equipppedWeapon;
-	
-	private String spriteName;
-	
+	public int maxHealth = 20;
+	public float movementSpeed = 20;
 	private String name;
-	
-	
-	public Agent(float x, float y, String name, String spriteName){
+	private String spriteName;
+	private int visualRange = 100;
+
+	public float x;
+
+	public float y;
+
+	public Agent(float x, float y, String name, String spriteName) {
 		this.x = x;
 		this.y = y;
 		this.name = name;
 		this.spriteName = spriteName;
+		currentHealth = maxHealth;
 		setEquipppedWeapon(new Unarmed());
 	}
-	
-	public void makeStep(float delta, int xDirection, int yDirection){
-		x += delta*movementSpeed*xDirection;
-		y += delta*movementSpeed*yDirection;
-	}
 
-	public int getVisualRange() {
-		return visualRange;
-	}
-
-	public void setVisualRange(int visualRange) {
-		this.visualRange = visualRange;
-	}
-	
 	public Weapon getEquipppedWeapon() {
 		return equipppedWeapon;
 	}
 
-	public void setEquipppedWeapon(Weapon equipppedWeapon) {
-		this.equipppedWeapon = equipppedWeapon;
+	public String getName() {
+		return name;
 	}
 
 	public String getSpriteName() {
 		return spriteName;
 	}
 
+	public int getVisualRange() {
+		return visualRange;
+	}
+
+	public void makeStep(float delta, int xDirection, int yDirection) {
+		x += delta * movementSpeed * xDirection;
+		y += delta * movementSpeed * yDirection;
+	}
+
+	public void setEquipppedWeapon(Weapon equipppedWeapon) {
+		this.equipppedWeapon = equipppedWeapon;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void setSpriteName(String spriteName) {
 		this.spriteName = spriteName;
 	}
-	
-	public void setName(String name){
-		this.name = name;
+
+	public void setVisualRange(int visualRange) {
+		this.visualRange = visualRange;
 	}
-	
-	public String getName(){
-		return name;
-	}
-	
+
 }

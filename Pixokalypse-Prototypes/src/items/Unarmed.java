@@ -1,6 +1,6 @@
 package items;
 
-public class Unarmed extends Weapon{
+public class Unarmed extends Weapon {
 
 	public Unarmed() {
 		super(5, 1, 7);
