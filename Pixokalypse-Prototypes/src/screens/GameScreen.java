@@ -90,7 +90,6 @@ public class GameScreen implements Screen {
 	}
 
 	private void action(float delta) {
-		ArrayList<Enemy> deadEnemies = new ArrayList<Enemy>();
 		ArrayList<Enemy> enemiesCloseToPlayer = new ArrayList<Enemy>();
 
 		for (Enemy e : enemies) {
@@ -106,24 +105,7 @@ public class GameScreen implements Screen {
 				continue;
 			}
 			
-			Enemy closestValidEnemy = null;
-			float minDistance = 1000;
-			for(Enemy e: enemiesCloseToPlayer){
-				float currentDistance = Utils.getDistance(character, e);
-				if(currentDistance < minDistance){
-					if(rayTracer.castRay(
-							(int) character.x, 
-							(int) character.y, 
-							(int) e.x, 
-							(int) e.y, 
-							character.getEquipppedWeapon().getRange(), 
-							false)
-						){
-						closestValidEnemy = e;
-						minDistance = currentDistance;
-					}
-				}
-			}
+			Enemy closestValidEnemy = getClosestValidEnemy(character, enemiesCloseToPlayer);
 			
 			if(closestValidEnemy != null){
 				weapon.shoot();
@@ -131,19 +113,75 @@ public class GameScreen implements Screen {
 				addShootingEffect(character, closestValidEnemy);
 
 				if (closestValidEnemy.currentHealth <= 0) {
-					deadEnemies.add(closestValidEnemy);
+					enemies.remove(closestValidEnemy);
+					enemiesCloseToPlayer.remove(closestValidEnemy);
 				}
-			}
-			
-			enemies.removeAll(deadEnemies);
-			deadEnemies.clear();
-			if (!weapon.isReadyToShoot()) {
-				// only one char can shoot at a time
 				break;
 			}
 		}
 
 		// zombies
+				
+		for(Enemy e: enemiesCloseToPlayer){
+			Weapon weapon = e.getEquipppedWeapon();
+			if(!weapon.isReadyToShoot()){
+				continue;
+			}else{
+				PlayerCharacter closest = getClosestPlayerCharacterForEnemy(e);
+				if(Utils.getDistance(e, closest) < 4){
+					weapon.shoot();
+					closest.currentHealth -= weapon.getDamage();
+					System.out.println(closest.getName() + " "+ weapon.getDamage() + " damage");
+					if(closest.currentHealth <= 0){
+						playerCharacters.remove(closest);
+						System.out.println(closest.getName()+ " DEAD!");
+						if(selectedPlayerCharacter == closest){
+							if(playerCharacters.isEmpty()){
+								System.out.println("GAME OVER!");
+							}else{
+								selectedPlayerCharacter = playerCharacters.get(0);
+							}
+						}
+					}
+					break;
+				}
+			}
+		}
+	}
+	
+	private Enemy getClosestValidEnemy(PlayerCharacter character, ArrayList<Enemy> enemiesCloseToPlayer) {
+		Enemy closestValidEnemy = null;
+		float minDistance = 1000;
+		for(Enemy e: enemiesCloseToPlayer){
+			float currentDistance = Utils.getDistance(character, e);
+			if(currentDistance < minDistance){
+				if(rayTracer.castRay(
+						(int) character.x, 
+						(int) character.y, 
+						(int) e.x, 
+						(int) e.y, 
+						character.getEquipppedWeapon().getRange(), 
+						false)
+					){
+					closestValidEnemy = e;
+					minDistance = currentDistance;
+				}
+			}
+		}
+		return closestValidEnemy;
+	}
+
+	public PlayerCharacter getClosestPlayerCharacterForEnemy(Enemy e) {
+		PlayerCharacter closest = null;
+		float smallestDistance = 10000;
+		for(PlayerCharacter pc: getPlayerCharacters()){
+			float currentDistance = Utils.getDistance(e, pc);
+			if(currentDistance < smallestDistance){
+				closest = pc;
+				smallestDistance = currentDistance;
+			}
+		}
+		return closest;
 	}
 
 	private void addShootingEffect(Agent start, Agent end) {
@@ -153,6 +191,10 @@ public class GameScreen implements Screen {
 	private void coolDownWeapons(float delta) {
 		for (PlayerCharacter c : playerCharacters) {
 			c.getEquipppedWeapon().tick(delta);
+		}
+		
+		for(Enemy e: enemies){
+			e.getEquipppedWeapon().tick(delta);
 		}
 	}
 

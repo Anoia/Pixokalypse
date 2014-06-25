@@ -172,7 +172,7 @@ public class PotentialFieldManager {
 		ArrayList<Enemy> enemies = game.getEnemiesOnScreen();
 		combinedMap = new CombinedFields(environmentMap);
 		for(Enemy e: enemies){
-			PlayerCharacter closestPlayerCharacter = getClosestPlayerCharacter(e);
+			PlayerCharacter closestPlayerCharacter = game.getClosestPlayerCharacterForEnemy(e);
 			combinedMap.add(pullingZombiePotentialFieldMap, closestPlayerCharacter);
 			GridPoint2 destination = getDestination(e, combinedMap);
 			int xDirection = destination.x - (int) e.x;
@@ -182,19 +182,6 @@ public class PotentialFieldManager {
 			
 		}
 				
-	}
-
-	private PlayerCharacter getClosestPlayerCharacter(Enemy e) {
-		PlayerCharacter closest = null;
-		float smallestDistance = 10000;
-		for(PlayerCharacter pc: game.getPlayerCharacters()){
-			float currentDistance = Utils.getDistance(e, pc);
-			if(currentDistance < smallestDistance){
-				closest = pc;
-				smallestDistance = currentDistance;
-			}
-		}
-		return closest;
 	}
 
 	public void stepPlayerCharacters(float delta) {
