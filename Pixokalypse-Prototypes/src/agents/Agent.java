@@ -16,10 +16,13 @@ public abstract class Agent implements ElementWithZIndex{
 	
 	private String spriteName;
 	
+	private String name;
 	
-	public Agent(float x, float y, String spriteName){
+	
+	public Agent(float x, float y, String name, String spriteName){
 		this.x = x;
 		this.y = y;
+		this.name = name;
 		this.spriteName = spriteName;
 		setEquipppedWeapon(new Unarmed());
 	}
@@ -51,6 +54,14 @@ public abstract class Agent implements ElementWithZIndex{
 
 	public void setSpriteName(String spriteName) {
 		this.spriteName = spriteName;
+	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public String getName(){
+		return name;
 	}
 	
 	@Override

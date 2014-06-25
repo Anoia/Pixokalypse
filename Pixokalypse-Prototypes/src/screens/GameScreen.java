@@ -3,8 +3,13 @@ package screens;
 import input.GameInputProcessor;
 import items.Weapon;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.json.*;
+import javax.json.stream.JsonParser;
 
 import potentialField.PotentialFieldManager;
 import potentialField.StaticPotentialField;
@@ -25,7 +30,6 @@ import agents.Zombie;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector3;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 import com.we.PixokalypsePrototypes.test.Map;
 import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
@@ -70,28 +74,12 @@ public class GameScreen implements Screen {
 
 		Gdx.input.setInputProcessor(new GameInputProcessor(manager, camera));
 		
-		
-		//System.out.println("Spriteanz: " + spriteContainer.getSpriteCount());
 		spriteCollisionMapContainer = new SpriteCollisionMapContainer(
 				"data/height.txt", "data/height.png");
-		//System.out.println("Collisionmapanz: " + spriteCollisionMapContainer.getCollisionmapCount());
 		
 		manager.addCollisionMapToEnvironment(map, spriteCollisionMapContainer);
 
-		// The Player, only one!
-		//PLAYERNAMEN SETZEN!!!!!!!!!!!!!
-		Random rand = new Random();
-		player = new Player(200, 200, "Char-"+(rand.nextInt(4)+1)+"-alive");
-		manager.addPlayerCharacter(player);
-		playerCharacters.add(player);
-
-		// zufallsnamen!!
-		for (int i = 0; i < 3; i++) {
-			Follower f = new Follower(200 + 3 * i, 200 + 3 * i,"Char-"+(rand.nextInt(4)+1)+"-alive");
-			followers.add(f);
-			playerCharacters.add(f);
-			manager.addPlayerCharacter(f);
-		}
+		createPlayerAndFollowers();
 		
 		renderer = new GameRenderer(this, game.batch, camera, map);
 		renderer.setFonts(game.font12, game.font24);
@@ -101,9 +89,51 @@ public class GameScreen implements Screen {
 		
 		createZombies();
 		
+		
+		
 
 	}
 	
+
+
+	private void createPlayerAndFollowers(){
+		
+		String data = Gdx.files.internal("data/names.json").readString();
+		
+		JsonParser parser = Json.createParser(new StringReader(data));
+		ArrayList<String> names = new ArrayList<String>();
+		while (parser.hasNext()){
+			JsonParser.Event event = parser.next();
+			switch(event){
+			case END_ARRAY:
+				break;
+			case VALUE_STRING:
+				String name = parser.getString();
+				names.add(name);
+			}
+		}
+		
+		
+		
+
+		
+		Random rand = new Random();
+		player = new Player(200, 200, names.get(rand.nextInt(names.size())), "Char-"+(rand.nextInt(4)+1)+"-alive");
+		System.out.println("PlayerName: "+ player.getName());
+		manager.addPlayerCharacter(player);
+		playerCharacters.add(player);
+
+		// zufallsnamen!!
+		for (int i = 0; i < 3; i++) {
+			Follower f = new Follower(200 + 3 * i, 200 + 3 * i, names.get(rand.nextInt(names.size())), "Char-"+(rand.nextInt(4)+1)+"-alive");
+			System.out.println("FollowerName: "+ f.getName());
+			followers.add(f);
+			playerCharacters.add(f);
+			manager.addPlayerCharacter(f);
+		}
+		
+	}
+
 
 
 	public void updateGame(float delta){

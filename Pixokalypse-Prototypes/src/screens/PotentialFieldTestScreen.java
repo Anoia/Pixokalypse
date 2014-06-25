@@ -39,15 +39,15 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 		this.game = gam;
 		manager = new PotentialFieldManager(new StaticPotentialField(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 		Gdx.input.setInputProcessor(new PotentialFieldInputProcessor(manager));
-		player = new Character(100, 100, "player");
+		player = new Character(100, 100, "name", "player");
 		manager.addPlayerCharacter(player);
-		player2 = new Character(150, 100, "player");
+		player2 = new Character(150, 100, "name", "player");
 		manager.addPlayerCharacter(player2);
-		player3 = new Character((int)Gdx.graphics.getWidth()/2,(int)Gdx.graphics.getHeight()/2, "player");
+		player3 = new Character((int)Gdx.graphics.getWidth()/2,(int)Gdx.graphics.getHeight()/2, "name", "player");
 		manager.addPlayerCharacter(player3);
-		player4 = new Character(150, 130, "player");
+		player4 = new Character(150, 130, "name", "player");
 		manager.addPlayerCharacter(player4);
-		player5 = new Character(150, 80, "player");
+		player5 = new Character(150, 80, "name", "player");
 		manager.addPlayerCharacter(player5);
 		
 	}

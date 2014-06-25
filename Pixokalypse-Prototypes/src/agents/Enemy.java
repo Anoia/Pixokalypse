@@ -6,8 +6,8 @@ public class Enemy extends Agent {
 	
 	public Target target;
 
-	public Enemy(float x, float y, String spriteName) {
-		super(x, y, spriteName);
+	public Enemy(float x, float y, String name, String spriteName) {
+		super(x, y, name, spriteName);
 		// TODO Auto-generated constructor stub
 	}
 
