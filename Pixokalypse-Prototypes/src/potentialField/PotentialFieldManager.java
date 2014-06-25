@@ -2,6 +2,7 @@ package potentialField;
 
 import java.util.ArrayList;
 
+import screens.GameScreen;
 import util.Constants;
 import util.GridPoint2;
 import agents.Agent;
@@ -13,21 +14,20 @@ import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
 
 public class PotentialFieldManager {
 	
+	private GameScreen game;
+	
 	private StaticPotentialField  environmentMap;
 	public CombinedFields combinedMap;
 	public boolean neuRendernA = false;
 	public boolean neuRendernB = false;
 	
-	
-	private ArrayList<PlayerCharacter> playerCharacters;
 	private CircleDynamicPotentialField pushingPlayerCharacterPotentialFieldMap; //wird auf andere playerCharacters angewendet, damit sie nicht ineinander laufen
 	private Target playerCharacterTarget;
 	
 	
-	public PotentialFieldManager(StaticPotentialField environmentMap){
-		
+	public PotentialFieldManager(GameScreen game, StaticPotentialField environmentMap){
+		this.game = game;
 		this.environmentMap = environmentMap;
-		this.playerCharacters = new ArrayList<PlayerCharacter>();
 		pushingPlayerCharacterPotentialFieldMap = new CircleDynamicPotentialField(7, true);
 		this.setPlayerCharacterTarget((int)Gdx.graphics.getWidth()/2, (int)Gdx.graphics.getHeight());	
 	}
@@ -38,6 +38,7 @@ public class PotentialFieldManager {
 	}
 	
 	public void stepPlayerCharacters(float delta){
+		ArrayList<PlayerCharacter> playerCharacters = game.getPlayerCharacters();
 		combinedMap = new CombinedFields(environmentMap);
 		combinedMap.add(playerCharacterTarget);		
 		for(PlayerCharacter pc: playerCharacters){
@@ -94,10 +95,6 @@ public class PotentialFieldManager {
 			}	
 		}
 	}
-		
-	public void addPlayerCharacter(PlayerCharacter pc){
-		playerCharacters.add(pc);
-	}
 	
 	public void setPlayerCharacterTarget(int x, int y){
 		int radius = 200;
@@ -132,6 +129,7 @@ public class PotentialFieldManager {
 	}
 
 	public void printZoneACII(int screenX, int screenY) {
+		ArrayList<PlayerCharacter> playerCharacters = game.getPlayerCharacters();
 		int radius = 20;
 		System.out.println("\n\n");
 			for(PlayerCharacter player: playerCharacters){

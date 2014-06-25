@@ -35,8 +35,9 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 	private Sprite debugSprite;
 	
 
-	public PotentialFieldTestScreen(final PixokalypsePrototypes gam) {
-		this.game = gam;
+	public PotentialFieldTestScreen(final PixokalypsePrototypes game) {
+		this.game = game;
+		/*
 		manager = new PotentialFieldManager(new StaticPotentialField(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 		Gdx.input.setInputProcessor(new PotentialFieldInputProcessor(manager));
 		player = new PlayerCharacter(100, 100, "name", "player");
@@ -48,7 +49,7 @@ public class PotentialFieldTestScreen implements Screen{ //,InputProcessor {
 		player4 = new PlayerCharacter(150, 130, "name", "player");
 		manager.addPlayerCharacter(player4);
 		player5 = new PlayerCharacter(150, 80, "name", "player");
-		manager.addPlayerCharacter(player5);
+		manager.addPlayerCharacter(player5);*/
 		
 	}
 	

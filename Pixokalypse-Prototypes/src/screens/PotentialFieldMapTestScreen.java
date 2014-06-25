@@ -42,7 +42,7 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 	private Sprite debugSprite;
 	
 	public PotentialFieldMapTestScreen(final PixokalypsePrototypes game) {
-		this.game = game;
+		this.game = game;/*
 		manager = new PotentialFieldManager(new StaticPotentialField(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 		Gdx.input.setInputProcessor(new PotentialFieldInputProcessor(manager));
 		player = new PlayerCharacter(100, 100, "name", "player");
@@ -58,7 +58,7 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 		spriteContainer = new SpriteContainer();	
 		spriteCollisionMapConainer = new SpriteCollisionMapContainer("data/height.txt", "data/height.png");
 		mainMap = new Map();
-		manager.addCollisionMapToEnvironment(mainMap, spriteCollisionMapConainer);
+		manager.addCollisionMapToEnvironment(mainMap, spriteCollisionMapConainer);*/
 	}
 	
 	@Override

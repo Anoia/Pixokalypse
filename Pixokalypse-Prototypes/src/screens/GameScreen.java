@@ -59,22 +59,25 @@ public class GameScreen implements Screen {
 	public GameScreen(PixokalypsePrototypes game) {
 		this.game = game;
 		map = new Map(40,8,4,10);
-		manager = new PotentialFieldManager(new StaticPotentialField(
-				map.mapSize * tileSize, map.mapSize * tileSize));
+		
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
 		camera.setToOrtho(true);
 		camera.zoom = 0.2f;
 
-		Gdx.input.setInputProcessor(new GameInputProcessor(manager, camera));
+		
 		
 		spriteCollisionMapContainer = new SpriteCollisionMapContainer(
 				"data/height.txt", "data/height.png");
-		
-		manager.addCollisionMapToEnvironment(map, spriteCollisionMapContainer);
 
-		createPlayerAndFollowers();
+		createPlayerCharacters();
+		
+		manager = new PotentialFieldManager(this, new StaticPotentialField(
+				map.mapSize * tileSize, map.mapSize * tileSize));
+		manager.addCollisionMapToEnvironment(map, spriteCollisionMapContainer);
+		
+		Gdx.input.setInputProcessor(new GameInputProcessor(manager, camera));
 		
 		renderer = new GameRenderer(this, game.batch, camera, map);
 		renderer.setFonts(game.font12, game.font24);
@@ -91,7 +94,7 @@ public class GameScreen implements Screen {
 	
 
 
-	private void createPlayerAndFollowers(){
+	private void createPlayerCharacters(){
 		
 		String data = Gdx.files.internal("data/names.json").readString();
 		JsonParser parser = Json.createParser(new StringReader(data));
@@ -113,7 +116,6 @@ public class GameScreen implements Screen {
 		for (int i = 0; i < 4; i++) {
 			PlayerCharacter pc = new PlayerCharacter(200 + 3 * i, 200 + 3 * i, names.get(rand.nextInt(names.size())), "Char-"+(rand.nextInt(4)+1)+"-alive");
 			playerCharacters.add(pc);
-			manager.addPlayerCharacter(pc);
 		}
 		
 		selectedPlayerCharacter = playerCharacters.get(0);
