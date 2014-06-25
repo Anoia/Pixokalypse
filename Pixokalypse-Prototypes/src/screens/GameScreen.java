@@ -105,22 +105,37 @@ public class GameScreen implements Screen {
 			if (!weapon.isReadyToShoot()) {
 				continue;
 			}
-			for (Enemy enemy : enemiesCloseToPlayer) {
-				if (rayTracer.castRay((int) character.x, (int) character.y,
-						(int) enemy.x, (int) enemy.y, character
-								.getEquipppedWeapon().getRange(), false)) {
-					weapon.shoot();
-					enemy.currentHealth -= weapon.getDamage();
-					addShootingEffect(character, enemy);
-
-					if (enemy.currentHealth <= 0) {
-						deadEnemies.add(enemy);
+			
+			Enemy closestValidEnemy = null;
+			float minDistance = 1000;
+			for(Enemy e: enemiesCloseToPlayer){
+				float currentDistance = Utils.getDistance(character, e);
+				if(currentDistance < minDistance){
+					if(rayTracer.castRay(
+							(int) character.x, 
+							(int) character.y, 
+							(int) e.x, 
+							(int) e.y, 
+							character.getEquipppedWeapon().getRange(), 
+							false)
+						){
+						closestValidEnemy = e;
+						minDistance = currentDistance;
 					}
-					break;
 				}
 			}
+			
+			if(closestValidEnemy != null){
+				weapon.shoot();
+				closestValidEnemy.currentHealth -= weapon.getDamage();
+				addShootingEffect(character, closestValidEnemy);
+
+				if (closestValidEnemy.currentHealth <= 0) {
+					deadEnemies.add(closestValidEnemy);
+				}
+			}
+			
 			enemies.removeAll(deadEnemies);
-			enemiesCloseToPlayer.removeAll(deadEnemies);
 			deadEnemies.clear();
 			if (!weapon.isReadyToShoot()) {
 				// only one char can shoot at a time
