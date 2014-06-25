@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
@@ -75,11 +75,11 @@ public class ParseTextureAtlasTestScreen implements Screen {
 		}
 
 		Gdx.gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		// angeblich f�r transparenz notwendig
-		Gdx.gl.glEnable(GL10.GL_BLEND);
-		Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		Gdx.gl.glEnable(GL20.GL_BLEND);
+		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
@@ -100,7 +100,7 @@ public class ParseTextureAtlasTestScreen implements Screen {
 		game.batch.end();
 
 		// angeblich f�r transparenz notwendig ende
-		Gdx.gl.glDisable(GL10.GL_BLEND);
+		Gdx.gl.glDisable(GL20.GL_BLEND);
 
 		// FPS unten links rendern
 		game.batch.getProjectionMatrix().setToOrtho2D(0, 0,

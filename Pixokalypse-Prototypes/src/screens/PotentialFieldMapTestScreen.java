@@ -6,7 +6,7 @@ import agents.PlayerCharacter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -132,11 +132,11 @@ public class PotentialFieldMapTestScreen implements Screen { // ,InputProcessor
 		if (manager.neuRendernA && manager.neuRendernB)
 			reDrawDebugMap();
 		Gdx.gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		// angeblich f�r transparenz notwendig
-		Gdx.gl.glEnable(GL10.GL_BLEND);
-		Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		Gdx.gl.glEnable(GL20.GL_BLEND);
+		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
@@ -176,7 +176,7 @@ public class PotentialFieldMapTestScreen implements Screen { // ,InputProcessor
 		game.shapeRenderer.end();
 
 		// angeblich f�r transparenz notwendig ende
-		Gdx.gl.glDisable(GL10.GL_BLEND);
+		Gdx.gl.glDisable(GL20.GL_BLEND);
 
 		// FPS unten links rendern
 		game.batch.getProjectionMatrix().setToOrtho2D(0, 0,

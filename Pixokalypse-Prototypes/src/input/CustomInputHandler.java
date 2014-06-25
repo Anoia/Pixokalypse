@@ -86,4 +86,10 @@ public class CustomInputHandler implements GestureListener{
 		return false;
 	}
 
+	@Override
+	public boolean panStop(float x, float y, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
