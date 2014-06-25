@@ -86,7 +86,7 @@ public class GameRenderer {
 		batch.setShader(defaultShader);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		float lightSize = 150.0f;
+		float lightSize = 200.0f;
 		PlayerCharacter p = game.getSelectedPlayerCharacter();
 		batch.draw(light, p.x - lightSize * 0.5f, p.y - 4 - lightSize * 0.5f,
 				lightSize, lightSize);

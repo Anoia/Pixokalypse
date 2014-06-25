@@ -147,7 +147,7 @@ public class SpriteCollisionMapContainer {
 
 	}
 
-	public void printASCII(int[][] collisionMap, String name) {
+	public void printASCII(int[][] collisionMap, String name) { 
 		System.out.println("\n Name: " + name);
 		for (int i = 0; i < collisionMap.length; i++) {
 			System.out.println();

@@ -42,7 +42,6 @@ public class SuperIntelligentDynamicPotentialField extends
 			laufVar += 1;
 			done = todo;
 		}
-
 		for (int i = 0; i < fieldArray.length; i++) {
 			for (int j = 0; j < fieldArray[0].length; j++) {
 				if (fieldArray[i][j] == -1) {

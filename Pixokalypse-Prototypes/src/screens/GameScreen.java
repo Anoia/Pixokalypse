@@ -1,6 +1,7 @@
 package screens;
 
-import input.GameInputProcessor;
+import input.CustomInputDetector;
+import input.CustomInputHandler;
 import items.Weapon;
 
 import java.io.StringReader;
@@ -60,8 +61,8 @@ public class GameScreen implements Screen {
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
-		camera.setToOrtho(true);
-		camera.zoom = 0.2f;
+		getCamera().setToOrtho(true);
+		getCamera().zoom = 0.2f;
 
 		spriteCollisionMapContainer = new SpriteCollisionMapContainer(
 				"data/height.txt", "data/height.png");
@@ -70,17 +71,21 @@ public class GameScreen implements Screen {
 
 		manager = new PotentialFieldManager(this, new StaticPotentialField(
 				map.mapSize * tileSize, map.mapSize * tileSize));
-		manager.addCollisionMapToEnvironment(map, spriteCollisionMapContainer);
+		getPotentialFieldManager().addCollisionMapToEnvironment(map, spriteCollisionMapContainer);
 
-		Gdx.input.setInputProcessor(new GameInputProcessor(manager, camera));
+		//Gdx.input.setInputProcessor(new GameInputProcessor(getPotentialFieldManager(), getCamera()));
+		Gdx.input.setInputProcessor(new CustomInputDetector(new CustomInputHandler(this)));
 
-		renderer = new GameRenderer(this, game.batch, camera, map);
+		renderer = new GameRenderer(this, game.batch, getCamera(), map);
 		renderer.setFonts(game.font12, game.font24);
-		effectsRenderer = new EffectsRenderer(this, game.batch, camera);
+		effectsRenderer = new EffectsRenderer(this, game.batch, getCamera());
 		effectsRenderer.setFonts(game.font12, game.font24);
-		rayTracer = new RayTracer(manager.getEnvironmentMap());
+		rayTracer = new RayTracer(getPotentialFieldManager().getEnvironmentMap());
 
 		createZombies();
+		
+		getCamera().position.set(selectedPlayerCharacter.x,
+				selectedPlayerCharacter.y, 0);
 
 	}
 
@@ -175,7 +180,7 @@ public class GameScreen implements Screen {
 		for (int i = 0; i < 400; i++) {
 			int x = Utils.random(100, map.mapSize * tileSize - 100);
 			int y = Utils.random(100, map.mapSize * tileSize - 100);
-			if (manager.getEnvironmentMap().fieldArray[x][y] == 0) {
+			if (getPotentialFieldManager().getEnvironmentMap().fieldArray[x][y] == 0) {
 				// create Zombie
 				enemies.add(new Zombie(x, y, spriteNameArray[(rand
 						.nextInt(spriteNameArray.length))]));
@@ -251,12 +256,22 @@ public class GameScreen implements Screen {
 	}
 
 	public void updateGame(float delta) {
-		manager.step(delta);
+		getPotentialFieldManager().step(delta);
 		coolDownWeapons(delta);
 		tickRenderEffects(delta);
 		action(delta);
 
-		camera.position.set(selectedPlayerCharacter.x,
+		getCamera().position.set(selectedPlayerCharacter.x,
 				selectedPlayerCharacter.y, 0);
 	}
+
+	public OrthographicCamera getCamera() {
+		return camera;
+	}
+
+	public PotentialFieldManager getPotentialFieldManager() {
+		return manager;
+	}
+
+
 }

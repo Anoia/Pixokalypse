@@ -162,8 +162,7 @@ public class PotentialFieldManager {
 	}
 
 	public void stepPlayerCharacters(float delta) {
-		ArrayList<PlayerCharacter> playerCharacters = game
-				.getPlayerCharacters();
+		ArrayList<PlayerCharacter> playerCharacters = game.getPlayerCharacters();
 		combinedMap = new CombinedFields(environmentMap);
 		combinedMap.add(playerCharacterTarget);
 		for (PlayerCharacter pc : playerCharacters) {
