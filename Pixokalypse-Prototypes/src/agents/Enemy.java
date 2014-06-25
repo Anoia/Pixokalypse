@@ -11,9 +11,4 @@ public class Enemy extends Agent {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public int getZIndex() {
-		return (int) y;
-	}
-
 }

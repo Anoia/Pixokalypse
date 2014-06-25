@@ -1,11 +1,10 @@
 package agents;
 
-import renderer.ElementWithZIndex;
 import items.Unarmed;
 import items.Weapon;
 
 
-public abstract class Agent implements ElementWithZIndex{
+public abstract class Agent{
 	public float x;
 	public float y;
 	public float movementSpeed = 20;
@@ -62,16 +61,6 @@ public abstract class Agent implements ElementWithZIndex{
 	
 	public String getName(){
 		return name;
-	}
-	
-	@Override
-	public int getX() {
-		return (int) x;
-	}
-	
-	@Override
-	public int getY() {
-		return (int) y;
 	}
 	
 }

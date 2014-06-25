@@ -4,7 +4,7 @@ package screens;
 import input.PotentialFieldInputProcessor;
 import potentialField.PotentialFieldManager;
 import potentialField.StaticPotentialField;
-import agents.Character;
+import agents.PlayerCharacter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -27,11 +27,11 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 	final PixokalypsePrototypes game;
 	private OrthographicCamera camera;
 	private PotentialFieldManager manager;
-	private Character player;
-	private Character player2;
-	private Character player3;
-	private Character player4;
-	private Character player5;
+	private PlayerCharacter player;
+	private PlayerCharacter player2;
+	private PlayerCharacter player3;
+	private PlayerCharacter player4;
+	private PlayerCharacter player5;
 	
 	private SpriteContainer spriteContainer;
 	private SpriteCollisionMapContainer spriteCollisionMapConainer;
@@ -45,15 +45,15 @@ public class PotentialFieldMapTestScreen implements Screen{ //,InputProcessor {
 		this.game = game;
 		manager = new PotentialFieldManager(new StaticPotentialField(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 		Gdx.input.setInputProcessor(new PotentialFieldInputProcessor(manager));
-		player = new Character(100, 100, "name", "player");
+		player = new PlayerCharacter(100, 100, "name", "player");
 		manager.addPlayerCharacter(player);
-		player2 = new Character(150, 100, "name", "player");
+		player2 = new PlayerCharacter(150, 100, "name", "player");
 		manager.addPlayerCharacter(player2);
-		player3 = new Character((int)Gdx.graphics.getWidth()/2,(int)Gdx.graphics.getHeight()/2, "name", "player");
+		player3 = new PlayerCharacter((int)Gdx.graphics.getWidth()/2,(int)Gdx.graphics.getHeight()/2, "name", "player");
 		manager.addPlayerCharacter(player3);
-		player4 = new Character(150, 130, "name", "player");
+		player4 = new PlayerCharacter(150, 130, "name", "player");
 		manager.addPlayerCharacter(player4);
-		player5 = new Character(150, 80, "name", "player");
+		player5 = new PlayerCharacter(150, 80, "name", "player");
 		manager.addPlayerCharacter(player5);
 		spriteContainer = new SpriteContainer();	
 		spriteCollisionMapConainer = new SpriteCollisionMapContainer("data/height.txt", "data/height.png");

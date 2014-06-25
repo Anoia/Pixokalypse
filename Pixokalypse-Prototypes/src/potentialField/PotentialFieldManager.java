@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import util.Constants;
 import util.GridPoint2;
 import agents.Agent;
-import agents.Character;
+import agents.PlayerCharacter;
 
 import com.badlogic.gdx.Gdx;
 import com.we.PixokalypsePrototypes.test.Map;
@@ -19,7 +19,7 @@ public class PotentialFieldManager {
 	public boolean neuRendernB = false;
 	
 	
-	private ArrayList<Character> playerCharacters;
+	private ArrayList<PlayerCharacter> playerCharacters;
 	private CircleDynamicPotentialField pushingPlayerCharacterPotentialFieldMap; //wird auf andere playerCharacters angewendet, damit sie nicht ineinander laufen
 	private Target playerCharacterTarget;
 	
@@ -27,7 +27,7 @@ public class PotentialFieldManager {
 	public PotentialFieldManager(StaticPotentialField environmentMap){
 		
 		this.environmentMap = environmentMap;
-		this.playerCharacters = new ArrayList<Character>();
+		this.playerCharacters = new ArrayList<PlayerCharacter>();
 		pushingPlayerCharacterPotentialFieldMap = new CircleDynamicPotentialField(7, true);
 		this.setPlayerCharacterTarget((int)Gdx.graphics.getWidth()/2, (int)Gdx.graphics.getHeight());	
 	}
@@ -40,11 +40,11 @@ public class PotentialFieldManager {
 	public void stepPlayerCharacters(float delta){
 		combinedMap = new CombinedFields(environmentMap);
 		combinedMap.add(playerCharacterTarget);		
-		for(Character pc: playerCharacters){
+		for(PlayerCharacter pc: playerCharacters){
 			combinedMap.add(pushingPlayerCharacterPotentialFieldMap, pc);
 		}
 		
-		for(Character pc: playerCharacters){
+		for(PlayerCharacter pc: playerCharacters){
 			combinedMap.remove(pushingPlayerCharacterPotentialFieldMap, pc);
 			GridPoint2 destination = getDestination(pc, combinedMap);
 			int xDirection = destination.x - (int)pc.x;
@@ -95,7 +95,7 @@ public class PotentialFieldManager {
 		}
 	}
 		
-	public void addPlayerCharacter(Character pc){
+	public void addPlayerCharacter(PlayerCharacter pc){
 		playerCharacters.add(pc);
 	}
 	
@@ -134,7 +134,7 @@ public class PotentialFieldManager {
 	public void printZoneACII(int screenX, int screenY) {
 		int radius = 20;
 		System.out.println("\n\n");
-			for(Character player: playerCharacters){
+			for(PlayerCharacter player: playerCharacters){
 					System.out.println(player.x+","+player.y);
 				}
 		for(int y = screenY-radius; y < screenY+radius;y++){
@@ -144,7 +144,7 @@ public class PotentialFieldManager {
 				String stringValue = ""+value;
 				while (stringValue.length()<5)stringValue = " "+stringValue;
 				boolean playerposition = false;
-				for(Character player: playerCharacters){
+				for(PlayerCharacter player: playerCharacters){
 					if((int)player.x == x && (int)player.y == y)playerposition = true;
 				}
 				if(playerposition){

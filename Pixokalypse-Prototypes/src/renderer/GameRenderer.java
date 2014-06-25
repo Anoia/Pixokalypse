@@ -1,25 +1,17 @@
 package renderer;
 
-import java.awt.Font;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 
-import renderer.effects.Effect;
 import screens.GameScreen;
 import util.Constants;
 
 import agents.Agent;
 import agents.Enemy;
-import agents.Follower;
-import agents.Player;
-import agents.Zombie;
+import agents.PlayerCharacter;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -49,7 +41,7 @@ public class GameRenderer {
 	
 	public BitmapFont font12, font24;
 	
-	Comparator<ElementWithZIndex> comparator;
+	Comparator<Agent> comparator;
 	
 	
 	// Shader stuff
@@ -74,10 +66,10 @@ public class GameRenderer {
 		this.map = map;
 		spriteContainer = new SpriteContainer();
 		initializeShader();
-		comparator = new Comparator<ElementWithZIndex>() {
+		comparator = new Comparator<Agent>() {
 			@Override
-			public int compare(ElementWithZIndex o1, ElementWithZIndex o2) {
-				return o1.getZIndex() - o2.getZIndex();
+			public int compare(Agent o1, Agent o2) {
+				return (int) (o1.y - o2.y);
 			}
 		};
 		
@@ -117,16 +109,10 @@ public class GameRenderer {
 		// Sprites Rendern anfang
 		renderGround();
 		//renderWithZIndex(delta);
-		//renderAgents();
-		renderPlayer();
-		renderFollowers();
-		renderZombies();
+		renderAgents();
 		renderBuildings();
-	
-	//	renderWithZIndex();
 		
 		batch.end();
-		//renderFPS();
 	}
 	
 	private void drawLightToFBO() {
@@ -136,52 +122,10 @@ public class GameRenderer {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		float lightSize = 150.0f;
-		Player p = game.getPlayer();
+		PlayerCharacter p = game.getSelectedPlayerCharacter();
 		batch.draw(light, p.x - lightSize*0.5f , p.y-4 - lightSize*0.5f, lightSize, lightSize);
 		batch.end();
 		fbo.end();
-		
-	}
-
-	private void renderWithZIndex() {
-		ArrayList<ElementWithZIndex> toRender = new ArrayList<ElementWithZIndex>();
-		
-		//Add Elements To List
-		toRender.addAll(game.getPlayerCharacters());
-		toRender.addAll(getZombiesToRender());
-		toRender.addAll(getBuildingsToRender());
-		Collections.sort(toRender, comparator);
-		
-		//Actual Rendering
-		String lastSpriteName = "";
-		String spriteName = "";
-		Sprite sprite = null;
-		
-		for(ElementWithZIndex element: toRender){
-			// TODO Replace with subtype polymorphism: every ElementWithZIndex should have required information to render!
-			// 
-			if(element instanceof Building){
-				Building b = (Building) element;
-				spriteName = b.getSpriteName();
-				if(!spriteName.equals(lastSpriteName)){
-					sprite = spriteContainer.getSprite("Block-"+spriteName);
-					lastSpriteName = spriteName;
-				}
-				
-				sprite.setBounds(b.getX(), b.getY(), b.getWidth(),b.getHeight());
-				sprite.draw(batch);
-				
-			}else{
-				//it's an agent
-				spriteName = element.getSpriteName();
-				if(!spriteName.equals(lastSpriteName)){
-					sprite = spriteContainer.getSprite(spriteName);
-					lastSpriteName = spriteName;
-				}
-				sprite.setPosition(element.getX()-sprite.getWidth() / 2, element.getY() - sprite.getHeight());
-				sprite.draw(batch);	
-			}
-		}
 		
 	}
 
@@ -189,10 +133,10 @@ public class GameRenderer {
 		ArrayList<Enemy> enemies = game.getEnemies();
 		ArrayList<Enemy> toRender = new ArrayList<Enemy>();
 		for(Enemy e: enemies){
-			if (e.getX() > camera.position.x-Gdx.graphics.getWidth()/2
-					&& e.getX() < camera.position.x+Gdx.graphics.getWidth()/2
-					&& e.getY() > camera.position.y-Gdx.graphics.getHeight()/2
-					&& e.getY() < camera.position.y+Gdx.graphics.getHeight()/2
+			if (e.x > camera.position.x-Gdx.graphics.getWidth()/2
+					&& e.x < camera.position.x+Gdx.graphics.getWidth()/2
+					&& e.y > camera.position.y-Gdx.graphics.getHeight()/2
+					&& e.y < camera.position.y+Gdx.graphics.getHeight()/2
 					) {
 				toRender.add(e);
 			}
@@ -292,62 +236,18 @@ public class GameRenderer {
 		ArrayList<Agent> agents = new ArrayList<Agent>();
 		agents.addAll(game.getPlayerCharacters());
 		agents.addAll(getZombiesToRender());
-		String lastSpriteName = "";
-		Sprite sprite = null;
+		Collections.sort(agents, comparator);
+		Sprite sprite;
 		for(Agent a: agents){
-			String spriteName = a.getSpriteName();
-			if(!spriteName.equals(lastSpriteName)){
-				sprite = spriteContainer.getSprite(spriteName);
-				lastSpriteName = spriteName;
-			}
-			sprite.setPosition(a.getX()-sprite.getWidth() / 2, a.getY() - sprite.getHeight());
+			sprite = spriteContainer.getSprite(a.getSpriteName());
+			sprite.setPosition(a.x-sprite.getWidth() / 2, a.y - sprite.getHeight());
 			sprite.draw(batch);
-		}
-	}
-	
-	private void renderPlayer(){
-		Player player = game.getPlayer();
-		Sprite sprite = spriteContainer.getSprite(player.getSpriteName());
-		sprite.setPosition(player.x - sprite.getWidth() / 2, player.y - sprite.getHeight());
-		sprite.draw(batch);
-	}
-	
-	private void renderFollowers(){
-		ArrayList<Follower> followers = game.getFollowers();
-		Sprite sprite;
-		if (!followers.isEmpty()) {
-			for (Follower f : followers) {
-				sprite = spriteContainer.getSprite(f.getSpriteName());
-				sprite.setPosition(f.x - sprite.getWidth() / 2,
-						f.y - sprite.getHeight());
-				sprite.draw(batch);
-			}
-		}
-	}
-	
-	private void renderZombies(){
-		ArrayList<Enemy> enemies = getZombiesToRender();
-		Sprite sprite;
-		if (!enemies.isEmpty()) {
-			for (Enemy e : enemies) {
-				sprite = spriteContainer.getSprite(e.getSpriteName());				
-				sprite.setPosition(e.x - sprite.getWidth() / 2,
-						e.y - sprite.getHeight());
-				sprite.draw(batch);
-			}
 		}
 	}
 	
 	public void setFonts(BitmapFont font12, BitmapFont font24){
 		this.font12 = font12;
 		this.font24 = font24;
-	}
-	
-	private void renderFPS(){
-		batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		batch.begin();
-		font24.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 30, Gdx.graphics.getHeight() - 30);
-		batch.end();
 	}
 	
 	public void dispose(){

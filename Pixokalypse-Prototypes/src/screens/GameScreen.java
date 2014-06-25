@@ -3,8 +3,6 @@ package screens;
 import input.GameInputProcessor;
 import items.Weapon;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,10 +19,8 @@ import util.Constants;
 import util.RayTracer;
 import util.Utils;
 import agents.Agent;
-import agents.Character;
+import agents.PlayerCharacter;
 import agents.Enemy;
-import agents.Follower;
-import agents.Player;
 import agents.Zombie;
 
 import com.badlogic.gdx.Gdx;
@@ -46,9 +42,8 @@ public class GameScreen implements Screen {
 	private PotentialFieldManager manager;
 	int tileSize = Constants.TILE_SIZE; // one tile = one field on map
 
-	private Player player;
-	private ArrayList<Follower> followers = new ArrayList<Follower>();
-	private ArrayList<Character> playerCharacters = new ArrayList<Character>();
+	private PlayerCharacter selectedPlayerCharacter;
+	private ArrayList<PlayerCharacter> playerCharacters = new ArrayList<PlayerCharacter>();
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	
 	private ArrayList<Effect> renderEffects = new ArrayList<Effect>();
@@ -99,7 +94,6 @@ public class GameScreen implements Screen {
 	private void createPlayerAndFollowers(){
 		
 		String data = Gdx.files.internal("data/names.json").readString();
-		
 		JsonParser parser = Json.createParser(new StringReader(data));
 		ArrayList<String> names = new ArrayList<String>();
 		while (parser.hasNext()){
@@ -114,36 +108,27 @@ public class GameScreen implements Screen {
 		}
 		
 		
-		
-
-		
 		Random rand = new Random();
-		player = new Player(200, 200, names.get(rand.nextInt(names.size())), "Char-"+(rand.nextInt(4)+1)+"-alive");
-		System.out.println("PlayerName: "+ player.getName());
-		manager.addPlayerCharacter(player);
-		playerCharacters.add(player);
 
-		// zufallsnamen!!
-		for (int i = 0; i < 3; i++) {
-			Follower f = new Follower(200 + 3 * i, 200 + 3 * i, names.get(rand.nextInt(names.size())), "Char-"+(rand.nextInt(4)+1)+"-alive");
-			System.out.println("FollowerName: "+ f.getName());
-			followers.add(f);
-			playerCharacters.add(f);
-			manager.addPlayerCharacter(f);
+		for (int i = 0; i < 4; i++) {
+			PlayerCharacter pc = new PlayerCharacter(200 + 3 * i, 200 + 3 * i, names.get(rand.nextInt(names.size())), "Char-"+(rand.nextInt(4)+1)+"-alive");
+			playerCharacters.add(pc);
+			manager.addPlayerCharacter(pc);
 		}
+		
+		selectedPlayerCharacter = playerCharacters.get(0);
 		
 	}
 
 
 
 	public void updateGame(float delta){
-		//move all Actors
 		manager.step(delta);
 		coolDownWeapons(delta);
 		tickRenderEffects(delta);
 		action(delta);
 		
-		camera.position.set(player.x, player.y, 0);
+		camera.position.set(selectedPlayerCharacter.x, selectedPlayerCharacter.y, 0);
 	}
 	
 	private void tickRenderEffects(float delta) {
@@ -156,70 +141,55 @@ public class GameScreen implements Screen {
 		
 	}
 
-
-
 	private void coolDownWeapons(float delta) {
-		for(Character c: playerCharacters){
+		for(PlayerCharacter c: playerCharacters){
 			c.getEquipppedWeapon().tick(delta);
 		}
-		
 	}
 
-
-
 	private void action(float delta){
-		ArrayList<Enemy> dead = new ArrayList<Enemy>();
+		ArrayList<Enemy> deadEnemies = new ArrayList<Enemy>();
 		ArrayList<Enemy> enemiesCloseToPlayer = new ArrayList<Enemy>();
 		
 		for(Enemy e: enemies){
-			if(Utils.getDistance(player, e) < 100){
+			if(Utils.getDistance(selectedPlayerCharacter, e) < 100){
 				enemiesCloseToPlayer.add(e);
 			}
 		}
 		
-		
 		//PlayerCharacters attack
-		for(Character character: playerCharacters){
+		for(PlayerCharacter character: playerCharacters){
 			Weapon weapon = character.getEquipppedWeapon();
 			if(!weapon.isReadyToShoot()){
-				//System.out.println("Weapon not ready");
 				continue;
 			}
 			for(Enemy enemy: enemiesCloseToPlayer){
 				if(rayTracer.castRay((int)character.x, (int)character.y, (int)enemy.x, (int)enemy.y, character.getEquipppedWeapon().getRange(), false)){
 					weapon.shoot();
 					enemy.currentHealth -= weapon.getDamage();
-					System.out.print("PEW! ");
-					//renderEffects.add(new TextEffect(enemy.x, enemy.y, ""+weapon.getDamage()));
 					addShootingEffect(character, enemy);
 					
 					if(enemy.currentHealth <= 0){
-						dead.add(enemy);
-						System.out.println("KILL");
+						deadEnemies.add(enemy);
 					}
 					break;
 				}
 			}
-			enemies.removeAll(dead);
-			enemiesCloseToPlayer.removeAll(dead);
-			dead.clear();
+			enemies.removeAll(deadEnemies);
+			enemiesCloseToPlayer.removeAll(deadEnemies);
+			deadEnemies.clear();
 			if(!weapon.isReadyToShoot()){
-				//only one char can shoot
+				//only one char can shoot at a time
 				break;
 			}
 		}
-		
-		
+				
 		//zombies
-		
-		
 	}
 	
 	private void addShootingEffect(Agent start, Agent end){
 		renderEffects.add(new ShootingEffect(start, end));
 	}
-	
-
 
 	@Override
 	public void render(float delta) {
@@ -230,9 +200,6 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		// camera = new OrthographicCamera(width, height);
-		// camera.setToOrtho(true);
-		// camera.zoom = 0.5f;
 		renderer.resize(width, height);
 	}
 
@@ -261,20 +228,13 @@ public class GameScreen implements Screen {
 		renderer.dispose();
 	}
 
-	
-	public Player getPlayer(){
-		return player;
+	public PlayerCharacter getSelectedPlayerCharacter(){
+		return selectedPlayerCharacter;
 	}
-	
-	public ArrayList<Follower> getFollowers(){
-		return followers;
-	}
-	
 	
 	public ArrayList<Enemy> getEnemies(){
 		return enemies;
 	}
-	
 	
 	/* Brute Force Zombie Creation :D */
 	private void createZombies() {
@@ -293,15 +253,11 @@ public class GameScreen implements Screen {
 		
 	}
 
-
-
 	public ArrayList<Effect> getRenderEffects() {
 		return renderEffects;
 	}
 
-
-
-	public ArrayList<Character> getPlayerCharacters() {
+	public ArrayList<PlayerCharacter> getPlayerCharacters() {
 		return playerCharacters;
 	}
 }
