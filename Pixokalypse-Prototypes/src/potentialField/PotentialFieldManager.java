@@ -6,6 +6,7 @@ import screens.GameScreen;
 import util.Constants;
 import util.GridPoint2;
 import agents.Agent;
+import agents.Enemy;
 import agents.PlayerCharacter;
 
 import com.badlogic.gdx.Gdx;
@@ -24,6 +25,8 @@ public class PotentialFieldManager {
 	private Target playerCharacterTarget;
 	private CircleDynamicPotentialField pushingPlayerCharacterPotentialFieldMap;	// wird auf andere playerChars angewendet,
 																		 		 	// damit sie nicht ineinander laufen
+	
+	private CircleDynamicPotentialField pullingZombiePotentialFieldMap;
 
 	public PotentialFieldManager(GameScreen game,
 			StaticPotentialField environmentMap) {
@@ -31,6 +34,7 @@ public class PotentialFieldManager {
 		this.environmentMap = environmentMap;
 		pushingPlayerCharacterPotentialFieldMap = new CircleDynamicPotentialField(
 				7, true);
+		pullingZombiePotentialFieldMap = new CircleDynamicPotentialField(30, false);
 		this.setPlayerCharacterTarget((int) Gdx.graphics.getWidth() / 2,
 				(int) Gdx.graphics.getHeight());
 	}
@@ -157,8 +161,25 @@ public class PotentialFieldManager {
 
 	public void step(float delta) {
 		stepPlayerCharacters(delta);
+		stepEnemies(delta);
 		if (neuRendernA)
 			neuRendernB = true;
+	}
+
+	private void stepEnemies(float delta) {
+		
+		ArrayList<Enemy> enemies = game.getEnemiesOnScreen();
+		combinedMap = new CombinedFields(environmentMap);
+		for(PlayerCharacter pc: game.getPlayerCharacters()){
+			combinedMap.add(pullingZombiePotentialFieldMap, pc);
+		}
+		for(Enemy e: enemies){
+			GridPoint2 destination = getDestination(e, combinedMap);
+			int xDirection = destination.x - (int) e.x;
+			int yDirection = destination.y - (int) e.y;		
+			e.makeStep(delta, xDirection, yDirection);
+		}
+				
 	}
 
 	public void stepPlayerCharacters(float delta) {

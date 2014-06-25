@@ -95,20 +95,6 @@ public class GameRenderer {
 
 	}
 
-	private ArrayList<Enemy> getZombiesToRender() {
-		ArrayList<Enemy> enemies = game.getEnemies();
-		ArrayList<Enemy> toRender = new ArrayList<Enemy>();
-		for (Enemy e : enemies) {
-			if (e.x > camera.position.x - Gdx.graphics.getWidth() / 2
-					&& e.x < camera.position.x + Gdx.graphics.getWidth() / 2
-					&& e.y > camera.position.y - Gdx.graphics.getHeight() / 2
-					&& e.y < camera.position.y + Gdx.graphics.getHeight() / 2) {
-				toRender.add(e);
-			}
-		}
-		return toRender;
-	}
-
 	private void initializeShader() {
 
 		ShaderProgram.pedantic = false;
@@ -128,7 +114,7 @@ public class GameRenderer {
 	private void renderAgents() {
 		ArrayList<Agent> agents = new ArrayList<Agent>();
 		agents.addAll(game.getPlayerCharacters());
-		agents.addAll(getZombiesToRender());
+		agents.addAll(game.getEnemiesOnScreen());
 		Collections.sort(agents, comparator);
 		Sprite sprite;
 		for (Agent a : agents) {

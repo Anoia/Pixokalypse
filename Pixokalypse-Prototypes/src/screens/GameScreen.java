@@ -211,8 +211,22 @@ public class GameScreen implements Screen {
 		renderer.dispose();
 	}
 
-	public ArrayList<Enemy> getEnemies() {
+	public ArrayList<Enemy> getAllEnemies() {
 		return enemies;
+	}
+	
+	public ArrayList<Enemy> getEnemiesOnScreen(){
+		ArrayList<Enemy> enemiesOnScreen = new ArrayList<Enemy>();
+		for (Enemy e : enemies) {
+			if (e.x > camera.position.x - Gdx.graphics.getWidth() / 2
+					&& e.x < camera.position.x + Gdx.graphics.getWidth() / 2
+					&& e.y > camera.position.y - Gdx.graphics.getHeight() / 2
+					&& e.y < camera.position.y + Gdx.graphics.getHeight() / 2) {
+				enemiesOnScreen.add(e);
+			}
+		}
+
+		return enemiesOnScreen;
 	}
 
 	public ArrayList<PlayerCharacter> getPlayerCharacters() {
