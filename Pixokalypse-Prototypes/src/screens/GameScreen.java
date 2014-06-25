@@ -136,6 +136,7 @@ public class GameScreen implements Screen {
 					weapon.shoot();
 					closest.currentHealth -= weapon.getDamage();
 					System.out.println(closest.getName() + " "+ weapon.getDamage() + " damage");
+					hud.update();
 					if(closest.currentHealth <= 0){
 						playerCharacters.remove(closest);
 						System.out.println(closest.getName()+ " DEAD!");
