@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class HUD {
 	
@@ -84,6 +86,12 @@ public class HUD {
 			Container<Image> c = new Container<Image>();
 			Sprite sprite = new Sprite(new Texture("data/characters/portrait.png"));
 			Image image = new Image(new TextureRegionDrawable(sprite));
+			image.addListener(new ClickListener(){
+				@Override
+                public void clicked(InputEvent event, float x, float y) {
+					game.setSelectedPlayerCharacter(pc);
+				}
+			});
 			c.setActor(image);
 			c.pack();
 			System.out.println(c.getWidth());

@@ -365,5 +365,8 @@ public class GameScreen implements Screen {
 		return renderer.getSprite(spriteName);
 	}
 
+	public void setSelectedPlayerCharacter(PlayerCharacter pc){
+		selectedPlayerCharacter = pc;
+	}
 
 }
