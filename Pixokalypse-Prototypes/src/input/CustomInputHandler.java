@@ -1,11 +1,14 @@
 package input;
 
 import screens.GameScreen;
+import util.Constants;
 
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.we.PixokalypsePrototypes.test.Field;
+import com.we.PixokalypsePrototypes.test.FieldCategory;
 
 public class CustomInputHandler implements GestureListener{
 	
@@ -28,7 +31,20 @@ public class CustomInputHandler implements GestureListener{
 
 		switch (button) {
 			case Buttons.LEFT:
-				game.getPotentialFieldManager().setPlayerCharacterTarget((int) v.x, (int) v.y);
+				Field field = game.getMap().data[(int)(v.x/Constants.TILE_SIZE)][(int)(v.y/Constants.TILE_SIZE)];
+				int value = game.getPotentialFieldManager().getEnvironmentMap().fieldArray[(int) v.x][(int) v.y];
+				if(value >= 10000){
+					if(field.fieldCategory == FieldCategory.BUILDING){
+						if(field.entered){
+							System.out.println("You already visited this building. Stuff already happened.");
+						}else{
+							game.enterBuilding(field);
+						}
+						
+					}
+				}else{
+					game.getPotentialFieldManager().setPlayerCharacterTarget((int) v.x, (int) v.y);
+				}
 				break;
 			case Buttons.RIGHT:
 				break;
@@ -40,7 +56,7 @@ public class CustomInputHandler implements GestureListener{
 
 	@Override
 	public boolean longPress(float x, float y) {
-		System.out.println("LOOOONG!");
+		System.out.println("LOOOONG Klick!");
 		return false;
 	}
 

@@ -7,6 +7,7 @@ public class Field {
 	public String spriteName;
 	public int xAxis;
 	public int yAxis;
+	public boolean entered = false;
 
 	public Field(int xAxis, int yAxis) {
 		this(xAxis, yAxis, -1, FieldCategory.EMPTY);

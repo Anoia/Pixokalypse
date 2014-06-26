@@ -43,7 +43,7 @@ public class PotentialFieldManager {
 	public void addCollisionMapToEnvironment(Map map,
 			SpriteCollisionMapContainer spriteCollisionMapContainer) {
 		// Für jeden MapTile
-		int tileSize = Constants.TILE_SIZE;// müssen wir in der Map Speichern :D
+		
 		for (int i = 0; i < map.mapSize; i++) {
 			for (int j = 0; j < map.mapSize; j++) {
 				// Collisionmap in Environmentmap kopieren
@@ -51,15 +51,15 @@ public class PotentialFieldManager {
 				int[][] collisionmap = spriteCollisionMapContainer
 						.getSpriteCollisionmap("Heightmap-"
 								+ map.data[j][i].spriteName);
-				for (int row = 0; row < tileSize; row++) {
+				for (int row = 0; row < Constants.TILE_SIZE; row++) {
 					if (collisionmap == null)
 						System.out.println("collisionMap is NULL für sprite: "
 								+ map.data[j][i].spriteName);
 					if (environmentMap == null)
 						System.out.println("enviromentnMap is NULL");
-					System.arraycopy(collisionmap[tileSize - 1 - row], 0,
-							environmentMap.fieldArray[row + j * tileSize], i
-									* tileSize, tileSize);
+					System.arraycopy(collisionmap[Constants.TILE_SIZE - 1 - row], 0,
+							environmentMap.fieldArray[row + j * Constants.TILE_SIZE], i
+									* Constants.TILE_SIZE, Constants.TILE_SIZE);
 				}
 			}
 		}

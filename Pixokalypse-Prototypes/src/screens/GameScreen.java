@@ -17,6 +17,7 @@ import renderer.EffectsRenderer;
 import renderer.GameRenderer;
 import renderer.effects.Effect;
 import renderer.effects.ShootingEffect;
+import ui.EnterBuildingDialog;
 import ui.HUD;
 import util.Constants;
 import util.RayTracer;
@@ -34,6 +35,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
+import com.we.PixokalypsePrototypes.test.Field;
 import com.we.PixokalypsePrototypes.test.Map;
 import com.we.PixokalypsePrototypes.test.SpriteCollisionMapContainer;
 import com.we.PixokalypsePrototypes.test.SpriteContainer;
@@ -63,6 +65,8 @@ public class GameScreen implements Screen {
 	int tileSize = Constants.TILE_SIZE; // one tile = one field on map
 
 	private HUD hud;
+	
+	public static boolean paused = false;
 
 	public GameScreen(PixokalypsePrototypes game) {
 		this.gameContainer = game;
@@ -303,7 +307,9 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		updateGame(delta);
+		if(!paused){
+			updateGame(delta);
+		}
 		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
 		renderer.update(delta);
 		effectsRenderer.update(delta);
@@ -374,6 +380,18 @@ public class GameScreen implements Screen {
 
 	public void setSelectedPlayerCharacter(PlayerCharacter pc){
 		selectedPlayerCharacter = pc;
+	}
+	
+	public Map getMap(){
+		return map;
+	}
+
+	public void enterBuilding(Field field) {
+		//TODO enter building should only be possible if players are on field next to building!
+		paused = true;
+		EnterBuildingDialog dialog = new EnterBuildingDialog("Entering Building", gameContainer.skin, field);
+		dialog.show(stage);
+		
 	}
 
 }
