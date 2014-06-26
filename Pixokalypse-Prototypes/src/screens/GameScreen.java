@@ -31,6 +31,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 import com.we.PixokalypsePrototypes.test.Map;
@@ -349,8 +350,14 @@ public class GameScreen implements Screen {
 		tickRenderEffects(delta);
 		action(delta);
 
-		getCamera().position.set(selectedPlayerCharacter.x,
-				selectedPlayerCharacter.y, 0);
+		updateCamera();
+	}
+
+	private void updateCamera() {
+		Vector3 cameraPosition = getCamera().position;
+		float lerp = 0.1f;
+		cameraPosition.x += (selectedPlayerCharacter.x - cameraPosition.x) *lerp;
+		cameraPosition.y += (selectedPlayerCharacter.y - cameraPosition.y)*lerp;
 	}
 
 	public OrthographicCamera getCamera() {
