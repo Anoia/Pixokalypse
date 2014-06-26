@@ -117,7 +117,7 @@ public class GameRenderer {
 		Collections.sort(agents, comparator);
 		Sprite sprite;
 		for (Agent a : agents) {
-			sprite = spriteContainer.getSprite(a.getSpriteName());
+			sprite = getSprite(a.getSpriteName());
 			sprite.setPosition(a.x - sprite.getWidth() / 2,
 					a.y - sprite.getHeight());
 			sprite.draw(batch);
@@ -140,7 +140,7 @@ public class GameRenderer {
 
 					if (map.data[x][y].fieldCategory == FieldCategory.BUILDING) {
 						String spriteName = map.data[x][y].spriteName;
-						sprite = spriteContainer.getSprite("Block-"
+						sprite = getSprite("Block-"
 								+ spriteName);
 						if (sprite != null) {
 							sprite.setBounds((x * tileSize), (y * tileSize)
@@ -175,7 +175,7 @@ public class GameRenderer {
 						&& camera.position.y < (y * tileSize + (Gdx.graphics
 								.getHeight() * 0.6f))) {
 					String spriteName = map.data[x][y].spriteName;
-					sprite = spriteContainer.getSprite("Ground-" + spriteName);
+					sprite = getSprite("Ground-" + spriteName);
 					sprite.setBounds(x * tileSize, y * tileSize, tileSize,
 							tileSize);
 					sprite.draw(batch);
@@ -221,6 +221,10 @@ public class GameRenderer {
 		renderBuildings();
 
 		batch.end();
+	}
+	
+	public Sprite getSprite(String spriteName){
+		return spriteContainer.getSprite(spriteName);
 	}
 
 }

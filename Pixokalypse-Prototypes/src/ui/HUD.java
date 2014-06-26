@@ -6,13 +6,20 @@ import screens.GameScreen;
 import agents.PlayerCharacter;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class HUD {
 	
 	private Stage stage;
@@ -60,25 +67,34 @@ public class HUD {
 			VerticalGroup group = new VerticalGroup();
 			
 			Label name = new Label(pc.getName(), skin);
-			name.setSize(100, 20);
+			//name.setSize(100, 20);
 			healthbar = new Slider(0, pc.maxHealth, 1, false, skin);
 			healthbar.setValue(pc.currentHealth);
-			group.pad(5);
+			healthbar.setTouchable(Touchable.disabled);
+			group.pad(2);
 			group.addActor(name);
-			group.pad(5);
+			group.pad(2);
 			group.addActor(healthbar);
-			group.pad(5);
+			group.pad(2);
+			group.left();
 			group.pack();
+			
+			Container<Image> c = new Container<Image>();
+			Sprite sprite = new Sprite(new Texture("data/characters/portrait.png"));
+			Image image = new Image(new TextureRegionDrawable(sprite));
+			c.setActor(image);
+			c.pack();
+			System.out.println(c.getWidth());
+			
+			
+			
+			
+			addActor(c);
+			
 			addActor(group);
-			System.out.println(group.getHeight());
 			pack();
-			System.out.println(getHeight()+" hr");
 		}
 		public void update(){
-			if(pc.currentHealth<=0){
-				characterInfoList.remove(this);
-				characterInfoPanel.removeActor(this);
-			}
 			healthbar.setValue(pc.currentHealth);
 		}
 		

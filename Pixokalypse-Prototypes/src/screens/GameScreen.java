@@ -30,6 +30,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.we.PixokalypsePrototypes.PixokalypsePrototypes;
 import com.we.PixokalypsePrototypes.test.Map;
@@ -358,6 +359,10 @@ public class GameScreen implements Screen {
 
 	public PotentialFieldManager getPotentialFieldManager() {
 		return manager;
+	}
+	
+	public Sprite getSprite(String spriteName){
+		return renderer.getSprite(spriteName);
 	}
 
 
