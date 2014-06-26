@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -57,7 +58,7 @@ public class HUD {
 	
 	private class CharacterInfo extends HorizontalGroup{
 		PlayerCharacter pc;
-		Slider healthbar;
+		ProgressBar healthbar;
 		
 		public CharacterInfo(PlayerCharacter pc){
 			this.pc = pc;
@@ -68,9 +69,10 @@ public class HUD {
 			
 			Label name = new Label(pc.getName(), skin);
 			//name.setSize(100, 20);
-			healthbar = new Slider(0, pc.maxHealth, 1, false, skin);
+			healthbar = new ProgressBar(0, pc.maxHealth, 1, false, skin, "healthbar");
 			healthbar.setValue(pc.currentHealth);
 			healthbar.setTouchable(Touchable.disabled);
+			
 			group.pad(2);
 			group.addActor(name);
 			group.pad(2);
