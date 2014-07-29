@@ -217,12 +217,24 @@ public class GameRenderer {
 		// Sprites Rendern anfang
 		renderGround();
 		// renderWithZIndex(delta);
+		renderDeadPeople();
 		renderAgents();
 		renderBuildings();
 
 		batch.end();
 	}
 	
+	private void renderDeadPeople() {
+		ArrayList<Agent> agents = game.getDeadPeople();
+		Sprite sprite;
+		for (Agent a : agents) {
+			sprite = getSprite(a.getSpriteName());
+			sprite.setPosition(a.x - sprite.getWidth() / 2,
+					a.y - sprite.getHeight());
+			sprite.draw(batch);
+		}	
+	}
+
 	public Sprite getSprite(String spriteName){
 		return spriteContainer.getSprite(spriteName);
 	}

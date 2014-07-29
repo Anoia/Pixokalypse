@@ -53,6 +53,7 @@ public class GameScreen implements Screen {
 
 	private RayTracer rayTracer;
 	private ArrayList<Effect> renderEffects = new ArrayList<Effect>();
+	private ArrayList<Agent> deadPeople = new ArrayList<Agent>();
 	GameRenderer renderer;
 
 	private PlayerCharacter selectedPlayerCharacter;
@@ -124,6 +125,7 @@ public class GameScreen implements Screen {
 
 				if (closestValidEnemy.currentHealth <= 0) {
 					enemies.remove(closestValidEnemy);
+					addToDeadPeople(closestValidEnemy);
 					enemiesCloseToPlayer.remove(closestValidEnemy);
 				}
 				break;
@@ -145,6 +147,7 @@ public class GameScreen implements Screen {
 					hud.update();
 					if(closest.currentHealth <= 0){
 						playerCharacters.remove(closest);
+						addToDeadPeople(closest);
 						System.out.println(closest.getName()+ " DEAD!");
 						if(selectedPlayerCharacter == closest){
 							if(playerCharacters.isEmpty()){
@@ -160,6 +163,19 @@ public class GameScreen implements Screen {
 		}
 	}
 	
+	private void addToDeadPeople(Agent a) {
+		deadPeople.add(a);
+		System.out.println(a.getSpriteName()+" DIED!");
+		String spriteName = a.getSpriteName();
+		if(a instanceof PlayerCharacter){
+			spriteName = spriteName.substring(0, spriteName.length()-5);
+			spriteName += "dead";
+		}else{
+			spriteName = "Zombie-dead-" + Utils.random(1, 3);
+		}
+		a.setSpriteName(spriteName);
+	}
+
 	private Enemy getClosestValidEnemy(PlayerCharacter character, ArrayList<Enemy> enemiesCloseToPlayer) {
 		Enemy closestValidEnemy = null;
 		float minDistance = 1000;
@@ -392,6 +408,10 @@ public class GameScreen implements Screen {
 		EnterBuildingDialog dialog = new EnterBuildingDialog("Entering Building", gameContainer.skin, field);
 		dialog.show(stage);
 		
+	}
+
+	public ArrayList<Agent> getDeadPeople() {
+		return deadPeople;
 	}
 
 }
